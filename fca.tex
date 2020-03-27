@@ -1,0 +1,48 @@
+\documentclass[11pt]{article}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[normalem]{ulem}
+\newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+
+% ========== Edit your name here
+\author{Simone Montali - monta.li}
+\title{Fondamenti di Controlli Automatici}
+
+\maketitle
+
+\medskip
+\section{Il controllo attivo di un processo}
+Innanzitutto definiamo due termini fondamentali per la materia: un \textbf{processo} è l'evoluzione nel tempo di ciò che caratterizza un sistema. Con \textbf{controllo attivo} intendiamo una strategia di controllo che prevede un'azione di comando esercitata sul processo. 
+Il controllo attivo risolve il problema di imporre una modalità di funzionamento desiderato ad un processo: l'obiettivo è che una variabile del processo coincida con una preassegnata. Parliamo di \textbf{regolazione} quando l'ingresso è costante, di \textbf{asservimento} quando l'ingresso è variabile. 
+Un \textbf{sistema} è un complesso, normalmente composto da più elementi interconnessi, in cui si possono distinguere grandezze soggette a variare nel tempo (variabili). Un \textbf{segnale} è una funzione che rappresenta l'andamento delle variabili nel tempo. Distinguiamo queste ultime in indipendenti (ingressi) e dipendenti (uscite). Arriviamo così al concetto di \textbf{sistema orientato}. Un \textbf{modello matematico} è la descrizione di un sistema che permette di determinare i segnali delle uscite noti gli ingressi e le condizioni iniziali. Distinguiamo tra sistemi multivariabili (MIMO) e scalari (SISO). Un sistema è detto \textbf{statico} quando l'uscita al tempo $t$ dipende esclusivamente dall'ingresso al medesimo tempo $t$. Un \textbf{sistema dinamico}, invece, ha uscita dipendente dal segnale di ingresso sull'intervallo $(-\infty , t]$, e ha quindi memoria. Per questi ultimi sistemi introduciamo i concetti di sistema in quiete (\textit{equilibrio}) e sistema in condizioni asintotiche(\textit{stazionarie}). 
+\subsection{Insieme dei behavior}
+Definiamo ora l'\textbf{insieme dei behavior} $\mathcal{B}$ come l'insieme di tutte le possibili coppie causa-effetto associate ad un sistema.
+\begin{displaymath}
+    \mathcal{B}:={\left( u(t), y(t) \right) : y(t)}
+\end{displaymath}
+è l'uscita del sistema corrispondente all'ingresso $u(t)$, con $u(t)$ e $y(t)$ che tipicamente appartengono agli spazi funzionali delle funzioni continue o differenziabili a tratti. 
+Un sistema è \textbf{lineare} se soddisfa la proprietà di sovrapposizione degli effetti. 
+\begin{displaymath}
+    \forall (u_1,y_1), (u_2, y_2) \in \mathcal{B}, \forall \alpha_1,\alpha_2 \in \mathcal{R} \rightarrow \alpha_1(u_1,y_1)+\alpha_2(u_2, y_2) := (\alpha_1 u_1+ \alpha_2 u_2, \alpha_1y_1 + \alpha_2 y_2) \in \mathcal{B}
+\end{displaymath}
+Con \textbf{stazionario} intendiamo un sistema invariante nel tempo, ossia:
+\begin{displaymath}
+    \left(u(t), y(t)\right) \in \mathcal{B} \rightarrow \left(u(t-T), y(t-T)\right) \in \mathcal{B}
+\end{displaymath}
+\subsection{Controllo ad azione diretta e retroazione}
+Vi è, tra le tipologie di controllo, una distinzione importantissima: quella tra i controlli \textbf{ad azione diretta} e quelli \textbf{in retroazione}. 
+Nel primo, l'azione di comando dipende da: obiettivo perseguito, informazioni sul modello del sistema controllato, ingressi agenti sul sistema controllato. Nel secondo, oltre ai suddetti, vi è l'intervento della \textbf{variabile controllata}. In altri termini, l'ingresso dipende anche dall'uscita. Introduciamo poi anche i controlli feedforward/feedback a due/tre gradi di libertà. 
+È utile notare come in sistemi disturbati, in cui cioè abbiamo una perturbazione data dal sistema stesso, il controllo ad azione diretta non la smorza, mentre quello in retroazione riduce l'errore di svariati ordini di grandezza. Bisogna però portare attenzione ai \textbf{fenomeni di instabilità} che nascono all'aumentare del guadagno di anello. 
+\end{document}
