@@ -45,4 +45,84 @@ Con \textbf{stazionario} intendiamo un sistema invariante nel tempo, ossia:
 Vi è, tra le tipologie di controllo, una distinzione importantissima: quella tra i controlli \textbf{ad azione diretta} e quelli \textbf{in retroazione}. 
 Nel primo, l'azione di comando dipende da: obiettivo perseguito, informazioni sul modello del sistema controllato, ingressi agenti sul sistema controllato. Nel secondo, oltre ai suddetti, vi è l'intervento della \textbf{variabile controllata}. In altri termini, l'ingresso dipende anche dall'uscita. Introduciamo poi anche i controlli feedforward/feedback a due/tre gradi di libertà. 
 È utile notare come in sistemi disturbati, in cui cioè abbiamo una perturbazione data dal sistema stesso, il controllo ad azione diretta non la smorza, mentre quello in retroazione riduce l'errore di svariati ordini di grandezza. Bisogna però portare attenzione ai \textbf{fenomeni di instabilità} che nascono all'aumentare del guadagno di anello. 
+\section{Modellistica ed equazioni differenziali lineari}
+\subsection{Cenni di modellistica}
+La \textbf{modellistica} è la costruzione dei modelli matematici dei sistemi, a partire da leggi fondamentali o dati sperimentali.
+\subsubsection{Circuiti elettrici}
+Citiamo anzitutto alcuni esempi elettrici di leggi fondamentali:\\
+\begin{center}
+Resistenza: $v_R = Ri$\\
+Induttanza: $v_L=L\frac{di}{dt} = LDi$\\
+Capacità: $v_c = \frac{Q}{C} = \frac{1}{C} \int_{-\infty}^t i(\tau)d\tau \rightarrow Dv_c = \frac{i}{C}$\\
+\end{center}
+
+Un circuito RLC diventa quindi
+\begin{displaymath}
+    v_i=v_L+v_R+v_c\\
+    v_i(t) = LDi(t) + Ri(t)+ \frac{1}{C} \int_{-\infty}^t i(\tau)d\tau
+\end{displaymath}
+Calcoliamo quindi l'equazione differenziale lineare a coefficienti costanti:
+\begin{displaymath}
+    LD^2i+RDi+\frac{1}{C}i = Dv_i
+\end{displaymath}
+Costruiamo il modello matematico orientato da $v_i$ a $v_u$.
+\begin{displaymath}
+    LCD^2 v_u + RCDv_u + v_u = v_i
+\end{displaymath}
+\subsubsection{Sistemi meccanici}
+Citiamo ora tre sistemi meccanici e le rispettive leggi del moto.
+\begin{center}
+    Massa: $MD^2x(t) = f_1(t) - f_2(t)$\\
+    Molla: $f(t)=K(x_1(t)-x_2(t))$\\
+    Ammortizzatore: $f(t) = B(v_1(t)-v_2(t)) \hspace{20px} f(t) = BD(x_1(t)-x_2(t))$
+\end{center}
+Introduciamo un sistema meccanico vibrante composto dai tre elementi, che avrà quindi equazione da f a x:
+\begin{displaymath}
+    mD^2 x(t) + bDx(t) + kx(t) = f(t)
+\end{displaymath}
+Otteniamo l'equazione differenziale
+\begin{displaymath}
+    mD^2y+bDy+ky = Df
+\end{displaymath}
+\subsubsection{OP-AMP}
+Citiamo anche i circuiti elettrici con OP-AMP, deducendo 
+\begin{displaymath}
+    R_1CDy + y = -R_2CDu-u
+\end{displaymath}
+\subsection{Equazioni differenziali lineari}
+Le equazioni differenziali lineari a coefficienti costanti possono rappresentare quindi sistemi scalari, generalizzando così:
+\begin{displaymath}
+    \sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u
+\end{displaymath}
+Otteniamo così un modello matematico formale del sistema dinamico (orientato) $\Sigma, y =$ variabile d'uscita, $u=$ variabile d'ingresso, $a_n \neq 0, b_m \neq 0$. $n$ è l'ordine dell'eq. differenziale per estensione ordine di $\Sigma$, $n\ge m$; $\rho := n-m$ ordine relativo o grado relativo di $\Sigma$.
+Ricollegandoci al concetto di \textbf{insieme dei behaviors} $\mathcal{B}$ di $\Sigma$, la coppia di segnali $\mathcal{B} := \{\left(u(t), y(t)\right)$ soddisfa l'equazione differenziale se $u(t)$ e $y(t)$ sono derivabili tante volte quanto necessario. 
+\subsubsection{Proprietà del sistema}
+Citiamo allora alcune proprietà del sistema. Per le dimostrazioni riferirsi alle slide.
+\begin{itemize}
+    \item Il sistema è lineare.
+    \item Il sistema è stazionario.
+\end{itemize}
+\subsection{Determinazione dei segnali di uscita}
+Una volta introdotto il sistema, sorge spontaneo un dubbio fondamentale:
+\begin{center}
+    \textbf{Noto il segnale di ingresso $u(t)|_{[0, +\infty]}$ e le condizioni iniziali $y(0), Dy(0),...,D^{n-1}y(0)$ determinare il segnale di uscita $y(t)|_{[0, +\infty]}$}
+\end{center}
+Se avessimo un'equazione omogenea, la soluzione sarebbe immediata. Ma spesso non è così, e ci serve un metodo generale per poter trattare le diverse casistiche. 
+La classe dei segnali che utilizzeremo è $C_p^\infty$, insieme delle funzioni infinitamente derivabili a tratti. 
+\begin{center}
+    \textit{Una funzione appartiene a $C_p^\infty$ se esiste un insieme sparso $\mathcal{S}$ per il quale $f \in C^\infty (\mathbb{R}/S, \mathbb{R})$ e per ogni $n \in \mathbb{N}$ e per ogni $t \in \mathcal{S}$ i limiti $f^{(n)}(t^-)$ e $f^{(n)}(t^+)$ esistono e sono finiti. Quando $f$ è definita in $t \in \mathcal{S}$, convenzionalmente $f(t) := f(t^+)$. In particolare $C^{-1} := C_p^\infty (\mathbb{R})$ definisce l'insieme delle funzioni di classe $C^\infty$ a tratti definite su tutto $\mathbb{R}$}
+\end{center}
+\subsubsection{Proprietà di $C_p^\infty$}
+In generale, sappiamo che $C^k \not\subset C^\infty_p$ e che $C_p^{k,\infty} := C^k \cap C^\infty_p$.
+\subsubsection{Grado di continuità di una funzione o segnale}
+Definiamo il grado di continuità di una funzione o segnale:
+\begin{center}
+    \textit{Se $f \in C_p^{k,\infty}, k $ è il grado di continuità di $f$.}
+\end{center}
+\begin{displaymath}
+    \overline{C_p^{k,\infty}} := \left\{ f:\mathbb{R} \rightarrow \mathbb{R}:f \in C_p^{k, \infty}  \wedge f \not\in C_p^{k+1,\infty}\right\}
+\end{displaymath}
+Se $f \in \overline{C_p^{k,\infty}}$ allora $k$ è il grado massimo di continuità di $f$.
+\subsubsection{Trasformate di Laplace}
+Il metodo generale proposto per "integrare" l'equazione differenziale di $\Sigma$ si basa sulla \textbf{trasformata di Laplace}, che permette di trasformare un'equazione differenziale in un'equazione algebrica.
 \end{document}
