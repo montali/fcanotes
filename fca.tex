@@ -5,6 +5,7 @@
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage[normalem]{ulem}
 \newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
 
@@ -125,4 +126,97 @@ Definiamo il grado di continuità di una funzione o segnale:
 Se $f \in \overline{C_p^{k,\infty}}$ allora $k$ è il grado massimo di continuità di $f$.
 \subsubsection{Trasformate di Laplace}
 Il metodo generale proposto per "integrare" l'equazione differenziale di $\Sigma$ si basa sulla \textbf{trasformata di Laplace}, che permette di trasformare un'equazione differenziale in un'equazione algebrica.
+\section{Cenni di analisi complessa}
+\subsection{Limite di una funzione complessa}
+Consideriamo una funzione complessa di variabile complessa $f: \mathbb{C} \rightarrow \mathbb{C} s \rightarrow f(s)$. Se $s = \sigma + j \omega$, allora $f(s) = u(\sigma, \omega)+ jv(\sigma, \omega)$. Definiamo il limite $lim_{s\rightarrow s_0} f(s) = \lambda$ con la classica definizione da Analisi 1:
+\begin{center}
+    $\forall \epsilon >0, \exists \rho >0$ tale che se $s$ soddisfa $0<|s-s_0|<\rho \rightarrow |f(s) - \lambda| < \epsilon$
+\end{center}
+\subsubsection{Altre proprietà derivate}
+Data questa definizione, possiamo definire altre proprietà, come la \textbf{continuità}: $f$ è continua in $s=s_0$ se $lim_{s\rightarrow s_0} f(s) = f(s_0)$. Da qui, $f(s)$ è continua in $s_0 = \sigma_0 + j\omega_0$ sse le funzioni reali $u(\sigma, \omega), v(\sigma, \omega)$ sono continue in $(\sigma_0, \omega_0)$. Definiamo poi la \textbf{derivabilità}: $f(s)$ è derivabile in $s=s_0$ se esiste il limite 
+\begin{displaymath}
+    lim_{\Delta s\rightarrow 0} \frac{f(s_0 + \Delta s) - f(s_0)}{\Delta s}
+\end{displaymath}
+Le regole base di derivabilità dell'analisi rimangono valide. Definiamo l'\textbf{analiticità}, ossia, $f(s)$ è analitica/olomorfa in $s=s_0$ se $f(s)$ è derivabile su di un intorno aperto contenente $s_0$. 
+Infine, definiamo le \textbf{condizioni di Cauchy-Riemann}: $u(\sigma, \omega), v(\sigma, \omega)$ soddisfano le condizioni di Cauchy-Riemann se 
+\begin{displaymath}
+    \begin{cases} 
+        \frac{\partial u}{\partial \sigma} = \frac{\partial v}{\partial \omega} \\ \frac{\partial u}{\partial \omega} = - \frac{\partial v}{\partial \sigma}
+    \end{cases}
+\end{displaymath}
+\paragraph{Teorema}
+Sia $f(s) = u(s) + jv(s)$:
+\begin{enumerate}
+    \item Se esiste $f^{(1)} (s_0)$ con $s_0 = \sigma_0 + j\omega_0$ allora esistono le derivate parziali di $u(\sigma, \omega), v(\sigma, \omega)$ in $(\sigma_0, \omega_0)$ e soddisfano le equazioni di Cauchy-Riemann
+    \item Se $u(\sigma, \omega), v(\sigma, \omega)$ e le loro derivate parziali sono continue in $(\sigma_0, \omega_0)$ e soddisfano le condizioni di Cauchy-Riemann, allora esiste $f^{(1)} (s_0)$ con $s_0 = \sigma_0 + j\omega_0$
+\end{enumerate}
+\paragraph{Corollario}
+Sia $f(s) = u(s) + jv(s)$ con $u(\sigma, \omega), v(\sigma, \omega)$ e le loro derivate parziali continue su di un dominio aperto $U \subseteq C$. Allora $f(s)$ è analitica su $U$ se e solo se $u(\sigma, \omega), v(\sigma, \omega)$ soddisfano, su U, le condizioni di Cauchy-Riemann. 
+\paragraph{Teorema} 
+Sia $f(s)$ analitica su di una regione aperta $U \subseteq C$. Allora la derivata $Df(s)$ è anch'essa una funzione analitica su $U$.
+\paragraph{Corollario}
+Se $f(s)$ è analitica sulla regione aperta $U$, allora $f(s)$ è ivi derivabile indefinitivamente.
+\subsection{Integrali di linea nel piano complesso}
+Definiamo innanzitutto l'\textbf{integrale}: data una funzione $f(s)$ ed una curva $\Gamma$ su $\mathbb{C}$ percorsa da $s_a$ a $s_b$, definiamo $\int_\Gamma f(s) ds \triangleq lim_{n\rightarrow \infty} \sum_{i=1}^n f(s_i)(s_i- s_{i-1})$ dove $s_0,...,s_n$ è una discretizzazione uniforme della curva $\Gamma$. 
+\subsubsection{Calcolo dell'integrale di linea}
+Sia $\Gamma$ una curva parametrica di classe $C^1$.
+\begin{displaymath}
+    \int_\Gamma f(s) ds = \int_a^b f\left(\Gamma(u) \right) \frac{d\Gamma}{du} du
+\end{displaymath}
+
+Definiamo una \textbf{curva chiusa semplice} come una curva continua tale che $\Gamma(a)=\Gamma(b)$ e $\Gamma(u_1) \neq \Gamma(u_2) \forall u_1 \neq u_2 \in (a,b)$
+Il \textbf{teorema di Jordan} afferma che se $\Gamma$ è una curva chiusa semplice in $\mathbb{C}$ questa suddivide il piano complesso in due regioni distinte, una esterna e una interna. 
+Definiamo un \textbf{insieme connesso} se per ogni coppia di punti appartenenti all'insieme esiste una curva continua $\Gamma$ che li congiunge tutta contenuta in R. È invece detto \textbf{semplicemente connesso} se è connesso e per ogni curva chiusa semplice $\Gamma$ appartenente all'insieme la regione interna di $\Gamma$ è tutta contenuta in R.
+\paragraph{Teorema dell'integrale di Cauchy}
+Sia $f(s)$ una funzione analitica su di una regione aperta e semplicemente connessa $U$ e $\Gamma$ una curva semplice ivi contenuta. Allora $\oint_\Gamma f(s) ds = 0$. 
+\paragraph{Corollario}
+Sia $f(s)$ una funzione analitica su di una regione aperta e semplicemente connessa $U$ e $\Gamma$ una curva ivi contenuta che congiunge $s_a$ ad $s_b$. Allora l'integrale di linea $\int_\Gamma f(s)ds$ non dipende dal percorso $\Gamma$ ma solo da $s_a, s_b$ e $f(s)$:
+\begin{displaymath}
+    \int_\Gamma f(s)ds = \int_{s_a}^{s_b} f(s)ds
+\end{displaymath}
+\paragraph{Teorema - Sviluppo in serie di Taylor}
+Sia $f(s)$ una funzione analitica su di un cerchio $B(s_0, r_0)$ centrato su $s_0$ e con raggio $r_0$. Allora $\forall s \in B(s_0, r_0)$ 
+\begin{displaymath}
+    f(s) = \sum_{i=0}^\infty c_i (s-s_0)^i
+\end{displaymath}
+dove 
+\begin{displaymath}
+    c_i = \frac{f^{(i) (s_0)}}{i!} = \frac{1}{2\pi j}\oint \frac{f(s)}{(s-s_0)^{i+1}}ds
+\end{displaymath}
+Come corollario, otteniamo la \textbf{formula integrale di Cauchy}
+\begin{displaymath}
+    f(s_0) = \frac{1}{2\pi j} \oint_\Gamma \frac{f(s)}{s-s_0} ds
+\end{displaymath}
+\paragraph{Teorema - Sviluppo in serie di Laurent}
+Sia $f(s)$ una funzione analitica sul cerchio $B(s_0, r_0)$ ad eccezione del suo centro $s_0$. Allora $\forall s \in B(s_0, r_0)- \{s_0\}$
+\begin{displaymath}
+    f(s) = \sum_{i=-\infty}^{+\infty} c_i(s-s_0)^i
+\end{displaymath}
+dove 
+\begin{displaymath}
+    c_i = \frac{f^{(i) (s_0)}}{i!} = \frac{1}{2\pi j}\oint \frac{f(s)}{(s-s_0)^{i+1}}ds
+\end{displaymath}
+\subsection{Classificazione del punto isolato $s_0$}
+Se $c_i =0 \forall i \in \mathbb{Z}^-$ definendo $f(s_0) = c_0$ risulta $f(s)$ analitica in $s=s_0$. Se $c_i \neq 0$ per qualche $i \in \mathbb{Z}^-$, $s_0$ è una singolarità di $f(s)$, detta \textbf{singolarità polo} quando i $c_i \neq 0$ sono in numero finito, con $-n = min\{i\in \mathbb{Z}^-: c_i \neq 0\}$ $s_0$ è polo di ordine $n$. Invece abbiamo una \textbf{singolarità essenziale} quando i $c_i \neq 0$ con $i \in \mathbb{Z}^-$ sono infiniti. Se abbiamo una $f(s)$ analitica in $B(s_0, r_0) - \{s_0\}$, $s_0$ è una singolarità di $f(s)$ se e solo se $f(s)$ assume valori illimitati in un intorno di $s_0$. 
+Il \textbf{Teorema di Picard} afferma che se abbiamo $s_0$ singolarità essenziale di $f(s)$, in ogni intorno di $s_0$ la funzione $f(s)$ assume ogni valore complesso infinite volte con l'eventuale eccezione di un solo particolare valore. 
+\subsubsection{Residui}
+Data una singolarità $s_0$, definiamo il \textbf{residuo} come il coefficiente $c_{-1}$ dello sviluppo in serie di Laurent.
+\paragraph{Teorema dei residui di Cauchy}
+Sia $\Gamma$ una curva chiusa semplice e $f(s)$ una funzione analitica su $\Gamma$ e nella sua regione interna ad eccezione dei punti singolari $s_1,...,s_n$ in essa contenuti, allora 
+\begin{displaymath}
+    \oint_\Gamma f(s) ds = 2\pi j \sum_{i=1}^n Res\{f, s_i\}
+\end{displaymath}
+\subsubsection{Poli e zeri}
+Sia $s_0$ una singolarità polo di $f(s)$. Allora $s_0$ è polo di ordine $n$ sse esiste $g(s)$ analitica in $s_0$ con $g(s_0) \neq 0$ tale che 
+\begin{displaymath}
+    f(s) = \frac{g(s)}{(s-s_0)^n}
+\end{displaymath}
+Sia $f(s)$ analitica in $z$. $z$ è detto \textbf{zero} di $f$ se $f(z)=0$. Considerato lo sviluppo di Taylor $f(s)= c_1(s-z)+\dots$ ed $n:=min\{i \in \mathbb{N}: c_i \neq 0\}$, $z$ è detto zero di ordine $n$ di $f(s)$. È detto tale se e solo se esiste $g(s)$ analitica in $z$ con $g(z) \neq 0$ tale che $f(s) = (s-z)^n g(s)$. Ricaviamo un'ultima proprietà: se $f: \mathbb{C} \rightarrow \mathbb{C}$ ha una singolarità polare in $p$ di ordine $n$ allora 
+\begin{displaymath}
+    Res\{f,p\} = \frac{1}{(n-1)!} D^{n-1} \left(f(s)(s-p)^n\right)|_{s=p}
+\end{displaymath}
+\subsection{Continuazione analitica}
+Data una funzione $f(s)$ definita da uno sviluppo in serie di Taylor su di un cerchio $B_0(s_0, r_0)$ è possibile estendere/continuare la definizione di $f(s)$ all'esterno di $B_0$ mediante lo sviluppo in serie di Taylor di altri punti di $B_0$. Il procedimento è ricorsivo. Possono anche emergere funzioni a più valori!
+
+
 \end{document}
