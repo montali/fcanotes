@@ -217,6 +217,108 @@ Sia $f(s)$ analitica in $z$. $z$ è detto \textbf{zero} di $f$ se $f(z)=0$. Cons
 \end{displaymath}
 \subsection{Continuazione analitica}
 Data una funzione $f(s)$ definita da uno sviluppo in serie di Taylor su di un cerchio $B_0(s_0, r_0)$ è possibile estendere/continuare la definizione di $f(s)$ all'esterno di $B_0$ mediante lo sviluppo in serie di Taylor di altri punti di $B_0$. Il procedimento è ricorsivo. Possono anche emergere funzioni a più valori!
-
-
+\section{La trasformata di Laplace}
+La \textbf{trasformata di Laplace} è un operatore funzionale che converte un'equazione differenziale in un'equazione algebrica, permettendo di risolvere anche equazioni differenziali lineari con condizioni iniziali arbitrarie.
+Permette inoltre di analizzare i fenomeni transitori ed asintotici di una grande varietà di sistemi. 
+Si applica ad una funzione $f$ di variabile reale con codominio $\mathbb{R}$ o $\mathbb{C}$. Assumiamo ora $f \in \mathbb{C}_p^\infty (\mathbb{R})$, sappiamo che $\exists \sigma \in \mathbb{R}$ per il quale $\int_0^{+\infty} |f(t)| e^{-\sigma t} dt < + \infty$. Se vale quest'ultima condizione, allora $\forall \sigma_1 > \sigma : \int_0^{+\infty} |f(t)| e^{-\sigma_1 t} dt < + \infty$. Definiamo l'\textbf{ascissa di convergenza} di $f(t)$ come $\sigma_c := inf \left\{\sigma \in \mathbb{R} : \int_0^{+\infty}|f(t)| e^{- \sigma t} dt\right\}$ Spesso assumeremo $f(t) = 0$ per $t<0$. 
+Volendo ora dare una definizione rigorosa della trasformata, 
+\begin{center}
+    La trasformata di Laplace di un segnale (funzione) $f(t)$ è la funzione $F(s) = \mathcal{L}[f(t)]$ definita da
+    \begin{displaymath}
+        F(s) = \int_0^{+\infty} f(t) e^{-st} dt
+    \end{displaymath}
+    per i valori $s\in \mathbb{C}$ per i quali l'integrale converge.
+\end{center}
+Notiamo alcune cose:
+\begin{itemize}
+    \item $F$ è una funzione complessa di variabile complessa, $\mathcal{L}[\dot]$ indica l'operatore di Laplace.
+    \item La notazione usuale prevede che le lettere minuscole denotino segnali e funzioni, le corrispondenti maiuscole le loro trasformate.
+\end{itemize}
+\subsection{Proprietà della trasformata}
+\subsubsection{Analitica}
+La trasformata $F(s)$ è una funzione analitica sul semipiano $\left\{s \in \mathbb{C}: Re s > \sigma_c\right\}$
+\subsubsection{Coniugato}
+Denotando il coniugato con $\overline{ }$, $\overline{F(s)} = F(\overline{s})$
+\subsubsection{Linearità}
+La trasformata di Laplace è un operatore lineare: per ogni segnale $f_1(t)$ e $f_2(t)$ e per ogni scalare $c_1$ e $c_2$:
+\begin{displaymath}
+    \mathcal{L}[c_1 f_1 (t) + c_2f_2(t)] = c_1 \mathcal{L}[f_1(t)] + c_2 \mathcal{L}[f_2(t)]
+\end{displaymath}
+\subsubsection{Iniettività}
+La trasformata di Laplace è \textbf{iniettiva}:
+\begin{displaymath}
+    \mathcal{L}[f(t)] = \mathcal{L}[g(t)] \rightarrow f(t) = g(t) \textrm{ su }[0, +\infty )
+\end{displaymath}
+È quindi ben definita la trasformata inversa.
+\subsection{La trasformata inversa di Laplace}
+Sia $F(s) = \mathcal{L}[f(t)]$ allora, per ogni $\sigma_0 > \sigma_c$
+\begin{displaymath}
+    \mathcal{L}^{-1} \rightarrow f(t) = \frac{1}{2\pi j} \int_{\sigma_0-j\infty}^{\sigma_0+j\infty} F(s) e^{st} ds
+\end{displaymath}
+\subsection{Trasformate notevoli}
+\subsubsection{Trasformata della derivata}
+Sia $f \in C^1 (\mathbb{R}_{>0})$ segue
+\begin{displaymath}
+    \mathcal{L}[Df(t)] = sF(s) - f(0+)
+\end{displaymath}
+Generalizzando per gli ordini superiori, otteniamo
+\begin{displaymath}
+    \mathcal{L}[D^i f] = s^i F(s) - \sum_{j=0}^{i-1} s^j D^{i-1-j} f_+
+\end{displaymath}
+\subsubsection{Trasformata dell'integrale}
+\begin{displaymath}
+    \mathcal{L}\left[\int_0^t f(v) dv\right] = \frac{1}{s} F(s)
+\end{displaymath}
+\subsection{Teoremi e gotchas}
+\subsubsection{Teorema del valore finale}
+Sia $f\in C^1 (\mathbb{R}_+)$ con $f$ e $Df$ aventi ascisse di convergenza non positive. Se esiste il limite $lim_{t\rightarrow+\infty} f(t)$ vale
+\begin{displaymath}
+    lim_{t\rightarrow+\infty} f(t) = lim_{s\rightarrow0} sF(s)
+\end{displaymath}
+\subsubsection{Teorema del valore iniziale}
+Sia $f\in C^1 (\mathbb{R}_+)$. Se esiste il limite $lim_{s\rightarrow+\infty} sF(s)$ vale
+\begin{displaymath}
+    f(0+)=lim_{s\rightarrow+\infty} sF(s)
+\end{displaymath}
+\subsubsection{Traslazione nel tempo}
+Per ogni $t_0 \ge 0$ vale 
+\begin{displaymath}
+    \mathcal{L}[f(t-t_0)\cdot 1(t-t_0)]= e^{-t_0s}F(s)
+\end{displaymath}
+\subsubsection{Traslazione nella variabile complessa $s$}
+Per ogni $a \in \mathbb{R}(\mathbb{C})$ vale 
+\begin{displaymath}
+    \mathcal{L}[e^{\alpha t} f(t)] = F(s-a)
+\end{displaymath}
+\subsubsection{Teorema di convoluzione}
+Si abbia $f(t) = g(t)=0$ per $t<0$. La convoluzione dei segnali $f$ e $g$, spesso indicata come $f*g$, è il segnale 
+\begin{displaymath}
+    \int_0^t f(v)g(t-v)dv
+\end{displaymath}
+rappresentabile anche come $f*g=g*f$
+\begin{displaymath}
+    \int_0^t g(v) f(t-v) dv
+\end{displaymath}
+La trasformata della convoluzione è 
+\begin{displaymath}
+    \mathcal{L}\left[    \int_0^t f(v)g(t-v)dv\right] = F(s)G(s)
+\end{displaymath}
+\subsection{Antitrasformazione di funzioni razionali}
+Per antitrasformare le funzioni razionali, sfruttiamo il \textbf{metodo dei fratti semplici}, ossia scomponiamo il denominatore in poli semplici e poi cerchiamo i $k_i$:
+\begin{displaymath}
+    F(s) = \frac{k_1}{(s-p_1)}+\frac{k_2}{(s-p_2)}+...+\frac{k_n}{(s-p_n)}
+\end{displaymath}
+Con i $k_i$ rappresentanti il residuo di $F(s)$ in $p_i$, e pari a
+\begin{displaymath}
+    k_i= (s-p_i)F(s)|_{s=p_i}
+\end{displaymath}
+Ottenendo
+\begin{displaymath}
+    f(t) = \sum_{i=1}^n k_i e^{p_it}
+\end{displaymath}
+\subsection{Trasformate notevoli}
+Citiamo infine altre due trasformate notevoli:
+\begin{displaymath}
+    \mathcal{L}[t^n] = \frac{n!}{s^{n+1}} \hspace{10px} \mathcal{L}[e^{\alpha t}] = \frac{1}{s-a}
+\end{displaymath}
 \end{document}
