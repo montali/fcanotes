@@ -321,4 +321,150 @@ Citiamo infine altre due trasformate notevoli:
 \begin{displaymath}
     \mathcal{L}[t^n] = \frac{n!}{s^{n+1}} \hspace{10px} \mathcal{L}[e^{\alpha t}] = \frac{1}{s-a}
 \end{displaymath}
+\section{Le funzioni impulsive e l'insieme dei behaviors}
+Consideriamo anzitutto un sistema dinamico $\Sigma$ descritto da $Dy(t) + 2y(t) = 2Du(t)+2u(t)$ ed assumiamo che per i tempi negativi sia $y(t) = e^{-2t}$ e $u(t)=0$ con $t<0$.
+Questa coppia di funzioni soddisfa l'eq. differenziale 
+\begin{displaymath}
+    Dy(t) = -2e^{-2t} \rightarrow (-2e^{-2t}) + 2(e^{-2t}) = 0 \forall t<0
+\end{displaymath}
+Quindi:
+\begin{displaymath}
+    \left(0, e^{-2t}\right)|_{(-\infty, 0)} \in \mathcal{B}
+\end{displaymath}
+Introduciamo ora nel sistema una azione forzante $u(t) = 1$ per $t \ge 0$. Quindi $u(t) = 1(t) \forall t \in \mathbb{R}$. Vogliamo determinare $y(t)$ per $t \ge 0$. Non possiamo però definire l'insieme dei behaviors eseguendo la trasformata di Laplace sull'equazione differenziale: otterremmo una soluzione valida per qualsiasi valore del parametro $y_+$, che sarebbe assurdo. L'insieme dei behaviors \textbf{errato} che si genera sarebbe così fatto:
+\begin{displaymath}
+    \mathcal{B}= \left\{\left(u(t), y(t)\right) \in C^\infty_p (\mathbb{R})^2 : Dy+ 2y = 2Du +2u \forall t \in \mathbb{R}-\left\{t_1,t_2,...\right\}\right\}
+\end{displaymath}
+Osserviamo però, che dato $C^{1, \infty}_p = C^1 \cap C_p^\infty$: 
+\begin{displaymath}
+    \left\{\left(u(t), y(t)\right) \in (C_p^{1,\infty})^2 : Dy + 2y = 2Du + 2u \forall t \in \mathbb{R}\right\} \subset \mathcal{B}
+\end{displaymath}
+Per risolvere l'impasse, definiamo l'azione forzante come 
+\begin{displaymath}
+    u(t) :=
+    \begin{cases}
+        0 \textrm{ per }t<0\\
+        3\frac{t^2}{\tau^2}- 2\frac{t^3}{\tau^3} \textrm{ per }t \in [0, \tau)\\
+        1 \textrm{ per } t \ge \tau
+    \end{cases}
+    \rightarrow u(t) \in C_p^{1,\infty} \forall \tau > 0
+\end{displaymath}
+Assumendo $y(t) \in C_p^\infty$ segue $y(0-) = y(0+) = 1$. Possiamo quindi determinare $y(t)$ con le condizioni iniziali al tempo $0+$: $u(0+)=0$ e $y(0+)=1$.
+Portando $\tau \rightarrow 0+$ otteniamo la soluzione desiderata. Ma se la volessimo senza dover applicare tutte le volte questo metodo di smoothing?
+Osserviamo che quando $\tau \rightarrow 0+$, $Du(t)$ in un intorno dell'origine diverge all'infinito. $Du(t) = 6\frac{t}{\tau^2} - 6\frac{t^2}{\tau^3}$ per $t \in [0, \tau] \rightarrow max_{t \in [0, \tau]} Du(t) = Du(t)|_{t=\frac{\tau}{2}}=\frac{3}{2\tau}$.
+Insomma, $Du(t)$ converge ad una funzione impulsiva (distribuzione) detta \textbf{delta di Dirac $\delta(t)$}.
+\subsection{Cenni di teoria delle funzioni impulsive}
+La funzione impulsiva più semplice è il gradino unitario $1(t)$:
+\begin{displaymath}
+    1(t) := \begin{cases}
+        0 \textrm{ per }t<0\\
+        1 \textrm{ per }t\ge0
+    \end{cases}
+\end{displaymath}
+Introduciamo $f(t<\tau) \in C_p^{0,\infty}$:
+\begin{displaymath}
+    f(t:\tau) :=
+    \begin{cases}
+        0 \textrm{ per } t<0\\
+        \frac{1}{\tau} t \textrm{ per }0\le \le \tau\\
+        1 \textrm{ per }t>\tau
+    \end{cases}
+\end{displaymath}
+$lim_{\tau \rightarrow 0+} f(t:\tau) = 1(t)$.
+La derivata di questa funzione sarà ovviamente pari a 0 per $t<0$ e $t\ge\tau$:
+\begin{displaymath}
+    Df(t;\tau) = 
+    \begin{cases}
+        0 \textrm{ per } t<0\\
+        \frac{1}{\tau} \textrm{ per } 0\le t \le \tau\\
+        0 \textrm{ per }t\ge\tau
+    \end{cases}
+\end{displaymath}
+Notiamo altresì che $lim_{\tau\rightarrow 0+} Df(t;\tau)$ è proprio la delta di Dirac!
+$\delta(t)$ è una distribuzione, o, più informalmente, una funzione impulsiva. È la \textbf{derivata generalizzata} del gradino unitario $\delta(t) := D^*1(t)$. $D^*$ è proprio l'operatore della derivata generalizzata: è un operatore lineare come $D$. Più precisamente, $D^*$ è la derivata in senso distribuzionale. Sappiamo inoltre che, assumendo $t_a < T < t_b$ 
+\begin{displaymath}
+    \int_{t_a}^{t_b} \delta(t-T)dt = 1 \hspace{10px} \int_{t_a}^{t_b} f(t)\delta(t-T)dt = f(T) 
+\end{displaymath}
+Introduciamo le derivate generalizzate di $\delta(t)$:
+\begin{displaymath}
+    D^{*i}\delta(t) \textrm{è la derivata generalizzata di ordine i della delta } =: \delta^{(i)}(t)
+\end{displaymath}
+Possiamo costruire $\delta^{(1)}(t)$ mediante limite di una funzione continua a tratti:
+\begin{displaymath}
+    1(t) = lim_{\tau\rightarrow0+}f(t;\tau) \hspace{10px} \delta(t):= D^* 1(t) = lim_{\tau\rightarrow0+} Df(t;\tau)
+\end{displaymath}
+\begin{displaymath}
+    \delta^{(1)} (t) := D^* \delta(t) = lim_{\tau\rightarrow0+}D^2 f(t;\tau)
+\end{displaymath}
+
+Questo metodo si può estendere per mostrare il significato di $\delta^{(i)} (t), i>1$.
+\subsection{Derivate generalizzate di una funzione discontinua}
+Ipotizziamo $f \in C_p^\infty(\mathbb{R})$ e sia $t=0$ l'unico istante di discontinuità:
+\begin{displaymath}
+    g(t) := \begin{cases}
+        f(t) \textrm{ per } t<0\\
+        f(t)-(f_+ - f_-) \textrm{ per }t\ge0
+    \end{cases}
+    g(t) \in C_p^{0, \infty}
+\end{displaymath}
+Ottenendo
+\begin{displaymath}
+    g(t) = f(t) - (f_+ - f_-)1(t)
+\end{displaymath}
+ovvero, una funzione discontinua è pari a una funzione continua $+$ una funzione a gradino.
+Derivando in senso usuale otteniamo $Df(t) = Dg(t) \forall t \neq 0$. Assumiamo ora che la derivata generalizzata di una funzione continua sia $D^* g(t) := Dg(t^+)$. Applicando l'operatore $D^*$ otteniamo
+\begin{displaymath}
+    D^* f(t) = Df(t^+) + (f_+ - f_-)\delta(t)
+\end{displaymath}
+Ossia, derivata gen. di ordine 1 $=$ funzione discontinua $+$ funzione impulsiva (di ordine 0). La funzione discontinua $Df(t^+)$ può essere scomposta nella somma di una funzione continua più una funzione a gradino:
+\begin{center}
+    derivata gen. di ordine 1 $=$ f. continua $+$ f. a gradino $+$ f. impulsiva di ordine 0. 
+\end{center}
+Applicando la derivata generalizzata alla relazione che esprime $D^*f(t)$, otteniamo
+\begin{displaymath}
+    D^{*2} f(t) = Dg_1(t^+) + (Df_+ - Df_-)\delta(t) + (f_+ - f_-)\delta^{(1)}(t)
+\end{displaymath}
+Iterando il tutto per generalizzare, otterremo 
+\begin{displaymath}
+    D^{*n} f(t) = D^n f(t^+) + (D^{n-1} f_+ - D^{n-1} f_-) \delta(t)+...+(f_+ - f_-)\delta^{(n-1)}(t)
+\end{displaymath}
+Che, con $t<0$ o $t>0$ è $D^{*n} f(t) = D^n f(t)$, mentre con $t=0$ è $D^{*n} f(0) = (D^{n-1} f_+ - D^{n-1} f_-) \delta(0) + ... + (f_+-f_-)\delta^{(n-1)}(0)$.
+Più in generale: $f \in C_p^\infty (\mathbb{R})$ con $t_1,t_2,...$ istanti di possibile discontinuita:
+\begin{displaymath}
+D^{*n} f(t) = D^n f(t^+)+\end{displaymath}\begin{displaymath}
+\left(D^{n-1}(t_1^+) - D^{n-1}(t_1^-)\right)\delta(t-t_1)+...+\left(f(t_1^+)-f(t_1^-)\right)\delta^{(n-1)}(t-t_1)+\end{displaymath}\begin{displaymath}
+\left(D^{n-1}(t_2^+) - D^{n-1}(t_2^-)\right)\delta(t-t_2)+...+\left(f(t_2^+)-f(t_2^-)\right)\delta^{(n-1)}(t-t_2)+\dots
+\end{displaymath}
+\subsection{Principio di identità delle funzioni impulsive}
+Le funzioni impulsive 
+\begin{displaymath}
+    c_{-1} + c_0 \delta(0) + c_1 \delta^{(1)}(0)+\dots+c_k\delta^{(k)}(0)
+\end{displaymath}
+e
+\begin{displaymath}
+    d_{-1} + d_0\delta(0)+d_1\delta^{(1)}(0)+\dots+d_k\delta^{(k)}(0)
+\end{displaymath}
+sono uguali fra loro sse $c_0=d_0,\dots,c_k=d_k$.
+Ritornando all'esempio iniziale, quindi, l'eq. differenziale di $\Sigma$ interpretata in senso distribuzionale
+\begin{displaymath}
+    D^* y(t) + 2y(t) = 2D^* u(t) + 2u(t)
+\end{displaymath}
+deve essere soddisfatta per ogni $t \in \mathbb{R}$ compresi gli istanti di discontinuità.
+\subsection{Insieme dei behaviors}
+Dato un insieme dinamico $\Sigma$ descritto dall'eq. differenziale 
+\begin{displaymath}
+    \sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u
+\end{displaymath}
+si definisce insieme dei behaviors di $\Sigma$
+\begin{displaymath}
+    \mathcal{B}:= \left\{(u,y)\in C_p^\infty (\mathbb{R})^2: \sum_{i=0}^n a_i D^{*i} y = \sum_{i=0}^m b_i D^{*i}u\right\}
+\end{displaymath}
+L'equazione differenziale è soddisfatta in senso distribuzionale per ogni $t \in \mathbb{R}$. Se abbiamo $t=0$ istante di discontinuità emergono le condizioni al tempo $0-$ e $0+$. Le relazioni fra i valori al tempo $0+$ ($y_-, Dy_-,\dots,D^{n-1}y_-; u_-\dots$) e quelli al tempo $0+$ ($y_+, Dy_+,\dots,D^{n+1}y_+; u_+\dots$) sono determinabili eguagliando le espressioni impulsive dell'eq. differenziale al tempo $t=0$.
+\subsubsection{Proprietà}
+Sia $\left(u(t),y(t)\right) \in \mathcal{B}$ con $u(t)$ funzione discontinua. Se $\rho=0$ allora anche l'uscita $y(t)$ è una funzione discontinua. Se $\rho\ge1$ allora $y(t) \in \overline{C_p^{\rho-1,\infty}}$.\\
+Otteniamo anche una proprietà che definisce la relazione tra i gradi di continuità dell'ingresso e dell'uscita: sia $\left(u(t),y(t)\right) \in \mathcal{B}$ e $l \in \mathbb{N}$. Allora
+\begin{displaymath}
+    u(t)\in C_p^{l,\infty} \Leftrightarrow y(t)\in C_p^{\rho+l,\infty}, \hspace{10px}u(t)\in \overline{C_p^{l,\infty} }\Leftrightarrow y(t)\in \overline{C_p^{\rho+l,\infty}}
+\end{displaymath}
 \end{document}
+
