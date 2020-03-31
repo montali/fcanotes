@@ -466,5 +466,114 @@ Otteniamo anche una proprietà che definisce la relazione tra i gradi di continu
 \begin{displaymath}
     u(t)\in C_p^{l,\infty} \Leftrightarrow y(t)\in C_p^{\rho+l,\infty}, \hspace{10px}u(t)\in \overline{C_p^{l,\infty} }\Leftrightarrow y(t)\in \overline{C_p^{\rho+l,\infty}}
 \end{displaymath}
+\section{La funzione di trasferimento}
+Definiamo anzitutto lo spazio delle sequenze impulsive $\mathcal{I}^*$:
+\begin{displaymath}
+    \mathcal{I}^* \triangleq \left\{d:\mathbb{R}\rightarrow\mathbb{R}^*:d(t) = \sum_{i=1}^{+\infty}\sum_{j=0}^{r_i} c_{ij}\delta^{(j)}(t-t_i), c_{ij} \in \mathbb{R}\right\}
+\end{displaymath}
+Estensione distribuzionale delle funzioni derivabili a tratti: $C_p^\infty (\mathbb{R})^* \triangleq C_p^\infty (\mathbb{R}) + \mathcal{I}^*$.
+\subsection{La trasformata della derivata generalizzata}
+Tenendo conto del solo istante di discontinuità in $t=0$, otteniamo, data $f \in C_p^{\infty} (\mathbb{R})(C_p^\infty(\mathbb{R})^*)$, segue
+\begin{displaymath}
+    \mathcal{L}[D^*f(t)] = sF(s) - f(0-)
+\end{displaymath}
+Per ottenere le derivate generalizzate di ordine superiore:
+\begin{displaymath}
+    \mathcal{L}[D^{*i}f] = s^i F(s) - s^{i-1}f_- - s^{i-2} Df_- -\dots-sD^{i-2}f_--D^{i-1}f_-
+\end{displaymath}
+\subsection{Estensione dell'insieme dei behaviors}
+Dato un sistema dinamico $\Sigma$ descritto dall'eq. differenziale
+\begin{displaymath}
+    \sum_{i=0}^n a_i D^i  y = \sum_{i=0}^m b_i u
+\end{displaymath}
+si definisce estensione impulsiva dei behaviors o \textbf{behavior esteso}
+\begin{displaymath}
+    \mathcal{B}^* := \left\{(u,y) \in C_p^\infty (\mathbb{R})^* \times C_p^\infty (\mathbb{R})^* : \sum_{i=0}^n a_i D^{*i} y = \sum_{i=0}^m b_i D^{*i} u\right\}
+\end{displaymath}
+Ancora l'equazione differenziale è soddisfatta in senso distribuzionale per ogni $t \in \mathbb{R}$. 
+\begin{displaymath}
+    \mathcal{B} \subset \mathcal{B}^*
+\end{displaymath}
+\subsubsection{Proprietà}
+\begin{itemize}
+    \item Sia $(u,y)\in \mathcal{B}^*$, segue $(D^*u, D^*y)\in \mathcal{B}^*$.
+    \item Proprietà della coppia azione forzante-risposta forzata: sia $(u,y) \in \mathcal{B}^*$ con $u(t)$ azione forzante e $y(t)$ risposta forzata. Segue 
+    \begin{displaymath}
+        \left(\int_{0-}^t u(v) dv,\int_{0-}^t y(v) dv\right) \in \mathcal{B}^*
+    \end{displaymath}
+\end{itemize}
+\subsection{Il problema fondamentale dell'analisi del dominio nel tempo di un sistema $\Sigma$}
+Note le condizioni iniziali al tempo $0-$  $y_-, Dy_-,...,D^{n-1}y_-$ e $u_-,Du_-,\dots,D^{m-1}u_-$ e l'azione forzante $u(t), t\ge0$, vogliamo determinare la risposta $y(t), t\ge0$.
+Risolviamo quindi l'equazione differenziale di $\Sigma$
+\begin{displaymath}
+    \sum_{i=0}^n a_i D^{*i} y(t) = \sum_{i=0}^m b_i D^{*i} u(t)
+\end{displaymath}
+Applicando la trasformata di Laplace. Otterremmo una soluzione $y(t) = y_{for.}(t) + y_{lib.}(t), t\ge0$, ossia un'uscita composta da risposta forzata di $\Sigma$ all'azione forzante, e una risposta (evoluzione) libera di $\Sigma$.
+\subsection{Funzione di trasferimento}
+Definiamo ora la funzione di trasferimento di un sistema la funzione di variabile complessa $G(s)$ per la quale è valida la relazione
+\begin{displaymath}
+    \mathcal{L}[y(t)] = G(s)\mathcal{L}[u(t)]
+\end{displaymath}
+$\forall (u(t), y(t)) \in \mathcal{B}$ con $u(t)=0, y(t)=0$ per $t<0$.
+Abbiamo quindi ottenuto un modello matematico alternativo all'eq. differenzialie:
+\begin{displaymath}
+    G(s)=\frac{\sum_{i=0}^m b_i s^i}{\sum_{i=0}^n a_i s^i}=\frac{b(s)}{a(s)}
+\end{displaymath}
+Se le condizioni iniziali sono tutte nulle (sistema in quiete per $0-$), $Y(s)=G(s)U(s)\rightarrow Y_{for.}(s)=G(s)U(s)$ (trasformata della risposta forzata). Sia $g(t):=\mathcal{L}^{-1} [G(s)]$ con $g(t)=0, t<0: g(t)$ è la \textbf{risposta all'impulso} a partire da una condizione di quiete $(\delta(t), g(t)) \in \mathcal{B}^*$. Dal teorema di convoluzione sappiamo che $y_{for.}(t) = \int_0^t g(t-v)u(v)dv$. Otteniamo quindi la \textbf{soluzione generale dell'equazione differenziale} ($t\ge0$):
+\begin{displaymath}
+    y(t)=\int_0^t g(t-v)u(v)dv + \mathcal{L}^{-1}\left[\frac{\sum_{i=1}^n \sum_{j=0}^{i-1}a_i D^{i-1-j}y_- s^j - \sum_{i=1}^{m} \sum_{j=0}^{i-1} b_i D^{i-1-j}u_- s^j}{\sum_{i=0}^n a_is^i}\right]
+\end{displaymath}
+\subsection{Definizioni}
+\subsubsection{Proprio}
+Un sistema $\Sigma$ si dice \textbf{(strettamente) proprio} se la sua funzione di trasferimento è \textbf{(strettamente) propria}. Quindi, con $n\ge m (\rho \ge 0)$ abbiamo $\Sigma$ proprio, se $n>m (\rho\ge1)$ strettamente proprio.
+\subsubsection{Guadagno statico}
+Definiamo il \textbf{guadagno statico di $\Sigma$} come il rapporto fra il valore costante dell'uscita e il valore costante dell'ingresso ($\neq 0$) quando $\Sigma$ è all'equilibrio:
+\begin{displaymath}
+    K := \frac{y_c}{u_c} \textrm{ con } (u_c, y_c) \in \mathcal{B} \textrm{ e }u_c \neq 0
+\end{displaymath}
+Dall'equazione differenziale otteniamo $K=\frac{b_0}{a_0} \rightarrow K=G(0)$.
+\subsubsection{Polinomio caratteristico di $\Sigma$}
+Dato il sistema $\Sigma$ descritto dall'eq. differenziale $\sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u$, il polinomio $a(s)= \sum_{i=0}^n a_i s^i$ è detto polinomio caratteristico di $\Sigma$. È utile notare che esso è il polinomio a denominatore della funzione di trasferimento.
+\subsubsection{Poli e zeri}
+I poli e zeri di $\Sigma$ sono i poli e gli zeri della funzione di trasferimento. 
+\subsubsection{Modi del sistema dinamico $\Sigma$}
+I \textbf{modi} sono le funzioni  "tipiche" associate ai poli di $\Sigma$ secondo la regola:
+\begin{center}
+    Se $p$ è un polo reale di molteplicità $h$: $e^{pt}, te^{pt},\dots, t^{h-1}e^{pt}$
+\end{center}
+\begin{center}
+    Se $\sigma+j\omega$ è una coppia di poli complessi coniugati di molteplicità $h$: $e^{\sigma t} sen(\omega t+\phi_1), te^{\sigma t} sen(\omega t+\phi_2),\dots, t^{h-1}e^{\sigma t} sen(\omega t+\phi_h)$ oppure equivalentemente $e^{\sigma t} sen(\omega t), e^{\sigma t} cos(\omega t), te^{\sigma t} sen(\omega t), te^{\sigma t} cos(\omega t),\dots, t^{h-1}e^{\sigma t} sen(\omega t), t^{h-1} e^{\sigma t} cos(\omega t)$
+\end{center}
+
+\subsubsection{Risposta libera e modi di $\Sigma$}
+Sia $\Sigma$ un sistema per il quale i poli coincidono con le radici del polinomio caratteristico ($a(s)$ e $b(s)$ coprimi fra loro). Allora la risposta libera è una combinazione lineare dei suoi modi. 
+\subsubsection{Razionalità}
+Non tutti i sistemi dinamici lineari e stazionari sono caratterizzati da funzioni di trasferimento razionali. Un esempio è il ritardo finito.
+\subsubsection{Segnali tipici per l'ingresso di $\Sigma$}
+Alcuni segnali tipici di ingresso:
+\begin{itemize}
+    \item $\delta(t)$ impulso unitario (delta di Dirac): $\mathcal{L}[\delta (t)] = 1$
+    \item $1(t)$ gradino unitario: $\mathcal{L}[1(t)] = \frac{1}{s}$
+    \item $t\cdot 1(t)$ rampa unitaria: $\mathcal{L}[t\cdot 1(t)] = \frac{1}{s^2}$
+    \item $\frac{1}{2}t^2 \cdot 1(t)$ parabola unitaria: $\mathcal{L}\left[\frac{1}{2}t^2 \cdot 1(t)\right] = \frac{1}{s^3}$
+\end{itemize}
+\subsubsection{Risposta canonica}
+La risposta canonica è la risposta forzata di $\Sigma$ a un segnale tipico di ingresso. Quelle usualmente adottate sono $g(t)$, la risposta all'impulso, detta anche \textbf{risposta impulsiva}, e $g_s(t)$, la risposta al gradino $1(t)$ detta \textbf{risposta indiciale}. Sappiamo inoltre che 
+\begin{displaymath}
+    g(t) = \mathcal{L}^{-1}[G(s)] \hspace{10px} g_s(t) = \mathcal{L}^{-1}\left[\frac{1}{s}G(s)\right]
+\end{displaymath}
+Una proprietà interessante è che
+\begin{displaymath}
+    \int_{0-}^t g(v) dv = g_s(t) \hspace{10px} g(t)=D^* g_s (t)
+\end{displaymath}
+Per i sistemi strettamente propri, $g(t) = Dg_s(t^+)$.
+\subsubsection{Integrali di Vaschy}
+Nota la risposta al gradino $g_s(t)$, la risposta forzata $y_{for} (t), t\ge0$ effetto dell'azione forzante $u(t), t\ge0$ è determinabile come 
+\begin{displaymath}
+    y_{for}(t) = \int_0^t u' (v) g_s(t-v) dv + u(0+)g_s(t)
+\end{displaymath}
+\begin{displaymath}
+    y_{for}(t) = \int_0^t  g_s(v) u'(t-v) dv + u(0+)g_s(t)
+\end{displaymath}
 \end{document}
 
