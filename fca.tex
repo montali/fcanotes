@@ -575,5 +575,55 @@ Nota la risposta al gradino $g_s(t)$, la risposta forzata $y_{for} (t), t\ge0$ e
 \begin{displaymath}
     y_{for}(t) = \int_0^t  g_s(v) u'(t-v) dv + u(0+)g_s(t)
 \end{displaymath}
+\section{Sistemi dinamici elementari}
+Con questa lezione ci poniamo due obiettivi: studiare le caratteristiche dei sistemi lineari più semplici (primo ordine con grado relativo uno e secondo ordine con grado relativo due) e semplificare i sistemi di più complessi comparandoli a sistemi di secondo ordine. 
+\subsection{Sistemi del primo ordine (strettamente propri)}
+Un sistema del primo ordine strettamente proprio è definito da $G(s)=\frac{1}{1+\tau s}$ (guadagno statico normalizzato a 1), equazione differenziale $\tau Dy + y = u$ con $\tau$ costante di tempo ($>0$). Ha un polo ($-\frac{1}{\tau}$) e un modo ($e^{-\frac{1}{\tau}t}$). Per determinare la risposta al gradino unitario $g_s(t)$ svolgiamo l'antitrasformata:
+\begin{displaymath}
+    g_s(t) = \mathcal{L}^{-1}\left[\frac{1}{1+\tau s}\frac{1}{s}\right] = 1 - e^{-t/\tau}, t\ge0
+\end{displaymath}
+\subsubsection{Parametri della risposta al gradino}
+Spesso la risposta al gradino unitario di un sistema dinamico generico ha un andamento caratteristico, dove distinguiamo alcuni parametri:
+\begin{itemize}
+    \item $S$ massima sovraelongazione (in \% del valore di regime)
+    \item $T_r$ tempo di ritardo
+    \item $T_s$ tempo di salita
+    \item $T_m$ istante di massima sovraelongazione 
+    \item $T_a$ tempo di assestamento $inf\left\{T>0: |g_s(t)-y_{regime}|\le 0,05 y_{regime} \forall t \ge T\right\}$
+\end{itemize}
+\subsection{Sistemi del secondo ordine (senza zeri)}
+La funzione di trasferimento $G(s)$ sia così parametrizzata:
+\begin{displaymath}
+    G(s)=\frac{\omega^2_n}{s^2+2\delta\omega_n s + \omega_n^2}, G(0)=1
+\end{displaymath}
+Con equazione differenziale
+\begin{displaymath}
+    D^2(y)+2\delta\omega_n Dy + \omega^2_n y = \omega_n^2 u
+\end{displaymath}
+dove $\omega_n$ è la pulsazione naturale, mentre $\delta$ è il coefficiente di smorzamento, $\in (0,1)$.
+Poli e zeri sono definiti da:
+\begin{displaymath}
+    \left\{\textrm{poli di }G(s)\right\} = \left\{-\delta\omega_n \pm j\omega_n \sqrt{1-\delta^2}\right\} \hspace{10px}\left\{\textrm{modi di }G(s)\right\} = \left\{e^{-\delta\omega_nt}sen\left(\omega_n\sqrt{1-\delta^2}t+\phi_1\right)\right\}
+\end{displaymath}
+Determiniamo la risposta al gradino unitario, come sempre, con l'antitrasformata:
+\begin{displaymath}
+    y(t)=\mathcal{L}^{-1}\left[\frac{\omega_n^2}{s(s^2 + 2\delta\omega_n s+\omega_n^2)}\right] = 1-Ae^{-\delta\omega_nt} sen(\omega t + \phi)
+\end{displaymath}
+\begin{displaymath}
+    \omega := \omega_n \sqrt{1-\delta^2}\hspace{10px}A:=\frac{1}{\sqrt{1-\delta^2}}\hspace{10px}\phi:=arccos(\delta)
+\end{displaymath}
+Notiamo che per $\delta=1, A$ tende ad infinito quindi bisogna ricalcolare l'antitrasformata. La massima sovraelongazione $S$ è invece pari a
+\begin{displaymath}
+    S = 100exp\left\{-\frac{\delta \pi}{\sqrt{1-\delta^2}}\right\}
+\end{displaymath}
+I tempi di asservimento e salita, invece:
+\begin{displaymath}
+    T_a \cong \frac{3}{\delta\omega_n}\hspace{10px}T_s \approx \frac{1,8}{\omega_n}
+\end{displaymath}
+Com'è evidente, la seconda è approssimata, frutto di interpolazione.
+\subsection{Poli dominanti di un sistema generico}
+Un sistema $\Sigma$ generico con funzione di trasferimento $G(s)=\frac{b(s)}{a(s)}$, con n poli e $m$ zeri, tutti i poli hanno parte reale negativa (i modi convergono a zero per $t\rightarrow+\infty$). Definiamo i \textbf{poli dominanti} come i poli (normalmente una coppia) non soggetti a quasi cancellazione polo-zero, più vicini all'asse immaginario. La risposta al gradino unitario dipende approssimativamente dai soli poli dominanti: se i poli dominanti sono complessi coniugati, i parametri della risposta $S, T_a, T_s$ sono determinabili approssimativamente dalle relazioni per i sistemi di ordine due. Bisogna però fare attenzione: spesso può essere un'approssimazione abbondante, e non sempre è possibile individuare un insieme significativo di poli dominanti. 
+\subsection{Specifiche sulla risposta al gradino per un sistema di controllo}
+Siamo ora in grado di poter definire delle specifiche sulla risposta al gradino grazie ai parametri definiti: imponiamo infatti le specifiche $S \le S_{max}$ e $T_a \le T_{a-max}$, ottenendo che i poli $-\delta\omega_n \pm j\omega_n \sqrt{1-\delta^2}$ devono appartenere ad un cono troncato.
 \end{document}
 
