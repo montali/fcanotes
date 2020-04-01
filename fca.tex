@@ -625,5 +625,53 @@ Com'è evidente, la seconda è approssimata, frutto di interpolazione.
 Un sistema $\Sigma$ generico con funzione di trasferimento $G(s)=\frac{b(s)}{a(s)}$, con n poli e $m$ zeri, tutti i poli hanno parte reale negativa (i modi convergono a zero per $t\rightarrow+\infty$). Definiamo i \textbf{poli dominanti} come i poli (normalmente una coppia) non soggetti a quasi cancellazione polo-zero, più vicini all'asse immaginario. La risposta al gradino unitario dipende approssimativamente dai soli poli dominanti: se i poli dominanti sono complessi coniugati, i parametri della risposta $S, T_a, T_s$ sono determinabili approssimativamente dalle relazioni per i sistemi di ordine due. Bisogna però fare attenzione: spesso può essere un'approssimazione abbondante, e non sempre è possibile individuare un insieme significativo di poli dominanti. 
 \subsection{Specifiche sulla risposta al gradino per un sistema di controllo}
 Siamo ora in grado di poter definire delle specifiche sulla risposta al gradino grazie ai parametri definiti: imponiamo infatti le specifiche $S \le S_{max}$ e $T_a \le T_{a-max}$, ottenendo che i poli $-\delta\omega_n \pm j\omega_n \sqrt{1-\delta^2}$ devono appartenere ad un cono troncato.
+
+\section{La stabilità dei sistemi dinamici}
+\subsection{Stabilità alle perturbazioni}
+Consideriamo un sistema dinamico $\Sigma$ nella solita forma $\sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u$ e andiamo ad analizzarne i punti di equilibrio, ossia quei valori costanti di ingresso/uscita che si mantengono inalterati nel tempo. Andiamo quindi ad analizzare una coppia di valori $u_c, y_c$ devono rispettare la relazione $y_c = G(0)u_c$. Possiamo quindi mettere i punti a grafico, che evidentemente staranno su una retta con pendenza data dal guadagno statico $\frac{b_0}{a_0}$.
+Introduciamo il concetto di stabilità. Per semplicità ci concentreremo solo sul punto di equilibrio che sta nell'origine. Ipotizziamo anche che $a(s)$ e $b(s)$ siano coprimi (non hanno radici in comune). Esaminiamo una perturbazione alla condizione di equilibrio, ad esempio introducendo un segnale di ingresso o modificando l'uscita nell'intervallo $[t_0,0)$. 
+Distinguiamo tra tre tipologie di risposta a questa condizione: instabilità, stabilità semplice, stabilità asintotica. Formalizziamo la perturbazione come
+\begin{displaymath}
+    u(t) = 0 \textrm{ per }t<t_0, u(t) \neq 0 \textrm{ per }t\in[t_0, 0), u(t)=0 \textrm{ per }t\ge0
+\end{displaymath}
+\begin{displaymath}
+    y(t) = 0 \textrm{ per }t<t_0, y(t) \neq 0 \textrm{ per }t\in [t_0,0), y(t)=y_{lib}(t) \textrm{ per }t\ge0
+\end{displaymath}
+Di conseguenza, l'uscita è in evoluzione libera per $t\ge0$.
+Torniamo alla classificazione precedente:
+\begin{itemize}
+    \item $y_{lib}(t)$ è limitata su $[0,+\infty)$ punto di equilibrio \textbf{stabile}
+    \item $y_{lib}(t)$ non è limitata su $[0,+\infty)$ punto di equilibrio \textbf{instabile}
+    \item Se è stabile e convergente a $0$ per $t\rightarrow+\infty$ punto di equilibrio \textbf{asintoticamente stabile}
+    \item È \textbf{semplicemente stabile} se è stabile ed esiste una perturbazione per la quale \begin{displaymath}
+        lim_{t\rightarrow+\infty}y_{lib}(t)=y_\infty \neq 0 \vee \left\{\textrm{non esiste} lim_{t\rightarrow+\infty} y_{lib}(t)\right\}
+    \end{displaymath} 
+\end{itemize}
+\begin{center}
+    Per il sistema lineare $\Sigma$, il comportamento della risposta libera a seguito di perturbazioni su di un punto, rimane il medesimo per tutti gli altri punti. Possiamo quindi parlare di stabilità del sistema piuttosto che del singolo punto.
+\end{center}
+\subsection{Teorema sui poli e la stabilità}
+La stabilità è strettamente legata ai poli del sistema. Consideriamo un sistema $\Sigma$ lineare per il quale i poli coincidono con le radici del polinomio caratteristico ($a(s)$ e $b(s)$ coprimi). Valgono le seguenti condizioni necessarie e sufficienti:
+\begin{itemize}
+    \item $\Sigma$ è \textbf{stabile} se e solo se tutti i poli hanno parte reale non positiva e gli eventuali poli puramente immaginari sono semplici
+    \item $\Sigma$ è \textbf{asintoticamente stabile} se e solo se tutti i suoi poli hanno parte reale negativa
+    \item $\Sigma$ è \textbf{semplicemente stabile} se e solo se tutti i poli hanno parte reale non positiva e quelli puramente immaginari (che devono esistere, al massimo è $s=0$) sono semplici 
+    \item $\Sigma$ è \textbf{instabile} se e solo se esiste almeno un polo a parte reale positiva o un polo puramente immaginario con molteplicità maggiore di 1.
+\end{itemize}
+\subsection{Stabilità bounded-input bounded-output}
+La cosiddetta \textbf{stabilità BIBO} è così definita:
+\begin{center}
+    $\Sigma$ è BIBO stabile se per ogni azione forzante limitata la corrispondente risposta forzata è limitata.
+\end{center}
+Formalmente, è BIBO stabile se per ogni azione forzante la cui norma infinito $||u(t)||_\infty$ sia $<+\infty$, la norma infinito della risposta forzata $||y(t)||_\infty$ generata sia $<+\infty$.
+Grazie a un teorema, possiamo affermare che $\Sigma$ è BIBO stabile se e solo se 
+\begin{displaymath}
+    \int_0^{+\infty} |g(\tau)|d\tau < +\infty
+\end{displaymath}
+Un altro teorema utile è il seguente. Assumiamo $a(s)$ e $b(s)$ coprimi. Vale la seguente equivalenza:
+\begin{center}
+    Il sistema $\Sigma$ è BIBO stabile se e solo se $\Sigma$ è asintoticamente stabile. 
+\end{center}
+I due concetti vengono spesso utilizzati equivalentemente.
 \end{document}
 
