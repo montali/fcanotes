@@ -673,5 +673,53 @@ Un altro teorema utile è il seguente. Assumiamo $a(s)$ e $b(s)$ coprimi. Vale l
     Il sistema $\Sigma$ è BIBO stabile se e solo se $\Sigma$ è asintoticamente stabile. 
 \end{center}
 I due concetti vengono spesso utilizzati equivalentemente.
+\subsection{Criterio di Routh}
+Partiamo da una premessa: abbiamo fino ad ora associato la stabilità ai poli del sistema dinamico. Questi ultimi sono le radici dell'equazione caratteristica: potremo dire che con routine numeriche possiamo risolvere i quesiti sulla stabilità. Questo è spesso opportuno, ma è anche utile saperlo fare senza calcolo di radici. Consideriamo il solito sistema lineare $\Sigma$ decritto da $\sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u$ con f.d.t. $G(s)= \frac{b(s)}{a(s)}$, con $a(s)$ polinomio caratteristico e relativa equazione caratteristica $a_s=0$:
+\begin{displaymath}
+    a_ns^n+a_{n-1}s^{n-1}+...+a_1s+a_0=0
+\end{displaymath}
+Vediamo una prima proprietà, ricordando anzitutto cos'è un polinomio di Hurwitz: un polinomio $a(s)$ è detto tale se tutte le radici hanno parte reale negativa. Assumiamo ora $a_n>0$; il polinomio è hurwitziano solo se tutti i suoi coefficienti sono positivi. Non è sempre vero il contrario. Lo dimostriamo fattorizzando in modo estensivo $a(s)$ con dei fattori $(s+\eta_i)$.
+È possibile determinare il segno delle radici di $a(s)$ attraverso una \textbf{tabella di Routh}, senza doverle effettivamente calcolare. La tabella è costituita da $n-1$ righe, calcolate a ritroso. Le prime due righe contengono i coefficienti alternati del polinomio $a(s)$. In assenza di abbastanza coefficienti, riempiamo con 0. A questo punto, la terza riga viene calcolata a partire dalle due righe superiori. La quarta si baserà anch'essa sulle due righe superiori, a ritroso fino al calcolo di $\gamma_{n,1}$. Per calcolare i coefficienti delle righe dopo la seconda:
+\begin{displaymath}
+    y_{k,j}=-\frac{\begin{vmatrix}
+        \gamma_{k-2,1} & \gamma_{k-2,j+1}\\
+        \gamma_{k-1,1} & \gamma_{k-1,j+1}
+    \end{vmatrix}}{\gamma_{k-1,1}}
+    = \frac{\gamma_{k-1,1}\gamma_{k-2,j+1} - \gamma_{k-2,1}\gamma_{k-1,j+1}}{\gamma_{k-1,1}}
+\end{displaymath}
+La riga finisce quando il determinante è 0. 
+\subsubsection{Teorema di Routh}
+Per applicare il criterio, andiamo ad esaminare la prima colonna, osservando le variazioni di segno nella colonna. Determiniamo il numero di variazioni/permanenze, che sommate daranno $n$. 
+Assumiamo che la tabella di Routh possa essere completata (assenza di singolarità). Allora, ad ogni variazione di segno corrisponde una radice a parte reale positiva, ad ogni permanenza corrisponde una radice a parte reale negativa.
+\subsubsection{Criterio di Routh}
+Il polinomio $a(s)$ è hurwitziano se e solo se l'associata tabella di Routh può essere completata (con l'algoritmo base) e presenta nella prima colonna solo permanenze di segno. 
+\subsubsection{Proprietà della tabella}
+I termini di una riga possono essere moltiplicati tutti per uno stesso coefficiente senza che ciò modifichi le variazioni/permanenze di segno della prima colonna. 
+\subsubsection{Singolarità della tabella}
+Distinguiamo due tipi di singolarità possibili:
+\begin{enumerate}
+    \item Il primo elemento di una riga è zero 
+    \item Tutti gli elementi di una riga sono nulli
+\end{enumerate}
+Esistono metodi ad hoc per risolvere queste singolarità. 
+\paragraph{Prosecuzione della tabella nel caso 1} Per il primo tipo di singolarità, citiamo due metodi: 
+\begin{enumerate}
+    \item Metodo $\epsilon$, obsoleto perché non sempre risolutivo e complesso: inserire un numero arbitrario $\epsilon$ sullo 0
+    \item Metodo di Benidir-Picinbono: algoritmicamente semplice e sempre risolutivo
+\end{enumerate}
+Vediamo il secondo: ogni riga non nulla che inizia con $p$ zeri viene sommata con la riga ottenuta moltiplicandola per $-1^p$ e traslandola verso sinistra di $p$ posizioni. 
+0\paragraph{Prosecuzione della tabella nel caso 2} Questo accade sempre in una riga dispari: il polinomio non ha radici nell'origine ($a_0 \neq 0$). Introduciamo un polinomio ausiliario $\beta$ ottenuto riportando le potenze pari di $s$:
+\begin{displaymath}
+    \beta(s) := \gamma_{n-2i,1}s^{2i}+\gamma_{n-2i,2}s^{2i-2}+\gamma_{n-2i,3}s^{2i-4}+\dots+\gamma_{n-2i,i}s^{2}+\gamma_{n-2i,i+1}
+\end{displaymath}
+L'equazione ausiliaria è quindi $\beta(s) = 0$.
+Il polinomio ausiliario $\beta(s)$ divide $a(s)$. Esiste quindi un polinomio $a(s)$ tale che $a(s) = \alpha(s)\beta(s)$. Inoltre, la prima parte di tabella dà informazioni sul segno delle radici di $\alpha(s)$. Enunciamo anche la proprietà di simmetria delle radici del polinomio ausiliario: queste radici sono disposte simmetricamente rispetto all'origine del piano complesso. Se ad esempio avessi una radice positiva in $+3$, il polinomio ausiliario avrà radice in $-3$. Il numero di radici a parte reale positiva di $\beta(s)$ sarà quindi uguale al suo numero di radici a parte reale negativa. Può anche presentare radici puramente immaginarie. Come proseguire la costruzione della tabella?
+\begin{enumerate}
+    \item Si fa la derivata del polinomio ausiliario 
+    \item Sostituisco gli zeri della riga nulla coi coefficienti del polinomio ausiliario derivato 
+    \item Nel conteggio, le variazioni avranno lo stesso significato (radice a parte reale positiva), mentre le permanenze potranno essere associate a radici a parte reale negativa o radici puramente immaginaria.
+\end{enumerate}
+Insomma: \textbf{la simmetria delle radici di $\beta(s)$ permette di stabilire il segno della parte reale di tutte le radici}.
+Concludiamo facendo notare che il criterio di Routh viene utile anche quando lo applichiamo in funzione di parametri del sistema: otteniamo così un sistema di disequazioni che ci permette di progettare un sistema di controllo.
 \end{document}
 
