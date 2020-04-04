@@ -721,5 +721,123 @@ Il polinomio ausiliario $\beta(s)$ divide $a(s)$. Esiste quindi un polinomio $a(
 \end{enumerate}
 Insomma: \textbf{la simmetria delle radici di $\beta(s)$ permette di stabilire il segno della parte reale di tutte le radici}.
 Concludiamo facendo notare che il criterio di Routh viene utile anche quando lo applichiamo in funzione di parametri del sistema: otteniamo così un sistema di disequazioni che ci permette di progettare un sistema di controllo.
+\section{Analisi armonica e diagrammi di Bode}
+Ma anzitutto, cos'è il fenomeno armonico? Per spiegarlo, prendiamo una f.d.t. $G(s) = \frac{10}{s+1}$ e applichiamo il segnale armonico $u(t) = 2sin(t)$. Calcoliamo $Y(s)=\frac{10}{s+1}(s)\mathcal{L}[2sin(t)]$, poi calcoliamo i $k_i$. Risolviamo e notiamo che la risposta forzata è data da una parte transiente, ed una parte armonica. Concludiamo che quando $t\rightarrow+\infty$ scompare la parte armonica e quindi vale $y_\infty(t) = 10\sqrt{2sin\left(t-\frac{\pi}{4}\right)}$. Questa proprietà è generalizzabile. Fenomeno di risposta armonica:
+\begin{center}
+    Col sistema in quiete, all'istante $t=0-$, si applichi $u(t)=Usin(\omega t)$. La risposta forzata di $\Sigma$ assume questa forma: $y_\infty(t) = Y(\omega) sen(\omega t + \phi(\omega))$
+\end{center}
+Possiamo così definire una funzione di risposta armonica, che sarà $\mathbb{R}_{\ge0}\rightarrow\mathbb{C}$. In particolare associamo ad $\omega$ un valore $F(\omega)=\frac{Y(\omega)}{U}e^{j\phi(\omega)}$. In virtù della linearità di $\Sigma$, $F(\omega)$ è indipendente da U (grazie al principio di sovrapposizione degli effetti).
+Enunciamo così un teorema.
+\paragraph{Teorema di analisi armonica}
+Sia $\Sigma$ un sistema asintoticamente stabile con f.d.t. $G(s)$ razionale. La risposta forzata di $\Sigma$ ad un segnale armonico all'ingresso è ancora, a regime $t\rightarrow+\infty$, un segnale armonico con la stessa frequenza dell'ingresso. La funzione di risposta armonica associata soddisfa la relazione:
+\begin{displaymath}
+    F(\omega) = G(j\omega)
+\end{displaymath}
+Ovvero coincide con la funzione di trasferimento $G(s)$, valutata in $s=j\omega$.
+Alcune considerazioni necessarie:
+\begin{itemize}
+    \item La funzione di risposta armonica è un modello matematico alternativo all'eq. diff., f.d.t\dots 
+    \item Può essere determinata sperimentalmente
+    \item Sfruttando la relazione $F(\omega) = G(j\omega)$ la f. di risposta armonica è definibile anche per sistemi non asintoticamente stabili: in questo caso la risposta armonica descrive una soluzione instabile delle armoniche nel sistema.
+    \item Relazioni fra la risposta armonica $G(j\omega)$ e la risposta all'impulso $g(t)$:\begin{displaymath}
+        \begin{cases}
+            G(j\omega) = \int_{0-}^{+\infty} g(t)e^{-j\omega t}dt \\
+            g(t) = \frac{1}{2\pi}\int_{-\infty}^{+\infty} G(j\omega)e^{j\omega t}d\omega
+        \end{cases}
+    \end{displaymath}
+    Queste sono trasformate di Fourier. La prima è ottenibile dalla definizione di trasformata di Laplace, sostituendo $j\omega$ ad $s$. La seconda si ricava dalla formula di antitrasformazione di Laplace, facendo un integrale di linea. 
+    \item Ponendo $G(j\omega) = R(\omega) + jI\omega$ (parte reale ed immaginaria) 
+    \item Rappresentazioni grafiche della funzione di risposta armonica: diagrammi di Bode, diagrammi di Nyquist (polari), diagrammi di Nichols.
+\end{itemize}
+
+\subsection{Guadagni del sistema lineare $\Sigma$}
+Abbiamo quindi individuato tre guadagni relativi al sistema stesso:
+\begin{itemize}
+    \item Funzione di trasferimento $G(s)$ (guadagno dinamico)
+    \item Ponendo $s:=j\omega$, otteniamo la funzione di risposta armonica $\rightarrow G(j\omega)$ o risposta in frequenza 
+    \item Ponendo $s:=0$ otteniamo il guadagno statico $G(0)$
+\end{itemize}
+\subsection{I diagrammi di Bode}
+I \textbf{diagrammi di Bode} sono diagrammi (cartesiani) logaritmici della risposta armonica. In particolare, riportiamo dalla rappresentazione polare di $G(j\omega)$ e applichiamo il logaritmo naturale. Spesso si indicano parte reale e immaginaria come $\alpha, beta$. Andremo quindi a mettere a grafico il \textbf{diagramma delle ampiezze}, che riporta il logaritmo del modulo della r.a. in funzione del logaritmo della pulsazione $\omega$, ed il \textbf{diagramma delle fasi} che riporta l'argomento della r.a. in funzione del logaritmo della pulsazione $\omega$.
+Usualmente, nelle ascisse, vengono riportati direttamente i valori delle pulsazioni ed i moduli in scala logaritmica. Può capitare che nel diagramma dei moduli, le ordinate (modulo della r.a.) siano espresse in decibel. La scala logaritmica ha diversi vantaggi: è possibile rappresentare grandezze variabili in campi molto estesi, è possibile sommare i diagrammi dei sistemi in cascata, ed è anche possibile costruire i diagrammi come somme di diagrammi elementari. 
+\subsection{Rappresentazioni e parametri della f.d.t.}
+Una f.d.t. razionale $G(s)=\frac{b(s)}{a(s)}$ scrivibile nella \textbf{forma standard con polinomi monici}:
+\begin{displaymath}
+    G(s)=K_1\frac{s^m+b_{m-1}s^{m-1}+...+b_0}{s^n+a_{n-1}s^{n-1}+\dots+a_0}
+\end{displaymath}
+o nella \textbf{forma standard con poli e zeri}:\begin{displaymath}
+    G(s)=K_1\frac{(s-z_1)(s-z_2)...(s-z_m)}{(s-p_1)(s-p_2)...(s-p_n)}
+\end{displaymath}
+Con $K_1$ costante di trasferimento. A partire dalla seconda forma possiamo fare un'altra elaborazione parametrica: ipotizziamo la presenza di un polo nell'origine di molteplicità $h$ ("tipo" del sistema in oggetto)
+\begin{displaymath}
+    G(s)=K_1\frac{(s-z_1)...(s-z_m)}{s^h(s-p_{h+1})...(s-p_n)}
+\end{displaymath}
+Fatto ciò possiamo separare i poli/zeri fra reali e complessi coniugati. Otteniamo quindi 
+\begin{displaymath}
+    G(s) = K_1\frac{\left(s+\frac{1}{\tau'_1}\right)\left(s+\frac{1}{\tau'_2}\right)\dots(s^2+2\delta'_1\omega'_{n1}s + \omega^{'2}_{n1})(s^2+2\delta'_2\omega'_{n2}s + \omega^{'2}_{n2})}{s^h\left(s+\frac{1}{\tau_1}\right)\left(s+\frac{1}{\tau_2}\right)\dots(s^2+2\delta'_1\omega'_{n1}s + \omega^{'2}_{n1})(s^2+2\delta'_2\omega'_{n2}s + \omega^{'2}_{n2})}
+\end{displaymath}
+Con $\tau_i$ costante di tempo assoluta ad un polo (zero) reale, $\tau_i<0$ se il polo/zero è positivo. $\omega_{ni}$ pulsazione naturale assoluta ad una coppia di poli/zeri complessi coniugati. $\delta_i$ coefficiente di smorzamento assoluto ad una coppia di poli/zeri complessi coniugati. Notiamo quindi che l'espressione è divisibile in un parte dovuta ai poli/zeri reali e una ai complessi coniugati. Osserviamo che tutte le coppie di complessi coniugati vengono parametrizzate attraverso dei polinomi di secondo ordine. A questo punto possiamo raccogliere le costanti $\tau$ e gli $\omega$. Otteniamo quindi la scrittura della $G(s)$ seguente:
+\begin{displaymath}
+    G(s)=K_1\frac{\omega^{'2}_{n1}\omega^{'2}_{n2}...\tau_1\tau_2...}{\omega^{2}_{n1}\omega^{2}_{n2}...\tau_1^{'}\tau_2^{'}...} \cdot \frac{(1+\tau_1^{'}s)(1+\tau_2^{'}s)\dots\left(1+2\delta^{'}_1 \frac{s}{\omega^{'}_{n1}}+\frac{s^2}{\omega^{'2}_{n1}}\right)}{s^h(1+\tau_1s)(1+\tau_2s)\dots\left(1+2\delta_1 \frac{s}{\omega_{n1}}+\frac{s^2}{\omega^{2}_{n1}}\right)}
+\end{displaymath}
+Raccogliamo il primo fattore come $K=K_1\frac{\omega^{'2}_{n1}\omega^{'2}_{n2}...\tau_1\tau_2...}{\omega^{2}_{n1}\omega^{2}_{n2}...\tau_1^{'}\tau_2^{'}...} $, e otteniamo la \textbf{forma standard con le costanti di tempo:}
+\begin{displaymath}
+    G(s)=K\frac{(1+\tau_1^{'}s)(1+\tau_2^{'}s)\dots\left(1+2\delta^{'}_1 \frac{s}{\omega^{'}_{n1}}+\frac{s^2}{\omega^{'2}_{n1}}\right)}{s^h(1+\tau_1s)(1+\tau_2s)\dots\left(1+2\delta_1 \frac{s}{\omega_{n1}}+\frac{s^2}{\omega^{2}_{n1}}\right)}
+\end{displaymath}
+Con $K$ costante di guadagno, che in base ad $h$ è:
+\begin{itemize}
+    \item $h=0$ $K$ è guadagno statico
+    \item $h=1$ $K$ è guadagno di velocità
+    \item $h=2$ $K$ è guadagno di accelerazione
+\end{itemize}
+Sostituiamo ora $j\omega$ ad $s$ per trovare la risposta armonica con le costanti di tempo. 
+\subsection{Diagrammi elementari}
+Vogliamo tracciare il diagramma di Bode partendo dai diagrammi elementari: $K, (j\omega)^{-h}, (1+\tau j \omega)^{\pm 1}, \left(1-\frac{\omega^2}{\omega^2_n}+2\delta \frac{j\omega}{\omega_n}\right)^{\pm1}$. Il $\pm1$ dipende da se si tratta di zeri complessi coniugati o poli complessi coniugati. 
+Prima di ciò definiamo alcuni parametri caratteristici:
+\begin{itemize}
+    \item Pulsazione di risonanza $\omega_R := arg max_{\omega \in \mathbb{R}_{\ge0}}|G(j\omega)|$
+    \item Picco di risonanza $M_R := \frac{|G(j\omega_R)|}{|G(j0)|}$ oppure $M_R := |G(j\omega_R)|$
+    \item Larghezza di banda $B_\omega := \omega_{t2} - \omega_{t1}$ ossia la differenza tra pulsazione di taglio superiore e di taglio inferiore
+\end{itemize}
+SLIDE A.
+
+SLIDE B.
+
+SLIDE C.
+
+Qui, $\frac{1}{\tau}$ è detta anche pulsazione d'angolo. Possiamo inoltre, nel diagramma delle fasi, tracciare la tangente del diagramma delle pulsazioni. Otteniamo così un segmento che si raccorda coi due tratti asintotici identificati da $\omega_a$ e $\omega_b$. Vogliamo quindi determinare i valori dei suddetti per poter tracciare il diagramma.
+Sappiamo che $\beta = -arctg \omega \tau$. Deriviamo ora $\beta$ rispetto al logaritmo naturale di $\omega$.
+\begin{displaymath}
+\frac{d\beta}{d(ln\omega)}|_{\omega=\omega_0} = -\frac{1}{2}
+\end{displaymath} 
+che è la pendenza della tangente. Otteniamo quindi che 
+\begin{displaymath}
+    \frac{\pi/4}{ln\omega_0-ln\omega_a}=\frac{1}{2} \rightarrow ln\frac{\omega_0}{\omega_a} \rightarrow e^{\frac{\pi}{2}} \cong 4,81
+\end{displaymath}
+Sappiamo quindi che $\omega_a = \frac{\omega_0}{4,81}$ e $\omega_b = \omega_0 4,81$. I diagrammi di $G(j\omega) = q+j\omega\tau$ si ottengono per simmetria ribaltando i precedenti rispetto all'asse delle ascisse. 
+SLIDE D.
+Per determinare il picco di risonanza $\omega_R$ sfruttiamo, solo quando $1-2\delta^2 >0$, $\omega_R = \omega_n\sqrt{1-2\delta^2}$. Quindi, inserendo il valore appena calcolato di $\omega_R$ in $M_R$:
+\begin{displaymath}
+    M_R = \frac{|G(j\omega_R)|}{|G(j0)|} = \frac{1}{2\delta\sqrt{1-\delta^2}}
+\end{displaymath}
+\begin{displaymath}
+    \begin{cases}
+        \delta \in \left(0,\frac{1}{\sqrt{2}}\right) \textrm{ c'è risonanza}\\
+        \delta \in \left[\frac{1}{\sqrt{2}},1\right] \textrm{ non c'è risonanza}
+    \end{cases}
+\end{displaymath}
+Possiamo anche fare un'altra osservazione:
+\begin{displaymath}
+    \begin{cases}
+        \delta \in \left[0,\frac{1}{2}\right] \textrm{il d. }\alpha\textrm{ è tutto al di sopra del d. asintotico}\\
+        \delta \in \left(\frac{1}{2},\frac{1}{\sqrt{2}}\right) \textrm{il d. }\alpha\textrm{ intersexa l'asse delle pulsazioni a sinistra di }ln\omega_n(\omega_n)\\
+        \delta \in \left[\frac{1}{\sqrt{2}},1\right] \textrm{il d. }\alpha\textrm{ è tutto al di sotto del d. asintotico}\\
+    \end{cases}
+\end{displaymath}
+Potremmo chiederci perché in $\delta=0$ il diagramma diverge. Questo succede perché esistono $c_1,c_2, \phi_1, \phi_2$ per cui otteniamo una risposta armonica con ampiezza divergente all'infinito $y(t)=c_1sen(\omega_nt+\phi_1)+c_2t(\omega_nt+\phi_2)$. Infine, calcoliamo la larghezza di banda:
+\begin{displaymath}
+    B_\omega = \omega_n\sqrt{(1-2\delta^2)+\sqrt{(1-2\delta^2)^2 +1}}
+\end{displaymath}
+Notiamo che i diagrammi di $G(j\omega) = 1-\frac{\omega^2}{\omega^2_n}+2\delta\frac{j\omega}{\omega_n}$ si ottengono ribaltando i precedenti rispetto all'asse delle ascisse. Se $\delta<0$, si ribalta il diagramma delle fasi.
 \end{document}
 
