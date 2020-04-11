@@ -839,5 +839,86 @@ Potremmo chiederci perché in $\delta=0$ il diagramma diverge. Questo succede pe
     B_\omega = \omega_n\sqrt{(1-2\delta^2)+\sqrt{(1-2\delta^2)^2 +1}}
 \end{displaymath}
 Notiamo che i diagrammi di $G(j\omega) = 1-\frac{\omega^2}{\omega^2_n}+2\delta\frac{j\omega}{\omega_n}$ si ottengono ribaltando i precedenti rispetto all'asse delle ascisse. Se $\delta<0$, si ribalta il diagramma delle fasi.
+\section{I diagrammi di Nyquist e i sistemi a fase minima}
+\subsection{I diagrammi di Nyquist}
+\subsubsection{Definizione}
+Vediamo ora un'altra rappresentazione grafica delle risposte armoniche.
+Definiamo subito un diagramma polare (di Nyquist) della risposta armonica $G(j\omega)$ o della f.d.t. $G(s)$ come la curva tracciata sul piano complesso dal vettore $G(j\omega)$ per $\omega$ che varia da $0$ a $+\infty$. 
+Questi diagrammi sono utili per lo studio della stabilità, ad esempio tramite il criterio di Nyquist. Il tracciamento del diagramma può essere coadiuvato dal seguente procedimento grafico:
+\begin{displaymath}
+    G(s)=K_1\frac{(s-z_1)}{(s-p_1)(s-p_2)(s-p_3)} \hspace{10px}G(j\omega) = K_1 \frac{(j\omega-z_1)}{(j\omega-p_1)(j\omega-p_2)(j\omega-p_3)}
+\end{displaymath}
+\begin{displaymath}
+    |G(j\omega)| = |K_1|\frac{M_1}{M_2M_3M_4} \hspace{10px}argG(j\omega) = \begin{cases}
+    \varphi_1 - \varphi_2 - \varphi_3 - \varphi_4 \textrm{ se }K_1>0\\
+    \varphi_1 - \varphi_2 - \varphi_3 - \varphi_4 - \pi \textrm{ se }K_1<0
+    \end{cases}
+\end{displaymath}
+\subsubsection{Comportamenti importanti}
+Citiamo i comportamenti più importanti per il diagramma polare:
+\paragraph{Comportamento per $\omega\rightarrow+\infty$} Il diagramma polare di un sistema strettamente proprio termina (per $\omega\rightarrow+\infty$) sull'origine tangente ad uno degli assi coordinati. 
+\paragraph{Comportamento per $\omega\rightarrow0+$, $\Sigma$ di tipo 0} Il diagramma polare di un sistema di tipo zero (non ha poli nell'origine) parte da $\omega=0$ dal punto dell'asse reale $G(j0)=K=K_1(b_0/a_0)$
+\paragraph{Comportamento per $\omega\rightarrow0+$, $\Sigma$ di tipo $\ge1$} 
+Si rappresenti $G(j\omega)$ con la forma standard con le costanti di tempo e sia $\tau_a := \sum_i \tau_i^{'} - \sum_i \tau_i + \sum_i 2\frac{\delta_i^{'}}{\omega_{ni}}$. Vale 
+\begin{displaymath}
+    lim_{g\rightarrow0+} G(j\omega) = K\frac{1+j\omega\tau_a}{(j\omega)^h}
+\end{displaymath}
+Otteniamo anche il seguente corollario:
+\paragraph{Comportamento asintotico del d.p. dei sistemi di tipo $h=1,2,3$}
+Dall'espressione precedente otteniamo che se $h=1$, 
+\begin{displaymath}
+    lim_{g\rightarrow0+} G(j\omega) = K\tau_a - j\frac{K}{\omega}
+\end{displaymath}
+e il d.p. parte adiacente ad una semiretta della retta di eq. $x=K\tau_a$.
+Se $h=2$, otteniamo:
+\begin{displaymath}
+    lim_{g\rightarrow0+} G(j\omega) = -\frac{K}{\omega^2} - j\frac{K\tau_a}{\omega}
+\end{displaymath}
+Osserviamo che la parte reale diverge ad infinito più velocemente della parte immaginaria. Questo risultato può essere interpretato come una curva parametrica, eliminando omega otteniamo che il d.p. parte adiacente ad un ramo della parabola di eq. $x=-\frac{1}{K\tau_a^2}y^2$.
+Infine, se $h=3$, vale 
+\begin{displaymath}
+    lim_{g\rightarrow0+} G(j\omega) = -\frac{K\tau_a}{\omega^2} + j\frac{K}{\omega^3}
+\end{displaymath}
+Notiamo che entrambe le componenti reali e immaginarie divergono ad infinito, con l'immaginaria che lo fa più velocemente, e individuiamo che il d.p. parte adiacente ad un ramo della curva cubica di eq. $y^2=-\frac{1}{K\tau_a^3}x^3$.
+\subsection{I sistemi a fase minima}
+Ci si accorge che per una significativa classe di sistemi, detti a fase minima, nella funzione di risposta armonica l'andamento del diagramma delle fasi è strettamente associato a quello delle ampiezze: se in una certa banda di frequenze l'ampiezza è costante, la fase tende ad essere nulla; una pendenza negativa del diagramma delle ampiezze è associata invece ad un ritardo di fase, una pendenza positiva ad un anticipo. 
+Questa constatazione è teorizzata nella \textbf{formula di Bode}. Prima di enunciarla, però, definiamo i sistemi a fase minima come:
+\begin{center}
+    Consideriamo $\Sigma$ sistema lineare e stazionario con f.d.t. $G(s)$ e risposta armonica $G(j\omega)$. $\Sigma$ è detto a fase minima se il diagramma delle fasi $\beta=arg G(j\omega)$ è determinato univocamente, modulo $2\pi$, dal diagramma dei moduli $\alpha = ln|G(j\omega)|$ mediante la formula di Bode.
+\end{center}
+Se vale il contrario, il sistema è detto a \textbf{fase non minima}. Il progetto dei sistemi di controllo per questi ultimi è complesso. Un sistema con f.d.t. razionale è a fase minima s.s.e. non presenta poli o zeri a parte reale positiva.
+\subsection{Formula di Bode}
+Ricordiamo che
+\begin{displaymath}
+    \alpha := ln |G(j\omega)|, \beta := arg G(j\omega)
+\end{displaymath}
+Vogliamo trovare, una volta fissata una pulsazione $\omega_c$, il corrispondente argomento $\beta_c$. Introduciamo una variabile $u:=ln\frac{\omega}{\omega_c}=ln\omega-ln\omega_c$. Otteniamo infine 
+\begin{displaymath}
+    \beta_c = \frac{1}{\pi} \sum_{-\infty}^{+\infty}\frac{d\alpha}{du}ln cotgh|\frac{u}{2}|du \textrm{ se }lim_{\rightarrow0}s^h G(s)>0
+\end{displaymath}
+\begin{displaymath}
+    \beta_c = \{\textrm{come sopra}\} - \pi \textrm{ se }lim_{\rightarrow0}s^h G(s)<0
+\end{displaymath}
+con $h$ tipo del sistema $\Sigma$, quindi $h=0$ se non vi sono poli né zeri nell'origine. $h>0$ se c'è un polo di molteplicità $h$ nell'origine, $h<0$ se c'è uno zero di molteplicità $|h|$ nell'origine.
+Approfondiamo il discorso della funzione peso che compare. Notiamo che su una pendenza pari a 1, l'integrale vale $\frac{\pi}{2}$, da cui la regola pratica: se $\frac{d\alpha}{du}$ è costante per due decadi di pulsazione centrate su $\omega_c$, allora $\beta_c \approx \left(\frac{d\alpha}{du}\right)\cdot \frac{\pi}{2}$.
+\subsection{Ritardi finiti}
+Un ritardo finito è una funzione trascendente che nei sistemi di controllo assume particolare importanza: vogliamo ora approssimarli. Il fatto che sia una funzione trascendente crea qualche difficoltà: per questo l'approssimazione risulta utile. Introduciamo l'approssimante di Padè di $e^{-t_0s}$ di ordine q come 
+\begin{displaymath}
+    G_q(s;t_0) := \frac{\sum_{k=0}^q \frac{(sq-k)!q!}{(2q)!k!(q-k)!}(-1)^k t^k_0 s^k}{\sum_{k=0}^q \frac{(sq-k)!q!}{(2q)!k!(q-k)!} t^k_0 s^k}
+\end{displaymath}
+Notiamo una proprietà: lo sviluppo in serie di McLaurin coincide con l'analogo sviluppo di $e^{-t_0s}$. Questa coincidenza avviene fino alla potenza $(2q)$esima. In particolare, sviluppando $e^{-t_0s}$, all'aumentare di $q$ lo sviluppo è più preciso.
+\begin{displaymath}
+    e^{-t_0s} = 1- t_0s + \frac{t_0^2}{2!}s^2-\frac{t_0^3}{3!}s^3
+\end{displaymath}
+Calcolare l'approssimante del primo ordine è semplice: 
+\begin{displaymath}
+    G_1(s;t_0) = \frac{1-\frac{t_0}{2}s}{1+\frac{t_0}{2}s}
+\end{displaymath}
+Notiamo una simmetria tra zeri e poli e una stabilità asintotica.
+L'approssimante di Padè del secondo ordine è invece 
+\begin{displaymath}
+    G_2(s;t_0) = \frac{1-\frac{t_0}{2}s + \frac{t_0^2}{12}s^2}{1+\frac{t_0}{2}s + \frac{t_0^2}{12}s^2}
+\end{displaymath}
+Interpretriamo il diagramma di Nyquist (polare) del ritardo finito: sarà evidentemente una circonferenza percorsa infinite volte: è chiaro che il ritardo aumenta linearmente all'aumentare $\omega$ e diverge all'infinito con $\omega\rightarrow\infty$. Analizziamo i diagrammi polari delle approssimanti: nel primo ordine abbiamo una semicirconferenza, nel secondo una circonferenza percorsa una sola volta, nel terzo una circonferenza percorsa una volta e mezzo.
 \end{document}
 
