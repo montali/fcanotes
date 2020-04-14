@@ -920,5 +920,81 @@ L'approssimante di Padè del secondo ordine è invece
     G_2(s;t_0) = \frac{1-\frac{t_0}{2}s + \frac{t_0^2}{12}s^2}{1+\frac{t_0}{2}s + \frac{t_0^2}{12}s^2}
 \end{displaymath}
 Interpretriamo il diagramma di Nyquist (polare) del ritardo finito: sarà evidentemente una circonferenza percorsa infinite volte: è chiaro che il ritardo aumenta linearmente all'aumentare $\omega$ e diverge all'infinito con $\omega\rightarrow\infty$. Analizziamo i diagrammi polari delle approssimanti: nel primo ordine abbiamo una semicirconferenza, nel secondo una circonferenza percorsa una sola volta, nel terzo una circonferenza percorsa una volta e mezzo.
+\section{Sistemi retroazionati: proprietà ed analisi asintotica}
+\subsection{Schemi a blocchi}
+Gli \textbf{schemi a blocchi} vengono utilizzati per rappresentare sistemi complessi aventi un ingresso e un'uscita. Evidenziamo due variabili $u,y$, ingresso e uscita, e $k$, guadagno (numerico o funzione). I blocchi sono collegati tra di loro mediante i \textbf{punti di diramazione} e le \textbf{giunzioni sommanti}.
+In generale è utile poter semplificare (ridurre) i blocchi tramite le cosiddette \textbf{regole di riduzione}. Ad esempio:
+\begin{itemize}
+    \item Riduzione di blocchi in cascata tramite eliminazione delle variabili di mezzo $z=K_1K_2x$
+    \item Riduzione di blocchi in parallelo $k=k_1+k_2$
+    \item Scambio di giunzioni sommanti (proprietà commutativa)
+    \item Spostamento di prelievo di segnale a monte di un blocco
+    \item Spostamento di prelievo di segnale a valle di un blocco 
+    \item Spostamento di giunzione sommante a monte di un blocco 
+    \item Spostamento di giunzione sommante a valle di un blocco 
+    \item Eliminazione di un anello
+\end{itemize}
+\subsection{Proprietà generale dei sistemi in retroazione}
+Esiste una regola rapida per il calcolo della f.d.t. dei sistemi retroazionati (singolo anello con il segnale retroazionato sottratto alla giunzione sommante):
+\begin{displaymath}
+    f.d.t. = \left\{\frac{\textrm{f.d.t. del percorso di segnale diretto}}{1+\textrm{guadagno di anello}}\right\}
+\end{displaymath}
+\subsubsection{Sensibilità a variazioni di parametri nei sistemi retroazionati}
+Consideriamo un sistema definito da $T(s)=\frac{G(s)}{1+G(s)H(s)}$. Studiamo vari casi:
+\begin{itemize}
+    \item Variazione di un parametro nella catena diretta: $G(s)$ è in realtà $G(s;\alpha)$ con $\alpha=\alpha_0+\Delta\alpha$. Definiamo la sensibilità di T a variazioni di G come $\frac{\frac{\Delta T}{T(s;\alpha_0)}}{\frac{\Delta G}{G(s;\alpha_0)}}$. Otteniamo \begin{displaymath}
+        S_G^T=\frac{1}{1+G(s;\alpha_0)H(s)}
+    \end{displaymath} Quindi se il guadagno di anello è molto elevato, la var. relativa di T è molto più piccola della variazione relativa di G. Di conseguenza, un guadagno di anello elevato rende insensibile la f.d.t. del sistema retroazionato a variazioni della f.d.t. del sistema controllato. 
+    \item Variazione di un parametro nella catena di retroazione: $H(s)$ è in realtà $H(s;\beta)$ con $\beta = \beta_0+\Delta\beta$. Otteniamo $S_H^T = \frac{dT}{dH}|_{\beta=\beta_0}=G\frac{-G}{(1+GH)^2}\cdot\frac{H}{\frac{G}{1+GH}}$ e infine $S_H^T = -\frac{G(s)H(s;\beta_0)}{1+G(s)H(s;\beta_0)}$. Quindi se il guadagno di anello è elevato la variazione relativa di T è circa uguale (in modulo) alla variazione relativa di H. Di conseguenza, variazioni della f.d.t. nella catena di retroazione si riverberano senza attenuazione in variazioni della f.d.t. del sistema retroazionato.
+\end{itemize}
+\subsection{Attenuazione dei disturbi}
+Vediamo ora come può essere resa possibile un'attenuazione dei disturbi. Abbiamo per esempio un disturbo $D(s)$ su un sistema avente uscita normalmente uguale a $P(s)R(s)$. Vogliamo incrementare il rapporto segnale disturbo utlizzando un sistema retroazionato. A questo fine ipotizziamo che il disturbo sia indipendente da $R(s)$. Introduciamo un controllore $C(s)$. Per avere un confronto omogeneo si richiede $\frac{CP}{1+CPH} \approx P$, ossia che il sistema retroazionato non modifichi fortemente il comportamento. L'uscita determinata dal segnale utile è ora $P(s)R(s)$ mentre quella determinata dal disturbo è $\frac{P(s)}{1+C(s)P(s)H(s)}D(s)$, ottenendo un rapporto segnale disturbo pari a $\left(1+C(s)P(s)H(s)\right)\frac{R(s)}{D(s)}$. Quest'ultimo viene fortemente aumentato se nella banda di frequenze vale $|C(j\omega)P(j\omega)H(j\omega)|>>1$. In definitiva, se il guadagno di anello è elevato il rapporto segnale/disturbo si eleva all'incirca del medesimo fattore passando dallo schema in catena aperta a quello in catena chiusa. Quindi, a parità di segnale utile, il disturbo viene grandemente attenuato. 
+\subsection{Allargamento della banda passante}
+Ipotizziamo che $H(s) = h>0$. Significa quindi che la banda passante è infinita. Un guadagno di anello elevato implica un allargamento della banda passante. Sappiamo che \begin{displaymath}
+    T(j\omega) = \frac{G(j\omega)}{1+hG(j\omega)}
+\end{displaymath}
+Quindi, se $h|G(j\omega) >> 1 \rightarrow T(j\omega) \approx 1/h$. 
+Anche questo è un effetto benefico della retroazione. Possiamo esplicitare in termini quantitativi questo allargamento:
+\begin{displaymath}
+    G(j\omega)=\frac{1}{1+\tau j \omega} \rightarrow \omega_T = \frac{1+h}{\tau}
+\end{displaymath}
+\subsection{Analisi a regime dei sistemi in retroazione}
+Vogliamo ora studiare l'errore di regolazione a regime in risposta a segnali tipici. Ipotizziamo un sistema asintoticamente stabile, e a retroazione unitaria (nessun blocco $H(s)$). I segnali tipici che consideriamo sono $r(t) \in \left\{r_0 1(t), r_0t1(t), r_0\frac{t^2}{2}1(t)\right\}$, quindi il gradino unitario, una rampa, una parabola (tutti caratterizzati da $r_0$). Sappiamo che $e(t) := r(t)-y(t)$ (errore a regime), ne calcoliamo la trasformata $E(s)=\frac{1}{1+G(s)}R(s)$ (catena diretta fratto guadagno di anello moltiplicato per la trasformata del segnale di ingresso). L'errore a regime è quindi $e_r := lim_{t\rightarrow\infty} e(t)$. Ricordiamo anche che $h$ è il tipo del sistema. 
+\subsubsection{Gradino}
+Dopo un transitorio, l'uscita si stabilizza su un valore costante. Calcoliamo l'errore:
+\begin{displaymath}
+    e_r = lim_{s\rightarrow0} sE(s) = \frac{r_0}{1+K_p}
+\end{displaymath}
+con $K_p := ilm_{s\rightarrow0}G(s)$ costante di posizione.
+\subsubsection{Rampa}
+Ora, abbiamo 
+\begin{displaymath}
+    r(t) = r_0 t1(t) \rightarrow R(s) = \frac{r_0}{s^2}
+\end{displaymath}
+\begin{displaymath}
+    e_r = \frac{r_0}{K_v}
+\end{displaymath}
+con $K_v := lim_{s\rightarrow0}sG(s)$ costante di velocità.
+\subsubsection{Parabola}
+Abbiamo infine 
+\begin{displaymath}
+    r(t) = r_0 \frac{t^2}{2}1(t) \rightarrow R(s)=\frac{r_0}{s^3}
+\end{displaymath}
+\begin{displaymath}
+    e_r = \frac{r_0}{K_a}
+\end{displaymath}
+con $K_a := lim_{s\rightarrow0} s^2G(s)$ costante di accelerazione. 
+\subsection{Errore a regime con retroazione non unitaria}
+Ipotizziamo ora che la retroazione non sia unitaria: la variabile controllata $y$ è in generale dimensionalmente diversa dal segnale di set-point $r$ e quindi occorre definire la condizione ideale di controllo:
+\begin{displaymath}
+    y(t) \equiv K_c r(t)
+\end{displaymath}
+dove $K_c$ è detta costante di controllo o regolazione. Abbiamo quindi una variabile errore definita, ad esempio, come $e(t):=r(t) - \gamma y(t), \gamma=1/K_c$, e quindi $e(t) \equiv 0 \leftrightarrow y(t) \equiv K_cr(t)$. 
+Potremmo applicare il teorema del valore finale, ma ci conviene utilizzare i risultati ottenuti precedentemente trasformando il sistema in uno con retroazione unitaria, con guadagno dato da 
+\begin{displaymath}
+    G_E(s) = \frac{G(s)\gamma}{1+G(s)(H(s)-\gamma)}
+\end{displaymath}
+Se avessimo $H(s) = h$ e $K_c = 1/h \rightarrow G_E(s) = G(s)h$.
 \end{document}
+
 
