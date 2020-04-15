@@ -995,6 +995,87 @@ Potremmo applicare il teorema del valore finale, ma ci conviene utilizzare i ris
     G_E(s) = \frac{G(s)\gamma}{1+G(s)(H(s)-\gamma)}
 \end{displaymath}
 Se avessimo $H(s) = h$ e $K_c = 1/h \rightarrow G_E(s) = G(s)h$.
+\section{Sistemi retroazionati: criterio di Nyquist e margini di stabilità}
+Citiamo innanzitutto il requisito di \textbf{buona connessione}. Abbiamo un sistema retroazionato definito da $T_{ry}(s)\frac{G(s)}{1+L(s)}$ e guadagno di anello $L(s):=G(s)H(s)$. Il sistema retroazionato è ben connesso se 
+\begin{displaymath}
+    lim_{|s|\rightarrow+\infty} 1+L(s) \neq 0
+\end{displaymath}
+Questa caratteristica è necessaria per la realizzabilità fisica dell'anello di retroazione. Ma cosa significa? Se il sistema non fosse ben connesso, otterremmo, ad esempio $T_{ry}=\frac{1}{0}\rightarrow y=r+y$ che è sempre impossibile per $r\neq 0$. Questo è un esempio estremo, ma aiuta a capire il rischio nell'avere sistemi non ben connessi.
+\subsection{Criterio di Nyquist}
+Il \textbf{criterio di Nyquist} è un criterio grafico per lo studio della stabilità asintotica. Introduciamo un sistema retroazionato definito come sempre da $T_{ry}(s)\frac{G(s)}{1+L(s)}$, con equazione caratteristica $1+L(s)$ (le cui radici sono poli del sistema). Allora,
+\begin{center}
+    Il sistema retroazionato è stabile asintoticamente se e solo se l'eq. caratteristica $1+L(s)=0$ ha tutte le radici a parte reale negativa. 
+\end{center}
+Il criterio richiede il tracciamento del diagramma polare (o di Nyquist) di $L(j\omega)$.
+\subsubsection{Teorema dell'indice logaritmico (principle of the argument)}
+Ora, per arrivare al criterio è necessario enunciare il \textbf{teorema dell'indice logaritmico}: sia $\Gamma$ una curva chiusa semplice nel piano complesso, e $\mathcal{D}$ la regione ad esso interna ($\Gamma = \partial \mathcal{D}$). Sia $F(s)$ una funzione analitica su $\Gamma$ e su $\mathcal{D}$ ad eccezione di un numero finito di poli appartenenti a $\mathcal{D}$. Inoltre $F(s)$ non abbia zeri su $\Gamma$. Vale quindi la relazione 
+\begin{displaymath}
+    \frac{1}{2\pi} \Delta arg F(s) = n_z - n_p
+\end{displaymath}
+dove $\Delta arg F(s)$ denota la variazione dell'argomento di $F(s)$ al variare di $s$ lungo $\Gamma$ per un giro completo in senso antiorario ed $n_z$ e $n_p$ sono rispettivamente il numero degli zeri e dei poli di $F(s)$ su $\mathcal{D}$ computati con le loro molteplicità. Quindi abbiamo una curva $\Gamma$ che compie un giro completo, si determina tramite $F(s)$ un'altra curva immagine definita a una variazione di argomento. Se la curva fosse percorsa in senso orario c'è una differenza di segno e la relazione diventa $-\frac{1}{2\pi} \Delta arg F(s) = n_z - n_p$. A questo punto possiamo citare un corollario: con la percorrenza di $\Gamma$ antioraria vale
+\begin{displaymath}
+    \left\{\textrm{numero di giri antiorari della curva immagine intorno all'origine}\right\} = n_z-n_p
+\end{displaymath}
+mentre con la percorrenza oraria:
+\begin{displaymath}
+    \left\{\textrm{numero di giri orari della curva immagine intorno all'origine}\right\} = n_z-n_p
+\end{displaymath}
+A questo punto applichiamo il teorema alla stabilità dei sistemi retroazionati: la curva chiusa di figura percorsa in senso orario è detta \textbf{contorno di Nyquist}: è composta da una semicirconferenza all'infinito, semicirconferenze infinitesime, aggiranti i poli immaginari di $L(s)$ e da segmenti dell'asse immaginario. Dobbiamo porre però le condizioni di applicabilità:
+\begin{itemize}
+    \item $1+L(s)$ è analitica sul contorno di Nyquist ed è analitica su $\mathbb{C}_+$ ad eccezione di un numero finito di poli (vera per definizione)
+    \item $1+L(s)$ non deve presentare zeri sul contorno: il contorno è percorso da tre parti: la semicirconferenza all'infinito (dove non possono esserci zeri), le semicirconferenze infinitesime (dove non possono esserci zeri), punti dell'asse immaginario (dove possono esserci, e dobbiamo evitarlo). Possono infatti esistere dei valori di $j\omega$ per cui $L(j\omega)$ attraversa $-1+j0$. Questo \textbf{non deve accadere} ed è una condizione da soddisfare.
+\end{itemize}
+A questo punto diamo definizioni specifiche:
+\begin{itemize}
+    \item $n_z$ numero degli zeri di $1+L(s)$ appartenenti a $\mathbb{C}_+$
+    \item $n_z$ numero dei poli di $1+L(s)$ (o $L(s)$) appartenenti a $\mathbb{C}_+$
+    \item $\psi := \left\{\textrm{numero di giri in senso orario della curva immagine di }1+L(s)\textrm{ sul contorno di Nyquist intorno all'origine}\right\}$
+
+\end{itemize}
+
+Assumiamo che il diagramma polare non tocchi il punto $-1$ vale $\psi=n_z-n_p$.
+\subsection{Diagramma polare completo}
+Introduciamo ora il \textbf{diagramma polare completo}, ossia la curva chiusa immagine di $L(s)$ sul contorno di Nyquist. Quindi:
+\begin{displaymath}
+    \psi = \left\{\textrm{n. di giri in senso orario del d.p.c. intorno al punto }-1+j0\right\}
+\end{displaymath}
+Siamo in grado a questo punto di enunciare il criterio di Nyquist:
+\begin{center}
+    \textbf{Condizione necessaria e sufficiente affinché il sistema in retroazione sia asintoticamente stabile è che il diagramma polare completo non tocchi il punto critico $-1$ ma lo circondi tante volte in senso antiorario quanti sono i poli del guadagno di anello con parte reale positiva}
+\end{center}
+ed il corollario:
+\begin{center}
+    Nell'ipotesi che il guadagno di anello non abbia poli a parte reale positiva, condizione necessaria e sufficiente affinché il sistema in retroazione sia asintoticamente stabile è che il diagramma polare completo non tocchi né circondi il punto critico $-1$
+\end{center}
+Nota che il corollario non è da associarsi ai sistemi stabili ad anello aperto. La dimostrazione del criterio è possibile verificandone la sufficienza e la necessità (vedi slide).
+\subsection{Margini di stabilità}
+La proprietà di stabilità (asintotica) di un sistema retroazionato è binaria: o c'è, o no. Tuttavia è opportuno e necessario inserire delle specifiche tecniche associate ad un sistema retroazionato una misura della distanza dell'instabilità. Ipotizziamo un guadagno ad anello $L(s)$ asintoticamente stabile. Definiamo il margine di stabilità come la distanza del diagramma polare dal punto $-1$, che significherebbe un'instabilità. Introduciamo quindi il concetto di misura della distanza dell'instabilità: in particolare ne introduciamo 2, il \textbf{margine di ampiezza $M_A$} ed il \textbf{margine di fase $M_F$}. In particolare, 
+\begin{displaymath}
+    M_A := \frac{1}{|L(j\omega_p)|} \textrm{ dove }\omega_p \ni argL(j\omega_p)=-\pi \textrm{ con }\omega_p\textrm{ pulsazione di fase pi greco}
+\end{displaymath}
+\begin{displaymath}
+    M_F := \pi - |\varphi_c| \textrm{ dove }\varphi_c=argL(j\omega_c) \textrm{ e } \omega_c \ni |L(j\omega_c)|=1\textrm{ con }\omega_c\textrm{ pulsazione critica}
+\end{displaymath}
+$M_A$ è a volte espresso in decibel ($20logM_A$), $M_F$ è solitamente espresso in gradi sessagesimali. 
+Questi concetti sono individuabili anche sui diagrammi di Bode: $M_{A(dB)} = -20log|L(j\omega_p)|$.
+Queste definizioni possono però creare dei problemi: spesso la definizione del margine di fase non è adatta, ed è necessaria una definizione più "robusta".
+\subsubsection{Definizioni generalizzate dei margini di stabilità}
+Ipotizziamo un sistema retroazionato stabile asintoticamente, allora:
+\begin{displaymath}
+    M_A := sup \left\{M>1: |1+\gamma L(j\omega)|>0, \forall \gamma \in \left[\frac{1}{M},M\right] \textrm{ e }\forall\omega\ge0\right\}
+\end{displaymath}
+\begin{displaymath}
+    M_F := sup\left\{\phi>0: |1+e^{-j\varphi}L(j\omega)|>0, \forall \varphi \in \left[-\phi,+\phi\right] \textrm{ e }\forall\omega\ge0\right\}
+\end{displaymath}
+I margini di stabilità sono "norme" che misurano la distanza del punto critico $-1+j0$ dal diagramma polare di $L(j\omega)$.
+Abbiamo alcune proprietà da citare:
+\paragraph{Proprietà 1} Sia $M>1$. Vale la disequazione $|1+\gamma L(j\omega)|>0, \forall \gamma \in \left[\frac{1}{M},M\right] \textrm{ e }\forall\omega\ge0$ se e solo se il segmento dell'asse reale compreso fra $-M$ e $-1/M$ non interseca il diagramma polare di $L(j\omega)$. 
+\paragraph{Proprietà 2} Sia $\phi>0$. Vale la disequazione $\phi>0: |1+e^{-j\varphi}L(j\omega)|>0, \forall \varphi \in \left[-\phi,+\phi\right] \textrm{ e }\forall\omega\ge0$ se e solo se l'arco di circonferenza di equazione $e^{j(\pi+\varphi)}, \varphi \in \left[-\phi, +\phi\right]$ non interseca il diagramma polare di $L(j\omega)$.
+\subsubsection{Procedura generale per il calcolo dei margini di stabilità}
+Determiniamo ora una procedura generale: andiamo a trovare tutte le intersezioni più vicine a $-1$, e ne prendiamo il minimo. Per il margine di fase, il procedimento è lo stesso: cerchiamo le intersezioni del diagramma polare con la circonferenza unitaria, e prendiamo la più vicina:
+\begin{displaymath}
+    M_A = min\left\{M_1,M_2\right\}\hspace{10px}M_F = min\left\{\phi_1,\phi_2\right\}
+\end{displaymath} 
 \end{document}
 
 
