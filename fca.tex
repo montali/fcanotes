@@ -5,6 +5,7 @@
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{upgreek}
 \usepackage{amssymb}
 \usepackage[normalem]{ulem}
 \newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
@@ -1076,6 +1077,89 @@ Determiniamo ora una procedura generale: andiamo a trovare tutte le intersezioni
 \begin{displaymath}
     M_A = min\left\{M_1,M_2\right\}\hspace{10px}M_F = min\left\{\phi_1,\phi_2\right\}
 \end{displaymath} 
+\section{Il luogo delle radici}
+Ci occupiamo ora del metodo del luogo delle radici, che permette di analizzare i sistemi retroazionati. 
+\subsection{Il luogo delle radici}
+Nel progetto di un sistema in retroazione è utile conoscere come i poli retroazionati si modificano al variare di più importanti parametri, come $K_1$ costante di trasferimento del guadagno di anello $L(s)$. Da quello che abbiamo visto, i poli retroazionati sono le radici dell'equazione $L(s)=K_1\frac{(s-z_1)...(s-z_m)}{(s-p_1)...(s-p_n)}$ ossia $G_1(s) := \frac{z(s)}{p(s)}$. Abbiamo quindi due definizioni:
+\begin{itemize}
+    \item Luogo delle radici (diretto) è il luogo geometrico descritto dalle radici dell'eq. $1+K_1G_1(s)=0$ al variare di $K_1$ da 0 a $+\infty$. Questo è importante dal punto di vista della stabilità.  È quindi luogo geometrico descritto dalle radici dell'equazione suddetta.
+    \item Luogo delle radici (inverso) è il luogo geometrico descritto dalle radici dell'eq. $1+K_1G_1(s)=0$ al variare di $K_1$ da 0 a $-\infty$.
+\end{itemize}
+Se $K_1>0$, allora:
+\begin{displaymath}
+    \{1+K_1G_1(s)=0\} \leftrightarrow \begin{cases}
+        argG_1(s)=\pi\hspace{5px}mod2\pi\\
+        |G_1(s)| = \frac{1}{K_1}
+    \end{cases}
+\end{displaymath}
+La prima condizione impone che $G_1$ sia reale negativo, la seconda impone che il modulo soddisfi la relazione $1+K_1G_1(s)=0$.
+Se $K_1<0$, allora:
+\begin{displaymath}
+    \{1+K_1G_1(s)=0\} \leftrightarrow \begin{cases}
+        argG_1(s)=0\hspace{5px}mod2\pi\\
+        |G_1(s)| = -\frac{1}{K_1}
+    \end{cases}
+\end{displaymath}
+\subsection{Proprietà del luogo delle radici}
+Il luogo ha tanti rami quanti sono i poli di $G_1(s)$. Ogni ramo parte da un polo di $G_1(s)$ e termina in uno zero di $G_1(s)$ o in un punto all'infinito. I rami si intersecano in corrispondenza delle radici multiple. 
+Una seconda proprietà è che il luogo delle radici è simmetrico rispetto all'asse reale. 
+Sappiamo inoltre che nel luogo delle radici diretto ($K_1>0$) un punto dell'asse reale fa parte del luogo se si lascia alla sua destra un numero totale \textbf{dispari} di zeri e poli di $G_1(s)$. Nel luogo delle radici inverso ($K_1<0$) un punto dell'asse reale fa parte del luogo se si lascia alla sua destra un numero totale \textbf{pari} di zeri e poli di $G_1(s)$.
+Definiamo gli angoli di partenza e arrivo nel luogo. L'angolo di partenza è formato dalla direzione dell'asse reale positivo, e dalla tangente al luogo. Quello di arrivo è formato ancora dalla tangente al luogo, ma con $K_1$ da $0$ a $-\infty$.
+Nel luogo delle radici diretto ($K_1>0$), l'angolo di partenza è dato dalla relazione
+\begin{displaymath}
+    \left\{\textrm{ang. di partenza da }p_i\right\}=\pi+\sum_{j=1}^m arg(p_i-z_j) - \sum_{j\neq i} arg(p_i-p_j)
+\end{displaymath}
+L'angolo di arrivo sullo zero $z_i$ semplice è dato da
+\begin{displaymath}
+    \left\{\textrm{ang. di arrivo su }z_i\right\} = \pi + \sum_{j=1}^{n} arg(z_i-p_j) - \sum_{j\neq i} arg(z_i-z_j)
+\end{displaymath}
+Se il luogo delle radici è inverso ($K_1<0$), si sostituisce 0 a $\pi$.
+Se il polo $p_i$ è multiplo con molteplicità $h>1$, gli angoli di partenza $\varphi_i$ da $p_i$ si determinano con la congruenza:
+\begin{displaymath}
+    h\varphi_i = \pi+\sum_{j=1}^m arg(p_i-z_j) - \sum_{j\neq i} arg(p_i-p_j)\hspace{5px}mod2\pi
+\end{displaymath}
+Se lo zero $z_i$ è multiplo con molteplicità $h>1$, gli $h$ angoli di arrivo $\Psi_i$ su $z_i$ si determinano così:
+\begin{displaymath}
+    h\Psi_i = \pi + \sum_{j=1}^{n} arg(z_i-p_j) - \sum_{j\neq i} arg(z_i-z_j) \hspace{5px}mod2\pi
+\end{displaymath}
+Si potrebbe dimostrare che indipendentemente dalla molteplicità otteniamo sempre $h$ soluzioni distinte. 
+Sappiamo anche che una radice del luogo di molteplicità $h$ corrisponde a un punto comune ad $h$ rami in cui oltre all'eq. $1+K_1G_1(s)=0$ sono soddisfatte le relazioni $D^i G_1(s) = 0,i=1,\dots,h-1$ cioè la derivata i-esima si annulla. Abbiamo un corollario di questa proprietà, che afferma che una radice doppia del luogo soddisfa l'equazione $\sum_{i=1}^n \frac{1}{s-p_i} -\sum_{i=1}^m \frac{1}{s-z_i} = 0$. L'ultima proprietà afferma che in corrispondenza di una radice di molteplicità $h$ il luogo presenta $h$ rami entranti ed $h$ rami uscenti, alternati fra loro, le cui tangenti suddividono lo spazio circostante in settori uguali di $\pi/h$ radianti. 
+L'ultima proprietà che vediamo definisce il comportamento asintotico del luogo delle radici. Gli asintoti del luogo delle radici formano una cosiddetta "stella di asintoti" (di raggi) con centro nel punto dell'asse reale di ascissa
+\begin{displaymath}
+    \sigma_a = \left(\sum_{i=1}^n p_i - \sum_{i=1}^m z_i\right) / (n-m)
+\end{displaymath}
+ossia il rapporto della sommatoria dei poli, meno la sommatoria degli zeri, diviso $n-m$. Se il luogo è diretto, gli asintoti formano con l'asse reale gli angoli:
+\begin{displaymath}
+    \upvartheta_{a,\nu } = (2\nu +1)\pi / (n-m), \nu =0,1,\dots,n-m-1
+\end{displaymath}
+Se il luogo è invece diretto, avremo
+\begin{displaymath}
+    \upvartheta_{a,\nu} = 2\nu\pi/ (n-m), \nu=0,1,\dots,n-m-1
+\end{displaymath}
+In pratica, questi asintoti si disporranno diversamente in base a $\rho:=n-m$ grado relativo di $G_1(s)$. 
+SLIDE 13.16
+Quando abbiamo luoghi diretti del secondo ordine, possiamo trovare il raggio calcolando le distanze dei poli dallo zero $R=\sqrt{d_1d_2}$.
+\subsection{Contorno delle radici}
+La tecnica del contorno delle radici permette di generalizzare il metodo del luogo delle radici. Il contorno delle radici è infatti un luogo delle radici (dell'eq. caratteristica) per variazioni di un parametro diverso (può variare, ci sono regole per decidere se il parametro è applicabile) dalla costante di trasferimento del guadagno di anello. Questa tecnica è infatti applicabile quando l'eq. caratteristica $1+L(s;p)=0$ con p parametro variante è riconducibile all'eq. caratteristica standard $1+K_1G_1(s)=0$ con $K_1=K_1(p)$ funzione biunivoca di p. 
+Per esempio, se avessimo un contorno delle radici per variazioni di un polo, potremmo sfruttare $\tau$ per trovare un luogo delle radici. In $\tau=0$ abbiamo $1+\frac{K}{s} =0 $, ma con $\tau>0$ avremo $1+\tau\frac{s^2}{s+\overline{K}}$. È convenzione fissare $\overline{K}$, e variare il parametro $\tau$. Quest'equazione ha una scritura standard in cui al posto di $K_1$ ritroviamo $\tau$, notiamo però che il grado del numeratore è maggiore del denominatore. Questo è abbastanza tipico (a differenza dei luoghi visti precedentemente), significa che i rami partono dai poli e uno dall'infinito. I raggi si incontrano nella radice multipla, e convergono verso lo 0. 
+SLIDE 13.21
+L'eq. caratteristica $1+L(s;p)=0$ è riconducibile alla forma standard quando, trasformata in equazione polinoimale, i suoi coefficienti sono funzioni affini del parametro $p$. 
+\subsection{Complementi}
+Vediamo ora alcuni complementi. Riscriviamo l'equazione del luogo, considerando i poli come parametri fissati e gli zeri variabili. L'eq. caratteristica dipenderà quindi dagli zeri e da $K_1$.
+\begin{displaymath}
+    1+K_1\frac{\prod_{i=1}^m (s-z_i)}{\prod_{i=1}^n (s-p_i)} = 0 \hspace{10px}1+K_1G_1(s;z_1,\dots,z_m) = 0
+\end{displaymath}
+con $\left\{p_{c1}, p_{c2},...,p_{cn}\right\}$ radici dell'eq. caratteristica, queste radici dipendono da $K_1$ e gli zeri: $p_{ci}\equiv p_{c_i}(K_1;z_1,...,z_m)$. Enunciamo il teorema del baricentro del luogo delle radici: se il guadagno di anello ha grado relativo $\rho\ge2$ vale la relazione in cui la sommatoria delle radici dell'eq. caratteristica è pari alla sommatoria (fissa) dei poli del guadagno di anello, per qualunque valore di $K_1$ e degli zeri.
+\begin{displaymath}
+    \sum_{i=1}^n p_{ci} = \sum_{i=1}^n p_i \hspace{5px}\forall K_1 \in \mathbb{R}, \forall z_i \in \mathbb{C}, i=1,\dots,m
+\end{displaymath}
+quindi consideriamo le radici dell'eq caratteristica come delle masse unitarie in movimento, ed un baricentro fisso.
+\subsection{Grado di stabilità}
+Introduciamo ora il grado di stabilità di un sistema. Consideriamo un sistema $\Sigma$ asintoticamente stabile ($Re p_i <0, i=1,\dots,n:$ dove i $p_i$ sono i poli di $\Sigma$). Il grado di stablità è la distanza minima dei poli di $\Sigma$ dall'asse immaginario, ossia
+\begin{displaymath}
+    G_s := max\left\{Rep_1, Re p_2, ..., Re p_n\right\}
+\end{displaymath}
+Nell'ipotesi che fra i poli di $\Sigma$ esista una coppia dominante, vale l'ipotesi che il tempo di assestamento $T_a$ valga approssimativamente $T_a \approx \frac{3}{G_s}$. Ricordiamo che il tempo di assestamento è il tempo minimo per il quale la risposta al gradino del sistema entra in una fascia di $\pm 5\%$ del valore finale del sistema considerato. 
 \end{document}
 
 
