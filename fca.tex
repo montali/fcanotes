@@ -1160,6 +1160,65 @@ Introduciamo ora il grado di stabilità di un sistema. Consideriamo un sistema $
     G_s := max\left\{Rep_1, Re p_2, ..., Re p_n\right\}
 \end{displaymath}
 Nell'ipotesi che fra i poli di $\Sigma$ esista una coppia dominante, vale l'ipotesi che il tempo di assestamento $T_a$ valga approssimativamente $T_a \approx \frac{3}{G_s}$. Ricordiamo che il tempo di assestamento è il tempo minimo per il quale la risposta al gradino del sistema entra in una fascia di $\pm 5\%$ del valore finale del sistema considerato. 
+\section{Progetto di un sistema di controllo in retroazione}
+Iniziamo ora la sezione dedicata al progetto di un sistema di controllo.
+\subsection{Il progetto di un sistema di controllo in retroazione}
+Consideriamo un sistema scalare, con un singolo anello di retroazione. La struttura composta di un possibile sistema di controllo è la seguente, con P impianto controllato, Q disturbo di P (eventualmente modificato da parte dinamica di filtraggio), ingresso $u$ determinato dall'uscita di un attuatore (A) e da un disturbo. Poi, nella linea di retroazinoe troviamo H funzione di trasferimento del possibile trasduttore, con disturbo $n$, un anello comparatore che sottrae la parte dedicata alla retroazione. Infine, il controllore C, elemento cruciale per la buona riuscita del sistema e protagonista del nostro progetto, e F prefiltraggio. A volte il progetto non riguarda solo $C_s$, ma anche una funzione di prefiltraggio $F$. Quando questo accade, avremo un sistema di feedforward-feedback. A volte $F$ è semplicemente un guadagno algebrico. Usualmente si parte modellando l'impianto, prevedendo la scelta dei trasduttori ($H_s$) e dell'attuatore. 
+È chiaro che il progetto di un sistema completo sia ben più complesso. 
+\subsection{Specifiche di controllo}
+I requisiti per il sistema di controllo riguardano:
+\begin{enumerate}
+    \item Buona connessione: ci deve essere buona connessione nella retroazione
+    \item Stabilità asintotica interna
+    \item Prestazioni statiche e/o asintotiche 
+    \item Prestazioni dinamiche
+    \item Robustezza: alcuni di questi requisiti devono essere soddisfatti non solamente per il sistema nominale, ma per una classe di impianti
+\end{enumerate}
+\subsubsection{Buona connessione}
+Per avere un sistema retroazionato \textbf{ben connesso} deve valere $P(s)$ strettamente propria e $\mathcal{C}(s)$ propria. $\mathcal{C}(s)$ strettamente propria significa che il suo polinomio al numeratore dev'essere sempre $\le$ del polinomio al denominatore, per realizzabilità fisica: se così non fosse, la risposta armonica divergerebbe per $\omega\rightarrow\infty$. 
+\subsubsection{Stabilità asintotica interna}
+Il sistema retroazionato è asintoticamente ed internamente stabile quando tutte le f.d.t. fra gli ingressi $\left\{r,d_1,d_2\right\}$ e le uscite $\left\{e,m,y\right\}$ sono asintoticamente stabili. Questo è del tutto ragionevole: se così non fosse, ci ritroveremmo una situazione in cui una variabile sull'uscita, o interna, divergerebbe all'infinito. 
+Fino ad ora, parlavamo di sistema asintoticamente stabile quando l'uscita la era: ciò non è sufficiente per la stabilità asintotica interna. Abbiamo una condizione necessaria e sufficiente per verificare la stabilità asintotica interna. Devono valere due condizioni:
+\begin{enumerate}
+    \item Le radici dell'equazione $1+L(s)=0$ sono tutte a parte reale negativa 
+    \item Le eventuali cancellazioni polo-zero fra $C(s)$ e $P(s)$ avvengono in $\mathbb{C}_-$.
+\end{enumerate}
+\subsection{Terminologie}
+Definiamo la \textbf{funzione di sensitività} $T_{re}(s)$ pari a $\frac{1}{1+L(s)}$, spesso indicata con $S$, e la funzione di sensitività complementare $T=1-S$. Otteniamo quindi $T(s)=\frac{L(s)}{1+L(s)}$. Si noti che $T_{ry}(s)=T(s)$. 
+Osserviamo anche che nei progetti con prevalenti specifiche in frequenza, vengono imposti vincoli su S e T in modo disgiunto: possono capitare problemi di compatibilità, in quanto deve valere $S(j\omega)+T(j\omega) = 1, \forall \omega$. 
+\subsection{La sintesi con controllori di struttura prefissata}
+Nella letteratura controllistica tecnica c'è in realtà una moltitudine di approcci per la sintesi di controllori. Sfrutteremo l'approccio con i controllori di struttura prefissata o di ordine prefissato. 
+Anzitutto, spieghiamo cosa sono i controllori di ordine prefissato.
+\subsubsection{Controllori di ordine prefissato}
+I \textbf{controllori di ordine prefissato} sono dei sistemi dinamici aventi un ordine fisso. Nell'ambito di questo parametro, ci manteniamo nella massima libertà progettuale. Li introduciamo come insiemi, in cui $\mathcal{R}_p$ è l'insieme delle funzioni razionali proprie. Per esempio, il controllore di ordine zero sarà: $\mathcal{C}_0 :=\left\{C\in\mathcal{R}_p: C(s) K, K\in\mathbb{R}\right\}$.
+Quelli di ordine superiore saranno:
+\begin{enumerate}
+    \item $\mathcal{C}_1 := \left\{C\in\mathcal{R}_p : C(s) \frac{b_1s+b_0}{s+a_0}, a_0, b_0, b_1 \in \mathbb{R}\right\}$
+    \item $\mathcal{C}_2 := \left\{C\in\mathcal{R}_p : C(s) \frac{b_2s^2+b_1s+b_0}{s^2+s+a_0}, a_0,a_1, b_0, b_1, b_2 \in \mathbb{R}\right\}$
+    \item $\mathcal{C}_n := \left\{C\in\mathcal{R}_p : C(s) \frac{b_ns^n+\dots+b_1s+b_0}{s^n+\dots+s+a_0}, a_0,\dots,a_{n-1}, b_0, \dots, b_n \in \mathbb{R}\right\}$
+\end{enumerate}
+\subsubsection{Controllori di struttura prefissata}
+I \textbf{controllori di struttura prefissata} sono definiti mediante particolari parametrizzazioni della funzione di trasferimento del controllore. Alcuni esempi:
+\begin{itemize}
+    \item $\mathcal{C}_A := \left\{C\in\mathcal{R}_p:C(s)=\gamma \frac{s+\beta}{s+\alpha}, \alpha, \beta, \gamma \in \mathbb{R}\right\}$. Si osservi che $\mathcal{C}_A \neq \mathcal{C}_1$ e $\mathcal{C}_A \subset \mathcal{C}_1$. I successivi $\mathcal{C}_{A,B,C}$ sono delle ulteriori restrizioni a questo sottoinsieme.
+    \item $\mathcal{C}_B := \left\{C\in\mathcal{R}_p:C(s)=\gamma \frac{s+\beta}{s+\alpha}, \alpha, \beta \in \mathbb{R}_+,\gamma \in \mathbb{R} \right\}$. Si osservi che $\mathcal{C}_B \neq \mathcal{C}_A$ e $\mathcal{C}_B \subset \mathcal{C}_A$
+    \item $\mathcal{C}_C := \left\{C\in\mathcal{R}_p:C(s)=\gamma \frac{s+\beta}{s+\alpha}, \alpha \in [10,100] \beta \in (0,10],\gamma \in \mathbb{R} \right\}$. Si osservi che $\mathcal{C}_C \subset \mathcal{C}_B$.
+\end{itemize}
+Notiamo quindi che questi insiemi vanno via via restringendosi. 
+\subsection{Classi tradizionali di controllori a struttura fissa}
+Fra i controllori a struttura fissa, si individuano due classi tradizionali: reti correttrici, e regolatori standard. Le \textbf{reti correttrici} sono i più semplici controllori utilizzati nel progetto dei sistemi di controllo. Nell'approccio tradizionale vengono progettati per correggere il comportamento dinamico dell'anello di retroazione. In realtà le implementazioni non vengono più fatte con reti elettriche. I \textbf{regolatori standard} sono caratterizzati dalla combinazione di azioni proporzionale, derivativa e integrale. Vengono implementati su dispositivi standard adattabili a classi estese di applicazioni e per i quali è possibile il tuning diretto dei parametri di progetto anche in condizioni operative. 
+\subsubsection{Principali reti correttrici}
+Citiamo, tra le principali reti correttrici, 
+\begin{itemize}
+    \item Rete integratrice
+    \item Rete derivatrice
+    \item Rete ritardatrice
+    \item Rete anticipatrice
+    \item Rete a ritardo e anticipo: rapporto di due polinomi dipendenti da $\omega_n, \delta, \delta'$
+    \item Rete a T ponticellato: rapporto di due polinomi dipendenti da $\omega_n, \delta, \delta'$. Generalmente $\delta'\in (0,1)$, e $\delta>1 mentre \delta'$ non per forza
+\end{itemize}
+\subsection{Struttura del controllore con rete correttrice}
+Dovremo quindi progettare il parametro $K_c$ ed i parametri della rete correttrice $C_r(s)$, quindi un numero limitato di parametri per completare questo controllore. 
 \end{document}
 
 
