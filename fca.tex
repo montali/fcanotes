@@ -1242,6 +1242,45 @@ Sarà poi una pseudoderivata per i soliti motivi, ma il concetto funziona. Quind
 La rete anticipatrice ha diversi vantaggi, come il mantenimento delle prestazioni statiche e la stabilizzazion con allargamento della banda passante del guadagno dianello e quindi allargamento della banda passante per $T_{ry}(j\omega)$: aumento del grado di stabilità $G_s$, diminuzione del tempo di assestamento $T_a$, migliori capacità di inseguimento di segnale. C'è però uno svantaggio: la possibile introduzione di rumore. Infatti, il parametro $\alpha$ non può essere troppo piccolo. Anche qui, saltiamo i metodi grafici e citiamo i metodi per tentativi, i metodi con formule di inversione, ed infine anche la cancellazione polo-zero (non presente nelle ritardatrici). 
 \subsubsection{Cancellazione polo-zero}
 Possiamo sintetizzare la rete anticipatrice mediante cancellazione polo-zero. La cancellazione deve avvenire sempre nella regione negativa (parte reale negativa) del diagramma. Scegliamo quale zero della rete il polo reale negativo di $P(s)$ più vicino all'asse immaginario determinando così nella funzione di trasferimento di catena diretta una cancellazione polo-zero ammissibile. Cancelliamo quindi il polo più vicino all'asse immaginario. Comparirà quindi un polo determinato dalla rete in $-\frac{1}{\alpha\tau}$. Abbiamo infatti imposto $\tau=-\frac{1}{p_1}$.
+\subsection{Sintesi in frequenza con le formule di inversione}
+La sintesi in frequenza delle reti ritardatrici/anticipatrici con imposizione dei margini di stabilità prestabiliti può essere svolta utilizzando le funzioni inverse delle stesse reti. Interpretiamo anzitutto la risposta armonica della rete anticipatrice $\frac{1+j\tau\omega}{1+j\alpha\tau\omega}$, studiandola come una funzione matematica $f:\mathcal{D}\rightarrow \mathbb{R}^2, (\alpha,\tau\omega)\rightarrow(M,\varphi)$ dove $\mathcal{D}:=(0,1)x(0,+\infty)$ e $M=\frac{\sqrt{1+(\tau\omega)^2}}{\sqrt{1+(\alpha\tau\omega)^2}}, \varphi = arctan(\tau\omega)-arctan(\alpha\tau\omega)$. Ci porremo il problema di invertire questa funzione. Vogliamo quindi anzitutto provare che la stessa sia invertibile (biiettiva) e determinare $f^{-1}$ e $f(\mathcal{D})$ codominio. Per arrivare all'inversa introduciamo un lemma algebrico. Quindi la funzione $f:\mathcal{D}\rightarrow f(\mathcal{D})$ è biiettiva e la sua funzione inversa $f^{-1}:f(\mathcal{D})\rightarrow\mathcal{D}, (M,\varphi) \rightarrow (\alpha, \tau\omega)$ è definita da 
+\begin{displaymath}
+    \alpha=\frac{Mcos\varphi - 1}{M(M-cos\varphi)}, \tau\omega=\frac{M-cos\varphi}{sin\varphi}
+\end{displaymath}
+Poniamo infine una proposizione. Se noi assegniamo $M, \varphi$, l'$\alpha$ deve essere positivo e che quindi il suo numeratore sia maggiore di 0. 
+\begin{displaymath}
+    f(\mathcal{D}) = \left\{(M,\varphi) \in (1,+\infty)x\left(0,\frac{\pi}{2}\right):\varphi < arccos\frac{1}{M}\right\}
+\end{displaymath}
+\subsubsection{Sintesi della rete anticipatrice con imposizione del margine di fase $M_F$}
+Avremo un g.d.a. non compensato pari a $L(s)$, compensato pari a $\frac{1+\tau s}{1+\alpha\tau s} L(s)$. 
+Vogliamo che in virtù della presenza della rete anticipatrice, in corrispondenza di $\omega_0$ la rete debba amplificare la fase per portare il punto di intersezione con il cerchio unitario alla destra di -1. Questa amplificazione sarà pari al rapporto tra la dimensione del vettore (1) diviso il modulo di $L(j\omega_0)$. Quindi, dovremo 
+\begin{enumerate}
+    \item Scegliere $\omega_0$ affinché con $\varphi_0 := M_F - argL(j\omega_0)-\pi$ valga $\left(\frac{1}{|L(j\omega_0)}, \varphi_0\right) \in f(\mathcal{D})$ quindi $cos\varphi_0 > |L(j\omega_0)|$
+    \item Definiti $M:=\frac{1}{|L(j\omega_0)|}$ e $\varphi := \varphi_0$ segue $\tau = \frac{M-cos\varphi}{\omega_0 sin\varphi} $ e $\alpha=\frac{Mcos\varphi-1}{M(M-cos\varphi)}$
+\end{enumerate}
+Per massimizzare il margine di fase nella sintesi della rete anticipatrice, sappiamo, fissata una pulsazione $\omega_0$, che l'estremo superiore degli anticipi $\varphi_0$ ammissibili è dato da $arccos|L(j\omega_0)|$. Con questo valore il margine di fase corrispondente nel g.d.a. compensato è
+\begin{displaymath}
+    M_F(\omega_0) = \pi + argL(j\omega_0)+arccos|L(j\omega_0)|
+\end{displaymath}
+\subsubsection{Sintesi della rete ritardatrice con imposizione del margine di fase $M_F$}
+Teniamo presente che questa è il reciproco della precedente. Cercheremo quindi un valore di $\omega_0$ che non stia dentro il cerchio unitario, ma fuori: otterremo così il desiderato passaggio a destra di -1. 
+\begin{enumerate}
+    \item Scegliere $\omega_0$ affinché con $\varphi_0 := argL(j\omega_0)+\pi - M_F$ valga $\left(|L(j\omega_0), \varphi_0\right) \in f(\mathcal{D})$ quindi $cos\varphi_0 > \frac{1}{|L(j\omega_0)|}$
+    \item Definiti $M:=|L(j\omega_0)|$ e $\varphi := \varphi_0$ segue $\tau = \frac{M-cos\varphi}{\omega_0 sin\varphi} $ e $\alpha=\frac{Mcos\varphi-1}{M(M-cos\varphi)}$
+\end{enumerate}
+Abbiamo visto questi progetti, e possiamo espletare una considerazione: l'uso delle formule di inversione permette in generale di spostare nel piano complesso, per una data frequenza, un punto del diagramma di Nyquist in uno limitrofo del diagramma di Nyquist compensato. Lo scopo, al di là dell'imposizione di margini di stabilità, è quello di migliorare la risposta armonica del guadagno di anello in accordo a specifiche di progetto. 
+\subsubsection{Sintesi della rete anticipatrice con imposizione del margine di ampiezza $M_A$}
+In questo caso, anzitutto tracciamo un cerchio di raggio $\frac{1}{M_A}$, trovando il vettore. Dovremo quindi, in corrispondenza di $\omega_0$, amplificare di $\frac{1}{M_A(mod L(j\omega_0))}$ per spostare il punto sulla circonferenza. 
+\begin{enumerate}
+    \item Scegliere $\omega_0$ affinché con $\varphi_0 := - argL(j\omega_0)-\pi$ valga $\left(\frac{1}{M_A|L(j\omega_0)}, \varphi_0\right) \in f(\mathcal{D})$ quindi $cos\varphi_0 > M_A|L(j\omega_0)|$
+    \item Definiti $M:=\frac{1}{M_A|L(j\omega_0)|}$ e $\varphi := \varphi_0$ segue $\tau = \frac{M-cos\varphi}{\omega_0 sin\varphi} $ e $\alpha=\frac{Mcos\varphi-1}{M(M-cos\varphi)}$
+\end{enumerate}
+\subsubsection{Sintesi della rete ritardatrice con imposizione del margine di ampiezza $M_A$}
+Tracciamo ancora il cerchio con raggio $\frac{1}{M_A}$, ma vogliamo ora posizionarci fuori dal cerchio. Otterremo quindi un'attenuazione di $M_A modL(j\omega_0)$, e vorremo un ritardo di fase dato da $\varphi_0$, ottenibile $\pi$ meno il modulo dell'argomento di $L(j\omega_0)$. 
+\begin{enumerate}
+    \item Scegliere $\omega_0$ affinché con $\varphi_0 := argL(j\omega_0)+\pi$ valga $\left(M_A|L(j\omega_0), \varphi_0\right) \in f(\mathcal{D})$ quindi $cos\varphi_0 > \frac{1}{M_A|L(j\omega_0)|}$
+    \item Definiti $M:=M_A|L(j\omega_0)|$ e $\varphi := \varphi_0$ segue $\tau = \frac{M-cos\varphi}{\omega_0 sin\varphi} $ e $\alpha=\frac{Mcos\varphi-1}{M(M-cos\varphi)}$
+\end{enumerate}
 \end{document}
 
 
