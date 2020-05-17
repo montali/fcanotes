@@ -15,7 +15,7 @@
 \oddsidemargin -.25in
 \evensidemargin -.25in
 \textwidth 7in
-
+\newcommand{\trz}{\mathcal{Z}}
 \begin{document}
 
 % ========== Edit your name here
@@ -26,16 +26,16 @@
 
 \medskip
 \section{Il controllo attivo di un processo}
-Innanzitutto definiamo due termini fondamentali per la materia: un \textbf{processo} è l'evoluzione nel tempo di ciò che caratterizza un sistema. Con \textbf{controllo attivo} intendiamo una strategia di controllo che prevede un'azione di comando esercitata sul processo. 
-Il controllo attivo risolve il problema di imporre una modalità di funzionamento desiderato ad un processo: l'obiettivo è che una variabile del processo coincida con una preassegnata. Parliamo di \textbf{regolazione} quando l'ingresso è costante, di \textbf{asservimento} quando l'ingresso è variabile. 
-Un \textbf{sistema} è un complesso, normalmente composto da più elementi interconnessi, in cui si possono distinguere grandezze soggette a variare nel tempo (variabili). Un \textbf{segnale} è una funzione che rappresenta l'andamento delle variabili nel tempo. Distinguiamo queste ultime in indipendenti (ingressi) e dipendenti (uscite). Arriviamo così al concetto di \textbf{sistema orientato}. Un \textbf{modello matematico} è la descrizione di un sistema che permette di determinare i segnali delle uscite noti gli ingressi e le condizioni iniziali. Distinguiamo tra sistemi multivariabili (MIMO) e scalari (SISO). Un sistema è detto \textbf{statico} quando l'uscita al tempo $t$ dipende esclusivamente dall'ingresso al medesimo tempo $t$. Un \textbf{sistema dinamico}, invece, ha uscita dipendente dal segnale di ingresso sull'intervallo $(-\infty , t]$, e ha quindi memoria. Per questi ultimi sistemi introduciamo i concetti di sistema in quiete (\textit{equilibrio}) e sistema in condizioni asintotiche(\textit{stazionarie}). 
+Innanzitutto definiamo due termini fondamentali per la materia: un \textbf{processo} è l'evoluzione nel tempo di ciò che caratterizza un sistema. Con \textbf{controllo attivo} intendiamo una strategia di controllo che prevede un'azione di comando esercitata sul processo.
+Il controllo attivo risolve il problema di imporre una modalità di funzionamento desiderato ad un processo: l'obiettivo è che una variabile del processo coincida con una preassegnata. Parliamo di \textbf{regolazione} quando l'ingresso è costante, di \textbf{asservimento} quando l'ingresso è variabile.
+Un \textbf{sistema} è un complesso, normalmente composto da più elementi interconnessi, in cui si possono distinguere grandezze soggette a variare nel tempo (variabili). Un \textbf{segnale} è una funzione che rappresenta l'andamento delle variabili nel tempo. Distinguiamo queste ultime in indipendenti (ingressi) e dipendenti (uscite). Arriviamo così al concetto di \textbf{sistema orientato}. Un \textbf{modello matematico} è la descrizione di un sistema che permette di determinare i segnali delle uscite noti gli ingressi e le condizioni iniziali. Distinguiamo tra sistemi multivariabili (MIMO) e scalari (SISO). Un sistema è detto \textbf{statico} quando l'uscita al tempo $t$ dipende esclusivamente dall'ingresso al medesimo tempo $t$. Un \textbf{sistema dinamico}, invece, ha uscita dipendente dal segnale di ingresso sull'intervallo $(-\infty , t]$, e ha quindi memoria. Per questi ultimi sistemi introduciamo i concetti di sistema in quiete (\textit{equilibrio}) e sistema in condizioni asintotiche(\textit{stazionarie}).
 \subsection{Insieme dei behavior}
 Definiamo ora l'\textbf{insieme dei behavior} $\mathcal{B}$ come l'insieme di tutte le possibili coppie causa-effetto associate ad un sistema.
 \begin{displaymath}
     \mathcal{B}:={\left( u(t), y(t) \right) : y(t)}
 \end{displaymath}
-è l'uscita del sistema corrispondente all'ingresso $u(t)$, con $u(t)$ e $y(t)$ che tipicamente appartengono agli spazi funzionali delle funzioni continue o differenziabili a tratti. 
-Un sistema è \textbf{lineare} se soddisfa la proprietà di sovrapposizione degli effetti. 
+è l'uscita del sistema corrispondente all'ingresso $u(t)$, con $u(t)$ e $y(t)$ che tipicamente appartengono agli spazi funzionali delle funzioni continue o differenziabili a tratti.
+Un sistema è \textbf{lineare} se soddisfa la proprietà di sovrapposizione degli effetti.
 \begin{displaymath}
     \forall (u_1,y_1), (u_2, y_2) \in \mathcal{B}, \forall \alpha_1,\alpha_2 \in \mathcal{R} \rightarrow \alpha_1(u_1,y_1)+\alpha_2(u_2, y_2) := (\alpha_1 u_1+ \alpha_2 u_2, \alpha_1y_1 + \alpha_2 y_2) \in \mathcal{B}
 \end{displaymath}
@@ -44,18 +44,18 @@ Con \textbf{stazionario} intendiamo un sistema invariante nel tempo, ossia:
     \left(u(t), y(t)\right) \in \mathcal{B} \rightarrow \left(u(t-T), y(t-T)\right) \in \mathcal{B}
 \end{displaymath}
 \subsection{Controllo ad azione diretta e retroazione}
-Vi è, tra le tipologie di controllo, una distinzione importantissima: quella tra i controlli \textbf{ad azione diretta} e quelli \textbf{in retroazione}. 
-Nel primo, l'azione di comando dipende da: obiettivo perseguito, informazioni sul modello del sistema controllato, ingressi agenti sul sistema controllato. Nel secondo, oltre ai suddetti, vi è l'intervento della \textbf{variabile controllata}. In altri termini, l'ingresso dipende anche dall'uscita. Introduciamo poi anche i controlli feedforward/feedback a due/tre gradi di libertà. 
-È utile notare come in sistemi disturbati, in cui cioè abbiamo una perturbazione data dal sistema stesso, il controllo ad azione diretta non la smorza, mentre quello in retroazione riduce l'errore di svariati ordini di grandezza. Bisogna però portare attenzione ai \textbf{fenomeni di instabilità} che nascono all'aumentare del guadagno di anello. 
+Vi è, tra le tipologie di controllo, una distinzione importantissima: quella tra i controlli \textbf{ad azione diretta} e quelli \textbf{in retroazione}.
+Nel primo, l'azione di comando dipende da: obiettivo perseguito, informazioni sul modello del sistema controllato, ingressi agenti sul sistema controllato. Nel secondo, oltre ai suddetti, vi è l'intervento della \textbf{variabile controllata}. In altri termini, l'ingresso dipende anche dall'uscita. Introduciamo poi anche i controlli feedforward/feedback a due/tre gradi di libertà.
+È utile notare come in sistemi disturbati, in cui cioè abbiamo una perturbazione data dal sistema stesso, il controllo ad azione diretta non la smorza, mentre quello in retroazione riduce l'errore di svariati ordini di grandezza. Bisogna però portare attenzione ai \textbf{fenomeni di instabilità} che nascono all'aumentare del guadagno di anello.
 \section{Modellistica ed equazioni differenziali lineari}
 \subsection{Cenni di modellistica}
 La \textbf{modellistica} è la costruzione dei modelli matematici dei sistemi, a partire da leggi fondamentali o dati sperimentali.
 \subsubsection{Circuiti elettrici}
 Citiamo anzitutto alcuni esempi elettrici di leggi fondamentali:\\
 \begin{center}
-Resistenza: $v_R = Ri$\\
-Induttanza: $v_L=L\frac{di}{dt} = LDi$\\
-Capacità: $v_c = \frac{Q}{C} = \frac{1}{C} \int_{-\infty}^t i(\tau)d\tau \rightarrow Dv_c = \frac{i}{C}$\\
+    Resistenza: $v_R = Ri$\\
+    Induttanza: $v_L=L\frac{di}{dt} = LDi$\\
+    Capacità: $v_c = \frac{Q}{C} = \frac{1}{C} \int_{-\infty}^t i(\tau)d\tau \rightarrow Dv_c = \frac{i}{C}$\\
 \end{center}
 
 Un circuito RLC diventa quindi
@@ -87,7 +87,7 @@ Otteniamo l'equazione differenziale
     mD^2y+bDy+ky = Df
 \end{displaymath}
 \subsubsection{OP-AMP}
-Citiamo anche i circuiti elettrici con OP-AMP, deducendo 
+Citiamo anche i circuiti elettrici con OP-AMP, deducendo
 \begin{displaymath}
     R_1CDy + y = -R_2CDu-u
 \end{displaymath}
@@ -97,7 +97,7 @@ Le equazioni differenziali lineari a coefficienti costanti possono rappresentare
     \sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u
 \end{displaymath}
 Otteniamo così un modello matematico formale del sistema dinamico (orientato) $\Sigma, y =$ variabile d'uscita, $u=$ variabile d'ingresso, $a_n \neq 0, b_m \neq 0$. $n$ è l'ordine dell'eq. differenziale per estensione ordine di $\Sigma$, $n\ge m$; $\rho := n-m$ ordine relativo o grado relativo di $\Sigma$.
-Ricollegandoci al concetto di \textbf{insieme dei behaviors} $\mathcal{B}$ di $\Sigma$, la coppia di segnali $\mathcal{B} := \{\left(u(t), y(t)\right)$ soddisfa l'equazione differenziale se $u(t)$ e $y(t)$ sono derivabili tante volte quanto necessario. 
+Ricollegandoci al concetto di \textbf{insieme dei behaviors} $\mathcal{B}$ di $\Sigma$, la coppia di segnali $\mathcal{B} := \{\left(u(t), y(t)\right)$ soddisfa l'equazione differenziale se $u(t)$ e $y(t)$ sono derivabili tante volte quanto necessario.
 \subsubsection{Proprietà del sistema}
 Citiamo allora alcune proprietà del sistema. Per le dimostrazioni riferirsi alle slide.
 \begin{itemize}
@@ -109,8 +109,8 @@ Una volta introdotto il sistema, sorge spontaneo un dubbio fondamentale:
 \begin{center}
     \textbf{Noto il segnale di ingresso $u(t)|_{[0, +\infty]}$ e le condizioni iniziali $y(0), Dy(0),...,D^{n-1}y(0)$ determinare il segnale di uscita $y(t)|_{[0, +\infty]}$}
 \end{center}
-Se avessimo un'equazione omogenea, la soluzione sarebbe immediata. Ma spesso non è così, e ci serve un metodo generale per poter trattare le diverse casistiche. 
-La classe dei segnali che utilizzeremo è $C_p^\infty$, insieme delle funzioni infinitamente derivabili a tratti. 
+Se avessimo un'equazione omogenea, la soluzione sarebbe immediata. Ma spesso non è così, e ci serve un metodo generale per poter trattare le diverse casistiche.
+La classe dei segnali che utilizzeremo è $C_p^\infty$, insieme delle funzioni infinitamente derivabili a tratti.
 \begin{center}
     \textit{Una funzione appartiene a $C_p^\infty$ se esiste un insieme sparso $\mathcal{S}$ per il quale $f \in C^\infty (\mathbb{R}/S, \mathbb{R})$ e per ogni $n \in \mathbb{N}$ e per ogni $t \in \mathcal{S}$ i limiti $f^{(n)}(t^-)$ e $f^{(n)}(t^+)$ esistono e sono finiti. Quando $f$ è definita in $t \in \mathcal{S}$, convenzionalmente $f(t) := f(t^+)$. In particolare $C^{-1} := C_p^\infty (\mathbb{R})$ definisce l'insieme delle funzioni di classe $C^\infty$ a tratti definite su tutto $\mathbb{R}$}
 \end{center}
@@ -134,14 +134,14 @@ Consideriamo una funzione complessa di variabile complessa $f: \mathbb{C} \right
     $\forall \epsilon >0, \exists \rho >0$ tale che se $s$ soddisfa $0<|s-s_0|<\rho \rightarrow |f(s) - \lambda| < \epsilon$
 \end{center}
 \subsubsection{Altre proprietà derivate}
-Data questa definizione, possiamo definire altre proprietà, come la \textbf{continuità}: $f$ è continua in $s=s_0$ se $lim_{s\rightarrow s_0} f(s) = f(s_0)$. Da qui, $f(s)$ è continua in $s_0 = \sigma_0 + j\omega_0$ sse le funzioni reali $u(\sigma, \omega), v(\sigma, \omega)$ sono continue in $(\sigma_0, \omega_0)$. Definiamo poi la \textbf{derivabilità}: $f(s)$ è derivabile in $s=s_0$ se esiste il limite 
+Data questa definizione, possiamo definire altre proprietà, come la \textbf{continuità}: $f$ è continua in $s=s_0$ se $lim_{s\rightarrow s_0} f(s) = f(s_0)$. Da qui, $f(s)$ è continua in $s_0 = \sigma_0 + j\omega_0$ sse le funzioni reali $u(\sigma, \omega), v(\sigma, \omega)$ sono continue in $(\sigma_0, \omega_0)$. Definiamo poi la \textbf{derivabilità}: $f(s)$ è derivabile in $s=s_0$ se esiste il limite
 \begin{displaymath}
     lim_{\Delta s\rightarrow 0} \frac{f(s_0 + \Delta s) - f(s_0)}{\Delta s}
 \end{displaymath}
-Le regole base di derivabilità dell'analisi rimangono valide. Definiamo l'\textbf{analiticità}, ossia, $f(s)$ è analitica/olomorfa in $s=s_0$ se $f(s)$ è derivabile su di un intorno aperto contenente $s_0$. 
-Infine, definiamo le \textbf{condizioni di Cauchy-Riemann}: $u(\sigma, \omega), v(\sigma, \omega)$ soddisfano le condizioni di Cauchy-Riemann se 
+Le regole base di derivabilità dell'analisi rimangono valide. Definiamo l'\textbf{analiticità}, ossia, $f(s)$ è analitica/olomorfa in $s=s_0$ se $f(s)$ è derivabile su di un intorno aperto contenente $s_0$.
+Infine, definiamo le \textbf{condizioni di Cauchy-Riemann}: $u(\sigma, \omega), v(\sigma, \omega)$ soddisfano le condizioni di Cauchy-Riemann se
 \begin{displaymath}
-    \begin{cases} 
+    \begin{cases}
         \frac{\partial u}{\partial \sigma} = \frac{\partial v}{\partial \omega} \\ \frac{\partial u}{\partial \omega} = - \frac{\partial v}{\partial \sigma}
     \end{cases}
 \end{displaymath}
@@ -152,13 +152,13 @@ Sia $f(s) = u(s) + jv(s)$:
     \item Se $u(\sigma, \omega), v(\sigma, \omega)$ e le loro derivate parziali sono continue in $(\sigma_0, \omega_0)$ e soddisfano le condizioni di Cauchy-Riemann, allora esiste $f^{(1)} (s_0)$ con $s_0 = \sigma_0 + j\omega_0$
 \end{enumerate}
 \paragraph{Corollario}
-Sia $f(s) = u(s) + jv(s)$ con $u(\sigma, \omega), v(\sigma, \omega)$ e le loro derivate parziali continue su di un dominio aperto $U \subseteq C$. Allora $f(s)$ è analitica su $U$ se e solo se $u(\sigma, \omega), v(\sigma, \omega)$ soddisfano, su U, le condizioni di Cauchy-Riemann. 
-\paragraph{Teorema} 
+Sia $f(s) = u(s) + jv(s)$ con $u(\sigma, \omega), v(\sigma, \omega)$ e le loro derivate parziali continue su di un dominio aperto $U \subseteq C$. Allora $f(s)$ è analitica su $U$ se e solo se $u(\sigma, \omega), v(\sigma, \omega)$ soddisfano, su U, le condizioni di Cauchy-Riemann.
+\paragraph{Teorema}
 Sia $f(s)$ analitica su di una regione aperta $U \subseteq C$. Allora la derivata $Df(s)$ è anch'essa una funzione analitica su $U$.
 \paragraph{Corollario}
 Se $f(s)$ è analitica sulla regione aperta $U$, allora $f(s)$ è ivi derivabile indefinitivamente.
 \subsection{Integrali di linea nel piano complesso}
-Definiamo innanzitutto l'\textbf{integrale}: data una funzione $f(s)$ ed una curva $\Gamma$ su $\mathbb{C}$ percorsa da $s_a$ a $s_b$, definiamo $\int_\Gamma f(s) ds \triangleq lim_{n\rightarrow \infty} \sum_{i=1}^n f(s_i)(s_i- s_{i-1})$ dove $s_0,...,s_n$ è una discretizzazione uniforme della curva $\Gamma$. 
+Definiamo innanzitutto l'\textbf{integrale}: data una funzione $f(s)$ ed una curva $\Gamma$ su $\mathbb{C}$ percorsa da $s_a$ a $s_b$, definiamo $\int_\Gamma f(s) ds \triangleq lim_{n\rightarrow \infty} \sum_{i=1}^n f(s_i)(s_i- s_{i-1})$ dove $s_0,...,s_n$ è una discretizzazione uniforme della curva $\Gamma$.
 \subsubsection{Calcolo dell'integrale di linea}
 Sia $\Gamma$ una curva parametrica di classe $C^1$.
 \begin{displaymath}
@@ -166,21 +166,21 @@ Sia $\Gamma$ una curva parametrica di classe $C^1$.
 \end{displaymath}
 
 Definiamo una \textbf{curva chiusa semplice} come una curva continua tale che $\Gamma(a)=\Gamma(b)$ e $\Gamma(u_1) \neq \Gamma(u_2) \forall u_1 \neq u_2 \in (a,b)$
-Il \textbf{teorema di Jordan} afferma che se $\Gamma$ è una curva chiusa semplice in $\mathbb{C}$ questa suddivide il piano complesso in due regioni distinte, una esterna e una interna. 
+Il \textbf{teorema di Jordan} afferma che se $\Gamma$ è una curva chiusa semplice in $\mathbb{C}$ questa suddivide il piano complesso in due regioni distinte, una esterna e una interna.
 Definiamo un \textbf{insieme connesso} se per ogni coppia di punti appartenenti all'insieme esiste una curva continua $\Gamma$ che li congiunge tutta contenuta in R. È invece detto \textbf{semplicemente connesso} se è connesso e per ogni curva chiusa semplice $\Gamma$ appartenente all'insieme la regione interna di $\Gamma$ è tutta contenuta in R.
 \paragraph{Teorema dell'integrale di Cauchy}
-Sia $f(s)$ una funzione analitica su di una regione aperta e semplicemente connessa $U$ e $\Gamma$ una curva semplice ivi contenuta. Allora $\oint_\Gamma f(s) ds = 0$. 
+Sia $f(s)$ una funzione analitica su di una regione aperta e semplicemente connessa $U$ e $\Gamma$ una curva semplice ivi contenuta. Allora $\oint_\Gamma f(s) ds = 0$.
 \paragraph{Corollario}
 Sia $f(s)$ una funzione analitica su di una regione aperta e semplicemente connessa $U$ e $\Gamma$ una curva ivi contenuta che congiunge $s_a$ ad $s_b$. Allora l'integrale di linea $\int_\Gamma f(s)ds$ non dipende dal percorso $\Gamma$ ma solo da $s_a, s_b$ e $f(s)$:
 \begin{displaymath}
     \int_\Gamma f(s)ds = \int_{s_a}^{s_b} f(s)ds
 \end{displaymath}
 \paragraph{Teorema - Sviluppo in serie di Taylor}
-Sia $f(s)$ una funzione analitica su di un cerchio $B(s_0, r_0)$ centrato su $s_0$ e con raggio $r_0$. Allora $\forall s \in B(s_0, r_0)$ 
+Sia $f(s)$ una funzione analitica su di un cerchio $B(s_0, r_0)$ centrato su $s_0$ e con raggio $r_0$. Allora $\forall s \in B(s_0, r_0)$
 \begin{displaymath}
     f(s) = \sum_{i=0}^\infty c_i (s-s_0)^i
 \end{displaymath}
-dove 
+dove
 \begin{displaymath}
     c_i = \frac{f^{(i) (s_0)}}{i!} = \frac{1}{2\pi j}\oint \frac{f(s)}{(s-s_0)^{i+1}}ds
 \end{displaymath}
@@ -193,26 +193,26 @@ Sia $f(s)$ una funzione analitica sul cerchio $B(s_0, r_0)$ ad eccezione del suo
 \begin{displaymath}
     f(s) = \sum_{i=-\infty}^{+\infty} c_i(s-s_0)^i
 \end{displaymath}
-dove 
+dove
 \begin{displaymath}
     c_i = \frac{f^{(i) (s_0)}}{i!} = \frac{1}{2\pi j}\oint \frac{f(s)}{(s-s_0)^{i+1}}ds
 \end{displaymath}
 \subsection{Classificazione del punto isolato $s_0$}
-Se $c_i =0 \forall i \in \mathbb{Z}^-$ definendo $f(s_0) = c_0$ risulta $f(s)$ analitica in $s=s_0$. Se $c_i \neq 0$ per qualche $i \in \mathbb{Z}^-$, $s_0$ è una singolarità di $f(s)$, detta \textbf{singolarità polo} quando i $c_i \neq 0$ sono in numero finito, con $-n = min\{i\in \mathbb{Z}^-: c_i \neq 0\}$ $s_0$ è polo di ordine $n$. Invece abbiamo una \textbf{singolarità essenziale} quando i $c_i \neq 0$ con $i \in \mathbb{Z}^-$ sono infiniti. Se abbiamo una $f(s)$ analitica in $B(s_0, r_0) - \{s_0\}$, $s_0$ è una singolarità di $f(s)$ se e solo se $f(s)$ assume valori illimitati in un intorno di $s_0$. 
-Il \textbf{Teorema di Picard} afferma che se abbiamo $s_0$ singolarità essenziale di $f(s)$, in ogni intorno di $s_0$ la funzione $f(s)$ assume ogni valore complesso infinite volte con l'eventuale eccezione di un solo particolare valore. 
+Se $c_i =0 \forall i \in \mathbb{Z}^-$ definendo $f(s_0) = c_0$ risulta $f(s)$ analitica in $s=s_0$. Se $c_i \neq 0$ per qualche $i \in \mathbb{Z}^-$, $s_0$ è una singolarità di $f(s)$, detta \textbf{singolarità polo} quando i $c_i \neq 0$ sono in numero finito, con $-n = min\{i\in \mathbb{Z}^-: c_i \neq 0\}$ $s_0$ è polo di ordine $n$. Invece abbiamo una \textbf{singolarità essenziale} quando i $c_i \neq 0$ con $i \in \mathbb{Z}^-$ sono infiniti. Se abbiamo una $f(s)$ analitica in $B(s_0, r_0) - \{s_0\}$, $s_0$ è una singolarità di $f(s)$ se e solo se $f(s)$ assume valori illimitati in un intorno di $s_0$.
+Il \textbf{Teorema di Picard} afferma che se abbiamo $s_0$ singolarità essenziale di $f(s)$, in ogni intorno di $s_0$ la funzione $f(s)$ assume ogni valore complesso infinite volte con l'eventuale eccezione di un solo particolare valore.
 \subsubsection{Residui}
 Data una singolarità $s_0$, definiamo il \textbf{residuo} come il coefficiente $c_{-1}$ dello sviluppo in serie di Laurent.
 \paragraph{Teorema dei residui di Cauchy}
-Sia $\Gamma$ una curva chiusa semplice e $f(s)$ una funzione analitica su $\Gamma$ e nella sua regione interna ad eccezione dei punti singolari $s_1,...,s_n$ in essa contenuti, allora 
+Sia $\Gamma$ una curva chiusa semplice e $f(s)$ una funzione analitica su $\Gamma$ e nella sua regione interna ad eccezione dei punti singolari $s_1,...,s_n$ in essa contenuti, allora
 \begin{displaymath}
     \oint_\Gamma f(s) ds = 2\pi j \sum_{i=1}^n Res\{f, s_i\}
 \end{displaymath}
 \subsubsection{Poli e zeri}
-Sia $s_0$ una singolarità polo di $f(s)$. Allora $s_0$ è polo di ordine $n$ sse esiste $g(s)$ analitica in $s_0$ con $g(s_0) \neq 0$ tale che 
+Sia $s_0$ una singolarità polo di $f(s)$. Allora $s_0$ è polo di ordine $n$ sse esiste $g(s)$ analitica in $s_0$ con $g(s_0) \neq 0$ tale che
 \begin{displaymath}
     f(s) = \frac{g(s)}{(s-s_0)^n}
 \end{displaymath}
-Sia $f(s)$ analitica in $z$. $z$ è detto \textbf{zero} di $f$ se $f(z)=0$. Considerato lo sviluppo di Taylor $f(s)= c_1(s-z)+\dots$ ed $n:=min\{i \in \mathbb{N}: c_i \neq 0\}$, $z$ è detto zero di ordine $n$ di $f(s)$. È detto tale se e solo se esiste $g(s)$ analitica in $z$ con $g(z) \neq 0$ tale che $f(s) = (s-z)^n g(s)$. Ricaviamo un'ultima proprietà: se $f: \mathbb{C} \rightarrow \mathbb{C}$ ha una singolarità polare in $p$ di ordine $n$ allora 
+Sia $f(s)$ analitica in $z$. $z$ è detto \textbf{zero} di $f$ se $f(z)=0$. Considerato lo sviluppo di Taylor $f(s)= c_1(s-z)+\dots$ ed $n:=min\{i \in \mathbb{N}: c_i \neq 0\}$, $z$ è detto zero di ordine $n$ di $f(s)$. È detto tale se e solo se esiste $g(s)$ analitica in $z$ con $g(z) \neq 0$ tale che $f(s) = (s-z)^n g(s)$. Ricaviamo un'ultima proprietà: se $f: \mathbb{C} \rightarrow \mathbb{C}$ ha una singolarità polare in $p$ di ordine $n$ allora
 \begin{displaymath}
     Res\{f,p\} = \frac{1}{(n-1)!} D^{n-1} \left(f(s)(s-p)^n\right)|_{s=p}
 \end{displaymath}
@@ -220,9 +220,9 @@ Sia $f(s)$ analitica in $z$. $z$ è detto \textbf{zero} di $f$ se $f(z)=0$. Cons
 Data una funzione $f(s)$ definita da uno sviluppo in serie di Taylor su di un cerchio $B_0(s_0, r_0)$ è possibile estendere/continuare la definizione di $f(s)$ all'esterno di $B_0$ mediante lo sviluppo in serie di Taylor di altri punti di $B_0$. Il procedimento è ricorsivo. Possono anche emergere funzioni a più valori!
 \section{La trasformata di Laplace}
 La \textbf{trasformata di Laplace} è un operatore funzionale che converte un'equazione differenziale in un'equazione algebrica, permettendo di risolvere anche equazioni differenziali lineari con condizioni iniziali arbitrarie.
-Permette inoltre di analizzare i fenomeni transitori ed asintotici di una grande varietà di sistemi. 
-Si applica ad una funzione $f$ di variabile reale con codominio $\mathbb{R}$ o $\mathbb{C}$. Assumiamo ora $f \in \mathbb{C}_p^\infty (\mathbb{R})$, sappiamo che $\exists \sigma \in \mathbb{R}$ per il quale $\int_0^{+\infty} |f(t)| e^{-\sigma t} dt < + \infty$. Se vale quest'ultima condizione, allora $\forall \sigma_1 > \sigma : \int_0^{+\infty} |f(t)| e^{-\sigma_1 t} dt < + \infty$. Definiamo l'\textbf{ascissa di convergenza} di $f(t)$ come $\sigma_c := inf \left\{\sigma \in \mathbb{R} : \int_0^{+\infty}|f(t)| e^{- \sigma t} dt\right\}$ Spesso assumeremo $f(t) = 0$ per $t<0$. 
-Volendo ora dare una definizione rigorosa della trasformata, 
+Permette inoltre di analizzare i fenomeni transitori ed asintotici di una grande varietà di sistemi.
+Si applica ad una funzione $f$ di variabile reale con codominio $\mathbb{R}$ o $\mathbb{C}$. Assumiamo ora $f \in \mathbb{C}_p^\infty (\mathbb{R})$, sappiamo che $\exists \sigma \in \mathbb{R}$ per il quale $\int_0^{+\infty} |f(t)| e^{-\sigma t} dt < + \infty$. Se vale quest'ultima condizione, allora $\forall \sigma_1 > \sigma : \int_0^{+\infty} |f(t)| e^{-\sigma_1 t} dt < + \infty$. Definiamo l'\textbf{ascissa di convergenza} di $f(t)$ come $\sigma_c := inf \left\{\sigma \in \mathbb{R} : \int_0^{+\infty}|f(t)| e^{- \sigma t} dt\right\}$ Spesso assumeremo $f(t) = 0$ per $t<0$.
+Volendo ora dare una definizione rigorosa della trasformata,
 \begin{center}
     La trasformata di Laplace di un segnale (funzione) $f(t)$ è la funzione $F(s) = \mathcal{L}[f(t)]$ definita da
     \begin{displaymath}
@@ -282,17 +282,17 @@ Sia $f\in C^1 (\mathbb{R}_+)$. Se esiste il limite $lim_{s\rightarrow+\infty} sF
     f(0+)=lim_{s\rightarrow+\infty} sF(s)
 \end{displaymath}
 \subsubsection{Traslazione nel tempo}
-Per ogni $t_0 \ge 0$ vale 
+Per ogni $t_0 \ge 0$ vale
 \begin{displaymath}
     \mathcal{L}[f(t-t_0)\cdot 1(t-t_0)]= e^{-t_0s}F(s)
 \end{displaymath}
 \subsubsection{Traslazione nella variabile complessa $s$}
-Per ogni $a \in \mathbb{R}(\mathbb{C})$ vale 
+Per ogni $a \in \mathbb{R}(\mathbb{C})$ vale
 \begin{displaymath}
     \mathcal{L}[e^{\alpha t} f(t)] = F(s-a)
 \end{displaymath}
 \subsubsection{Teorema di convoluzione}
-Si abbia $f(t) = g(t)=0$ per $t<0$. La convoluzione dei segnali $f$ e $g$, spesso indicata come $f*g$, è il segnale 
+Si abbia $f(t) = g(t)=0$ per $t<0$. La convoluzione dei segnali $f$ e $g$, spesso indicata come $f*g$, è il segnale
 \begin{displaymath}
     \int_0^t f(v)g(t-v)dv
 \end{displaymath}
@@ -300,7 +300,7 @@ rappresentabile anche come $f*g=g*f$
 \begin{displaymath}
     \int_0^t g(v) f(t-v) dv
 \end{displaymath}
-La trasformata della convoluzione è 
+La trasformata della convoluzione è
 \begin{displaymath}
     \mathcal{L}\left[    \int_0^t f(v)g(t-v)dv\right] = F(s)G(s)
 \end{displaymath}
@@ -324,7 +324,7 @@ Citiamo infine altre due trasformate notevoli:
 \end{displaymath}
 \section{Le funzioni impulsive e l'insieme dei behaviors}
 Consideriamo anzitutto un sistema dinamico $\Sigma$ descritto da $Dy(t) + 2y(t) = 2Du(t)+2u(t)$ ed assumiamo che per i tempi negativi sia $y(t) = e^{-2t}$ e $u(t)=0$ con $t<0$.
-Questa coppia di funzioni soddisfa l'eq. differenziale 
+Questa coppia di funzioni soddisfa l'eq. differenziale
 \begin{displaymath}
     Dy(t) = -2e^{-2t} \rightarrow (-2e^{-2t}) + 2(e^{-2t}) = 0 \forall t<0
 \end{displaymath}
@@ -336,16 +336,16 @@ Introduciamo ora nel sistema una azione forzante $u(t) = 1$ per $t \ge 0$. Quind
 \begin{displaymath}
     \mathcal{B}= \left\{\left(u(t), y(t)\right) \in C^\infty_p (\mathbb{R})^2 : Dy+ 2y = 2Du +2u \forall t \in \mathbb{R}-\left\{t_1,t_2,...\right\}\right\}
 \end{displaymath}
-Osserviamo però, che dato $C^{1, \infty}_p = C^1 \cap C_p^\infty$: 
+Osserviamo però, che dato $C^{1, \infty}_p = C^1 \cap C_p^\infty$:
 \begin{displaymath}
     \left\{\left(u(t), y(t)\right) \in (C_p^{1,\infty})^2 : Dy + 2y = 2Du + 2u \forall t \in \mathbb{R}\right\} \subset \mathcal{B}
 \end{displaymath}
-Per risolvere l'impasse, definiamo l'azione forzante come 
+Per risolvere l'impasse, definiamo l'azione forzante come
 \begin{displaymath}
     u(t) :=
     \begin{cases}
-        0 \textrm{ per }t<0\\
-        3\frac{t^2}{\tau^2}- 2\frac{t^3}{\tau^3} \textrm{ per }t \in [0, \tau)\\
+        0 \textrm{ per }t<0                                                    \\
+        3\frac{t^2}{\tau^2}- 2\frac{t^3}{\tau^3} \textrm{ per }t \in [0, \tau) \\
         1 \textrm{ per } t \ge \tau
     \end{cases}
     \rightarrow u(t) \in C_p^{1,\infty} \forall \tau > 0
@@ -358,7 +358,7 @@ Insomma, $Du(t)$ converge ad una funzione impulsiva (distribuzione) detta \textb
 La funzione impulsiva più semplice è il gradino unitario $1(t)$:
 \begin{displaymath}
     1(t) := \begin{cases}
-        0 \textrm{ per }t<0\\
+        0 \textrm{ per }t<0 \\
         1 \textrm{ per }t\ge0
     \end{cases}
 \end{displaymath}
@@ -366,25 +366,25 @@ Introduciamo $f(t<\tau) \in C_p^{0,\infty}$:
 \begin{displaymath}
     f(t:\tau) :=
     \begin{cases}
-        0 \textrm{ per } t<0\\
-        \frac{1}{\tau} t \textrm{ per }0\le \le \tau\\
+        0 \textrm{ per } t<0                         \\
+        \frac{1}{\tau} t \textrm{ per }0\le \le \tau \\
         1 \textrm{ per }t>\tau
     \end{cases}
 \end{displaymath}
 $lim_{\tau \rightarrow 0+} f(t:\tau) = 1(t)$.
 La derivata di questa funzione sarà ovviamente pari a 0 per $t<0$ e $t\ge\tau$:
 \begin{displaymath}
-    Df(t;\tau) = 
+    Df(t;\tau) =
     \begin{cases}
-        0 \textrm{ per } t<0\\
-        \frac{1}{\tau} \textrm{ per } 0\le t \le \tau\\
+        0 \textrm{ per } t<0                          \\
+        \frac{1}{\tau} \textrm{ per } 0\le t \le \tau \\
         0 \textrm{ per }t\ge\tau
     \end{cases}
 \end{displaymath}
 Notiamo altresì che $lim_{\tau\rightarrow 0+} Df(t;\tau)$ è proprio la delta di Dirac!
-$\delta(t)$ è una distribuzione, o, più informalmente, una funzione impulsiva. È la \textbf{derivata generalizzata} del gradino unitario $\delta(t) := D^*1(t)$. $D^*$ è proprio l'operatore della derivata generalizzata: è un operatore lineare come $D$. Più precisamente, $D^*$ è la derivata in senso distribuzionale. Sappiamo inoltre che, assumendo $t_a < T < t_b$ 
+$\delta(t)$ è una distribuzione, o, più informalmente, una funzione impulsiva. È la \textbf{derivata generalizzata} del gradino unitario $\delta(t) := D^*1(t)$. $D^*$ è proprio l'operatore della derivata generalizzata: è un operatore lineare come $D$. Più precisamente, $D^*$ è la derivata in senso distribuzionale. Sappiamo inoltre che, assumendo $t_a < T < t_b$
 \begin{displaymath}
-    \int_{t_a}^{t_b} \delta(t-T)dt = 1 \hspace{10px} \int_{t_a}^{t_b} f(t)\delta(t-T)dt = f(T) 
+    \int_{t_a}^{t_b} \delta(t-T)dt = 1 \hspace{10px} \int_{t_a}^{t_b} f(t)\delta(t-T)dt = f(T)
 \end{displaymath}
 Introduciamo le derivate generalizzate di $\delta(t)$:
 \begin{displaymath}
@@ -403,7 +403,7 @@ Questo metodo si può estendere per mostrare il significato di $\delta^{(i)} (t)
 Ipotizziamo $f \in C_p^\infty(\mathbb{R})$ e sia $t=0$ l'unico istante di discontinuità:
 \begin{displaymath}
     g(t) := \begin{cases}
-        f(t) \textrm{ per } t<0\\
+        f(t) \textrm{ per } t<0 \\
         f(t)-(f_+ - f_-) \textrm{ per }t\ge0
     \end{cases}
     g(t) \in C_p^{0, \infty}
@@ -419,25 +419,25 @@ Derivando in senso usuale otteniamo $Df(t) = Dg(t) \forall t \neq 0$. Assumiamo 
 \end{displaymath}
 Ossia, derivata gen. di ordine 1 $=$ funzione discontinua $+$ funzione impulsiva (di ordine 0). La funzione discontinua $Df(t^+)$ può essere scomposta nella somma di una funzione continua più una funzione a gradino:
 \begin{center}
-    derivata gen. di ordine 1 $=$ f. continua $+$ f. a gradino $+$ f. impulsiva di ordine 0. 
+    derivata gen. di ordine 1 $=$ f. continua $+$ f. a gradino $+$ f. impulsiva di ordine 0.
 \end{center}
 Applicando la derivata generalizzata alla relazione che esprime $D^*f(t)$, otteniamo
 \begin{displaymath}
     D^{*2} f(t) = Dg_1(t^+) + (Df_+ - Df_-)\delta(t) + (f_+ - f_-)\delta^{(1)}(t)
 \end{displaymath}
-Iterando il tutto per generalizzare, otterremo 
+Iterando il tutto per generalizzare, otterremo
 \begin{displaymath}
     D^{*n} f(t) = D^n f(t^+) + (D^{n-1} f_+ - D^{n-1} f_-) \delta(t)+...+(f_+ - f_-)\delta^{(n-1)}(t)
 \end{displaymath}
 Che, con $t<0$ o $t>0$ è $D^{*n} f(t) = D^n f(t)$, mentre con $t=0$ è $D^{*n} f(0) = (D^{n-1} f_+ - D^{n-1} f_-) \delta(0) + ... + (f_+-f_-)\delta^{(n-1)}(0)$.
 Più in generale: $f \in C_p^\infty (\mathbb{R})$ con $t_1,t_2,...$ istanti di possibile discontinuita:
 \begin{displaymath}
-D^{*n} f(t) = D^n f(t^+)+\end{displaymath}\begin{displaymath}
-\left(D^{n-1}(t_1^+) - D^{n-1}(t_1^-)\right)\delta(t-t_1)+...+\left(f(t_1^+)-f(t_1^-)\right)\delta^{(n-1)}(t-t_1)+\end{displaymath}\begin{displaymath}
-\left(D^{n-1}(t_2^+) - D^{n-1}(t_2^-)\right)\delta(t-t_2)+...+\left(f(t_2^+)-f(t_2^-)\right)\delta^{(n-1)}(t-t_2)+\dots
+    D^{*n} f(t) = D^n f(t^+)+\end{displaymath}\begin{displaymath}
+    \left(D^{n-1}(t_1^+) - D^{n-1}(t_1^-)\right)\delta(t-t_1)+...+\left(f(t_1^+)-f(t_1^-)\right)\delta^{(n-1)}(t-t_1)+\end{displaymath}\begin{displaymath}
+    \left(D^{n-1}(t_2^+) - D^{n-1}(t_2^-)\right)\delta(t-t_2)+...+\left(f(t_2^+)-f(t_2^-)\right)\delta^{(n-1)}(t-t_2)+\dots
 \end{displaymath}
 \subsection{Principio di identità delle funzioni impulsive}
-Le funzioni impulsive 
+Le funzioni impulsive
 \begin{displaymath}
     c_{-1} + c_0 \delta(0) + c_1 \delta^{(1)}(0)+\dots+c_k\delta^{(k)}(0)
 \end{displaymath}
@@ -452,7 +452,7 @@ Ritornando all'esempio iniziale, quindi, l'eq. differenziale di $\Sigma$ interpr
 \end{displaymath}
 deve essere soddisfatta per ogni $t \in \mathbb{R}$ compresi gli istanti di discontinuità.
 \subsection{Insieme dei behaviors}
-Dato un insieme dinamico $\Sigma$ descritto dall'eq. differenziale 
+Dato un insieme dinamico $\Sigma$ descritto dall'eq. differenziale
 \begin{displaymath}
     \sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u
 \end{displaymath}
@@ -491,17 +491,17 @@ si definisce estensione impulsiva dei behaviors o \textbf{behavior esteso}
 \begin{displaymath}
     \mathcal{B}^* := \left\{(u,y) \in C_p^\infty (\mathbb{R})^* \times C_p^\infty (\mathbb{R})^* : \sum_{i=0}^n a_i D^{*i} y = \sum_{i=0}^m b_i D^{*i} u\right\}
 \end{displaymath}
-Ancora l'equazione differenziale è soddisfatta in senso distribuzionale per ogni $t \in \mathbb{R}$. 
+Ancora l'equazione differenziale è soddisfatta in senso distribuzionale per ogni $t \in \mathbb{R}$.
 \begin{displaymath}
     \mathcal{B} \subset \mathcal{B}^*
 \end{displaymath}
 \subsubsection{Proprietà}
 \begin{itemize}
     \item Sia $(u,y)\in \mathcal{B}^*$, segue $(D^*u, D^*y)\in \mathcal{B}^*$.
-    \item Proprietà della coppia azione forzante-risposta forzata: sia $(u,y) \in \mathcal{B}^*$ con $u(t)$ azione forzante e $y(t)$ risposta forzata. Segue 
-    \begin{displaymath}
-        \left(\int_{0-}^t u(v) dv,\int_{0-}^t y(v) dv\right) \in \mathcal{B}^*
-    \end{displaymath}
+    \item Proprietà della coppia azione forzante-risposta forzata: sia $(u,y) \in \mathcal{B}^*$ con $u(t)$ azione forzante e $y(t)$ risposta forzata. Segue
+          \begin{displaymath}
+              \left(\int_{0-}^t u(v) dv,\int_{0-}^t y(v) dv\right) \in \mathcal{B}^*
+          \end{displaymath}
 \end{itemize}
 \subsection{Il problema fondamentale dell'analisi del dominio nel tempo di un sistema $\Sigma$}
 Note le condizioni iniziali al tempo $0-$  $y_-, Dy_-,...,D^{n-1}y_-$ e $u_-,Du_-,\dots,D^{m-1}u_-$ e l'azione forzante $u(t), t\ge0$, vogliamo determinare la risposta $y(t), t\ge0$.
@@ -536,7 +536,7 @@ Dall'equazione differenziale otteniamo $K=\frac{b_0}{a_0} \rightarrow K=G(0)$.
 \subsubsection{Polinomio caratteristico di $\Sigma$}
 Dato il sistema $\Sigma$ descritto dall'eq. differenziale $\sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u$, il polinomio $a(s)= \sum_{i=0}^n a_i s^i$ è detto polinomio caratteristico di $\Sigma$. È utile notare che esso è il polinomio a denominatore della funzione di trasferimento.
 \subsubsection{Poli e zeri}
-I poli e zeri di $\Sigma$ sono i poli e gli zeri della funzione di trasferimento. 
+I poli e zeri di $\Sigma$ sono i poli e gli zeri della funzione di trasferimento.
 \subsubsection{Modi del sistema dinamico $\Sigma$}
 I \textbf{modi} sono le funzioni  "tipiche" associate ai poli di $\Sigma$ secondo la regola:
 \begin{center}
@@ -547,7 +547,7 @@ I \textbf{modi} sono le funzioni  "tipiche" associate ai poli di $\Sigma$ second
 \end{center}
 
 \subsubsection{Risposta libera e modi di $\Sigma$}
-Sia $\Sigma$ un sistema per il quale i poli coincidono con le radici del polinomio caratteristico ($a(s)$ e $b(s)$ coprimi fra loro). Allora la risposta libera è una combinazione lineare dei suoi modi. 
+Sia $\Sigma$ un sistema per il quale i poli coincidono con le radici del polinomio caratteristico ($a(s)$ e $b(s)$ coprimi fra loro). Allora la risposta libera è una combinazione lineare dei suoi modi.
 \subsubsection{Razionalità}
 Non tutti i sistemi dinamici lineari e stazionari sono caratterizzati da funzioni di trasferimento razionali. Un esempio è il ritardo finito.
 \subsubsection{Segnali tipici per l'ingresso di $\Sigma$}
@@ -559,7 +559,7 @@ Alcuni segnali tipici di ingresso:
     \item $\frac{1}{2}t^2 \cdot 1(t)$ parabola unitaria: $\mathcal{L}\left[\frac{1}{2}t^2 \cdot 1(t)\right] = \frac{1}{s^3}$
 \end{itemize}
 \subsubsection{Risposta canonica}
-La risposta canonica è la risposta forzata di $\Sigma$ a un segnale tipico di ingresso. Quelle usualmente adottate sono $g(t)$, la risposta all'impulso, detta anche \textbf{risposta impulsiva}, e $g_s(t)$, la risposta al gradino $1(t)$ detta \textbf{risposta indiciale}. Sappiamo inoltre che 
+La risposta canonica è la risposta forzata di $\Sigma$ a un segnale tipico di ingresso. Quelle usualmente adottate sono $g(t)$, la risposta all'impulso, detta anche \textbf{risposta impulsiva}, e $g_s(t)$, la risposta al gradino $1(t)$ detta \textbf{risposta indiciale}. Sappiamo inoltre che
 \begin{displaymath}
     g(t) = \mathcal{L}^{-1}[G(s)] \hspace{10px} g_s(t) = \mathcal{L}^{-1}\left[\frac{1}{s}G(s)\right]
 \end{displaymath}
@@ -569,7 +569,7 @@ Una proprietà interessante è che
 \end{displaymath}
 Per i sistemi strettamente propri, $g(t) = Dg_s(t^+)$.
 \subsubsection{Integrali di Vaschy}
-Nota la risposta al gradino $g_s(t)$, la risposta forzata $y_{for} (t), t\ge0$ effetto dell'azione forzante $u(t), t\ge0$ è determinabile come 
+Nota la risposta al gradino $g_s(t)$, la risposta forzata $y_{for} (t), t\ge0$ effetto dell'azione forzante $u(t), t\ge0$ è determinabile come
 \begin{displaymath}
     y_{for}(t) = \int_0^t u' (v) g_s(t-v) dv + u(0+)g_s(t)
 \end{displaymath}
@@ -577,7 +577,7 @@ Nota la risposta al gradino $g_s(t)$, la risposta forzata $y_{for} (t), t\ge0$ e
     y_{for}(t) = \int_0^t  g_s(v) u'(t-v) dv + u(0+)g_s(t)
 \end{displaymath}
 \section{Sistemi dinamici elementari}
-Con questa lezione ci poniamo due obiettivi: studiare le caratteristiche dei sistemi lineari più semplici (primo ordine con grado relativo uno e secondo ordine con grado relativo due) e semplificare i sistemi di più complessi comparandoli a sistemi di secondo ordine. 
+Con questa lezione ci poniamo due obiettivi: studiare le caratteristiche dei sistemi lineari più semplici (primo ordine con grado relativo uno e secondo ordine con grado relativo due) e semplificare i sistemi di più complessi comparandoli a sistemi di secondo ordine.
 \subsection{Sistemi del primo ordine (strettamente propri)}
 Un sistema del primo ordine strettamente proprio è definito da $G(s)=\frac{1}{1+\tau s}$ (guadagno statico normalizzato a 1), equazione differenziale $\tau Dy + y = u$ con $\tau$ costante di tempo ($>0$). Ha un polo ($-\frac{1}{\tau}$) e un modo ($e^{-\frac{1}{\tau}t}$). Per determinare la risposta al gradino unitario $g_s(t)$ svolgiamo l'antitrasformata:
 \begin{displaymath}
@@ -589,7 +589,7 @@ Spesso la risposta al gradino unitario di un sistema dinamico generico ha un and
     \item $S$ massima sovraelongazione (in \% del valore di regime)
     \item $T_r$ tempo di ritardo
     \item $T_s$ tempo di salita
-    \item $T_m$ istante di massima sovraelongazione 
+    \item $T_m$ istante di massima sovraelongazione
     \item $T_a$ tempo di assestamento $inf\left\{T>0: |g_s(t)-y_{regime}|\le 0,05 y_{regime} \forall t \ge T\right\}$
 \end{itemize}
 \subsection{Sistemi del secondo ordine (senza zeri)}
@@ -623,14 +623,14 @@ I tempi di asservimento e salita, invece:
 \end{displaymath}
 Com'è evidente, la seconda è approssimata, frutto di interpolazione.
 \subsection{Poli dominanti di un sistema generico}
-Un sistema $\Sigma$ generico con funzione di trasferimento $G(s)=\frac{b(s)}{a(s)}$, con n poli e $m$ zeri, tutti i poli hanno parte reale negativa (i modi convergono a zero per $t\rightarrow+\infty$). Definiamo i \textbf{poli dominanti} come i poli (normalmente una coppia) non soggetti a quasi cancellazione polo-zero, più vicini all'asse immaginario. La risposta al gradino unitario dipende approssimativamente dai soli poli dominanti: se i poli dominanti sono complessi coniugati, i parametri della risposta $S, T_a, T_s$ sono determinabili approssimativamente dalle relazioni per i sistemi di ordine due. Bisogna però fare attenzione: spesso può essere un'approssimazione abbondante, e non sempre è possibile individuare un insieme significativo di poli dominanti. 
+Un sistema $\Sigma$ generico con funzione di trasferimento $G(s)=\frac{b(s)}{a(s)}$, con n poli e $m$ zeri, tutti i poli hanno parte reale negativa (i modi convergono a zero per $t\rightarrow+\infty$). Definiamo i \textbf{poli dominanti} come i poli (normalmente una coppia) non soggetti a quasi cancellazione polo-zero, più vicini all'asse immaginario. La risposta al gradino unitario dipende approssimativamente dai soli poli dominanti: se i poli dominanti sono complessi coniugati, i parametri della risposta $S, T_a, T_s$ sono determinabili approssimativamente dalle relazioni per i sistemi di ordine due. Bisogna però fare attenzione: spesso può essere un'approssimazione abbondante, e non sempre è possibile individuare un insieme significativo di poli dominanti.
 \subsection{Specifiche sulla risposta al gradino per un sistema di controllo}
 Siamo ora in grado di poter definire delle specifiche sulla risposta al gradino grazie ai parametri definiti: imponiamo infatti le specifiche $S \le S_{max}$ e $T_a \le T_{a-max}$, ottenendo che i poli $-\delta\omega_n \pm j\omega_n \sqrt{1-\delta^2}$ devono appartenere ad un cono troncato.
 
 \section{La stabilità dei sistemi dinamici}
 \subsection{Stabilità alle perturbazioni}
 Consideriamo un sistema dinamico $\Sigma$ nella solita forma $\sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u$ e andiamo ad analizzarne i punti di equilibrio, ossia quei valori costanti di ingresso/uscita che si mantengono inalterati nel tempo. Andiamo quindi ad analizzare una coppia di valori $u_c, y_c$ devono rispettare la relazione $y_c = G(0)u_c$. Possiamo quindi mettere i punti a grafico, che evidentemente staranno su una retta con pendenza data dal guadagno statico $\frac{b_0}{a_0}$.
-Introduciamo il concetto di stabilità. Per semplicità ci concentreremo solo sul punto di equilibrio che sta nell'origine. Ipotizziamo anche che $a(s)$ e $b(s)$ siano coprimi (non hanno radici in comune). Esaminiamo una perturbazione alla condizione di equilibrio, ad esempio introducendo un segnale di ingresso o modificando l'uscita nell'intervallo $[t_0,0)$. 
+Introduciamo il concetto di stabilità. Per semplicità ci concentreremo solo sul punto di equilibrio che sta nell'origine. Ipotizziamo anche che $a(s)$ e $b(s)$ siano coprimi (non hanno radici in comune). Esaminiamo una perturbazione alla condizione di equilibrio, ad esempio introducendo un segnale di ingresso o modificando l'uscita nell'intervallo $[t_0,0)$.
 Distinguiamo tra tre tipologie di risposta a questa condizione: instabilità, stabilità semplice, stabilità asintotica. Formalizziamo la perturbazione come
 \begin{displaymath}
     u(t) = 0 \textrm{ per }t<t_0, u(t) \neq 0 \textrm{ per }t\in[t_0, 0), u(t)=0 \textrm{ per }t\ge0
@@ -645,8 +645,8 @@ Torniamo alla classificazione precedente:
     \item $y_{lib}(t)$ non è limitata su $[0,+\infty)$ punto di equilibrio \textbf{instabile}
     \item Se è stabile e convergente a $0$ per $t\rightarrow+\infty$ punto di equilibrio \textbf{asintoticamente stabile}
     \item È \textbf{semplicemente stabile} se è stabile ed esiste una perturbazione per la quale \begin{displaymath}
-        lim_{t\rightarrow+\infty}y_{lib}(t)=y_\infty \neq 0 \vee \left\{\textrm{non esiste} lim_{t\rightarrow+\infty} y_{lib}(t)\right\}
-    \end{displaymath} 
+              lim_{t\rightarrow+\infty}y_{lib}(t)=y_\infty \neq 0 \vee \left\{\textrm{non esiste} lim_{t\rightarrow+\infty} y_{lib}(t)\right\}
+          \end{displaymath}
 \end{itemize}
 \begin{center}
     Per il sistema lineare $\Sigma$, il comportamento della risposta libera a seguito di perturbazioni su di un punto, rimane il medesimo per tutti gli altri punti. Possiamo quindi parlare di stabilità del sistema piuttosto che del singolo punto.
@@ -656,7 +656,7 @@ La stabilità è strettamente legata ai poli del sistema. Consideriamo un sistem
 \begin{itemize}
     \item $\Sigma$ è \textbf{stabile} se e solo se tutti i poli hanno parte reale non positiva e gli eventuali poli puramente immaginari sono semplici
     \item $\Sigma$ è \textbf{asintoticamente stabile} se e solo se tutti i suoi poli hanno parte reale negativa
-    \item $\Sigma$ è \textbf{semplicemente stabile} se e solo se tutti i poli hanno parte reale non positiva e quelli puramente immaginari (che devono esistere, al massimo è $s=0$) sono semplici 
+    \item $\Sigma$ è \textbf{semplicemente stabile} se e solo se tutti i poli hanno parte reale non positiva e quelli puramente immaginari (che devono esistere, al massimo è $s=0$) sono semplici
     \item $\Sigma$ è \textbf{instabile} se e solo se esiste almeno un polo a parte reale positiva o un polo puramente immaginario con molteplicità maggiore di 1.
 \end{itemize}
 \subsection{Stabilità bounded-input bounded-output}
@@ -665,13 +665,13 @@ La cosiddetta \textbf{stabilità BIBO} è così definita:
     $\Sigma$ è BIBO stabile se per ogni azione forzante limitata la corrispondente risposta forzata è limitata.
 \end{center}
 Formalmente, è BIBO stabile se per ogni azione forzante la cui norma infinito $||u(t)||_\infty$ sia $<+\infty$, la norma infinito della risposta forzata $||y(t)||_\infty$ generata sia $<+\infty$.
-Grazie a un teorema, possiamo affermare che $\Sigma$ è BIBO stabile se e solo se 
+Grazie a un teorema, possiamo affermare che $\Sigma$ è BIBO stabile se e solo se
 \begin{displaymath}
     \int_0^{+\infty} |g(\tau)|d\tau < +\infty
 \end{displaymath}
 Un altro teorema utile è il seguente. Assumiamo $a(s)$ e $b(s)$ coprimi. Vale la seguente equivalenza:
 \begin{center}
-    Il sistema $\Sigma$ è BIBO stabile se e solo se $\Sigma$ è asintoticamente stabile. 
+    Il sistema $\Sigma$ è BIBO stabile se e solo se $\Sigma$ è asintoticamente stabile.
 \end{center}
 I due concetti vengono spesso utilizzati equivalentemente.
 \subsection{Criterio di Routh}
@@ -683,32 +683,32 @@ Vediamo una prima proprietà, ricordando anzitutto cos'è un polinomio di Hurwit
 È possibile determinare il segno delle radici di $a(s)$ attraverso una \textbf{tabella di Routh}, senza doverle effettivamente calcolare. La tabella è costituita da $n-1$ righe, calcolate a ritroso. Le prime due righe contengono i coefficienti alternati del polinomio $a(s)$. In assenza di abbastanza coefficienti, riempiamo con 0. A questo punto, la terza riga viene calcolata a partire dalle due righe superiori. La quarta si baserà anch'essa sulle due righe superiori, a ritroso fino al calcolo di $\gamma_{n,1}$. Per calcolare i coefficienti delle righe dopo la seconda:
 \begin{displaymath}
     y_{k,j}=-\frac{\begin{vmatrix}
-        \gamma_{k-2,1} & \gamma_{k-2,j+1}\\
-        \gamma_{k-1,1} & \gamma_{k-1,j+1}
-    \end{vmatrix}}{\gamma_{k-1,1}}
+            \gamma_{k-2,1} & \gamma_{k-2,j+1} \\
+            \gamma_{k-1,1} & \gamma_{k-1,j+1}
+        \end{vmatrix}}{\gamma_{k-1,1}}
     = \frac{\gamma_{k-1,1}\gamma_{k-2,j+1} - \gamma_{k-2,1}\gamma_{k-1,j+1}}{\gamma_{k-1,1}}
 \end{displaymath}
-La riga finisce quando il determinante è 0. 
+La riga finisce quando il determinante è 0.
 \subsubsection{Teorema di Routh}
-Per applicare il criterio, andiamo ad esaminare la prima colonna, osservando le variazioni di segno nella colonna. Determiniamo il numero di variazioni/permanenze, che sommate daranno $n$. 
+Per applicare il criterio, andiamo ad esaminare la prima colonna, osservando le variazioni di segno nella colonna. Determiniamo il numero di variazioni/permanenze, che sommate daranno $n$.
 Assumiamo che la tabella di Routh possa essere completata (assenza di singolarità). Allora, ad ogni variazione di segno corrisponde una radice a parte reale positiva, ad ogni permanenza corrisponde una radice a parte reale negativa.
 \subsubsection{Criterio di Routh}
-Il polinomio $a(s)$ è hurwitziano se e solo se l'associata tabella di Routh può essere completata (con l'algoritmo base) e presenta nella prima colonna solo permanenze di segno. 
+Il polinomio $a(s)$ è hurwitziano se e solo se l'associata tabella di Routh può essere completata (con l'algoritmo base) e presenta nella prima colonna solo permanenze di segno.
 \subsubsection{Proprietà della tabella}
-I termini di una riga possono essere moltiplicati tutti per uno stesso coefficiente senza che ciò modifichi le variazioni/permanenze di segno della prima colonna. 
+I termini di una riga possono essere moltiplicati tutti per uno stesso coefficiente senza che ciò modifichi le variazioni/permanenze di segno della prima colonna.
 \subsubsection{Singolarità della tabella}
 Distinguiamo due tipi di singolarità possibili:
 \begin{enumerate}
-    \item Il primo elemento di una riga è zero 
+    \item Il primo elemento di una riga è zero
     \item Tutti gli elementi di una riga sono nulli
 \end{enumerate}
-Esistono metodi ad hoc per risolvere queste singolarità. 
-\paragraph{Prosecuzione della tabella nel caso 1} Per il primo tipo di singolarità, citiamo due metodi: 
+Esistono metodi ad hoc per risolvere queste singolarità.
+\paragraph{Prosecuzione della tabella nel caso 1} Per il primo tipo di singolarità, citiamo due metodi:
 \begin{enumerate}
     \item Metodo $\epsilon$, obsoleto perché non sempre risolutivo e complesso: inserire un numero arbitrario $\epsilon$ sullo 0
     \item Metodo di Benidir-Picinbono: algoritmicamente semplice e sempre risolutivo
 \end{enumerate}
-Vediamo il secondo: ogni riga non nulla che inizia con $p$ zeri viene sommata con la riga ottenuta moltiplicandola per $-1^p$ e traslandola verso sinistra di $p$ posizioni. 
+Vediamo il secondo: ogni riga non nulla che inizia con $p$ zeri viene sommata con la riga ottenuta moltiplicandola per $-1^p$ e traslandola verso sinistra di $p$ posizioni.
 0\paragraph{Prosecuzione della tabella nel caso 2} Questo accade sempre in una riga dispari: il polinomio non ha radici nell'origine ($a_0 \neq 0$). Introduciamo un polinomio ausiliario $\beta$ ottenuto riportando le potenze pari di $s$:
 \begin{displaymath}
     \beta(s) := \gamma_{n-2i,1}s^{2i}+\gamma_{n-2i,2}s^{2i-2}+\gamma_{n-2i,3}s^{2i-4}+\dots+\gamma_{n-2i,i}s^{2}+\gamma_{n-2i,i+1}
@@ -716,8 +716,8 @@ Vediamo il secondo: ogni riga non nulla che inizia con $p$ zeri viene sommata co
 L'equazione ausiliaria è quindi $\beta(s) = 0$.
 Il polinomio ausiliario $\beta(s)$ divide $a(s)$. Esiste quindi un polinomio $a(s)$ tale che $a(s) = \alpha(s)\beta(s)$. Inoltre, la prima parte di tabella dà informazioni sul segno delle radici di $\alpha(s)$. Enunciamo anche la proprietà di simmetria delle radici del polinomio ausiliario: queste radici sono disposte simmetricamente rispetto all'origine del piano complesso. Se ad esempio avessi una radice positiva in $+3$, il polinomio ausiliario avrà radice in $-3$. Il numero di radici a parte reale positiva di $\beta(s)$ sarà quindi uguale al suo numero di radici a parte reale negativa. Può anche presentare radici puramente immaginarie. Come proseguire la costruzione della tabella?
 \begin{enumerate}
-    \item Si fa la derivata del polinomio ausiliario 
-    \item Sostituisco gli zeri della riga nulla coi coefficienti del polinomio ausiliario derivato 
+    \item Si fa la derivata del polinomio ausiliario
+    \item Sostituisco gli zeri della riga nulla coi coefficienti del polinomio ausiliario derivato
     \item Nel conteggio, le variazioni avranno lo stesso significato (radice a parte reale positiva), mentre le permanenze potranno essere associate a radici a parte reale negativa o radici puramente immaginaria.
 \end{enumerate}
 Insomma: \textbf{la simmetria delle radici di $\beta(s)$ permette di stabilire il segno della parte reale di tutte le radici}.
@@ -737,17 +737,17 @@ Sia $\Sigma$ un sistema asintoticamente stabile con f.d.t. $G(s)$ razionale. La 
 Ovvero coincide con la funzione di trasferimento $G(s)$, valutata in $s=j\omega$.
 Alcune considerazioni necessarie:
 \begin{itemize}
-    \item La funzione di risposta armonica è un modello matematico alternativo all'eq. diff., f.d.t\dots 
+    \item La funzione di risposta armonica è un modello matematico alternativo all'eq. diff., f.d.t\dots
     \item Può essere determinata sperimentalmente
     \item Sfruttando la relazione $F(\omega) = G(j\omega)$ la f. di risposta armonica è definibile anche per sistemi non asintoticamente stabili: in questo caso la risposta armonica descrive una soluzione instabile delle armoniche nel sistema.
     \item Relazioni fra la risposta armonica $G(j\omega)$ e la risposta all'impulso $g(t)$:\begin{displaymath}
-        \begin{cases}
-            G(j\omega) = \int_{0-}^{+\infty} g(t)e^{-j\omega t}dt \\
-            g(t) = \frac{1}{2\pi}\int_{-\infty}^{+\infty} G(j\omega)e^{j\omega t}d\omega
-        \end{cases}
-    \end{displaymath}
-    Queste sono trasformate di Fourier. La prima è ottenibile dalla definizione di trasformata di Laplace, sostituendo $j\omega$ ad $s$. La seconda si ricava dalla formula di antitrasformazione di Laplace, facendo un integrale di linea. 
-    \item Ponendo $G(j\omega) = R(\omega) + jI\omega$ (parte reale ed immaginaria) 
+              \begin{cases}
+                  G(j\omega) = \int_{0-}^{+\infty} g(t)e^{-j\omega t}dt \\
+                  g(t) = \frac{1}{2\pi}\int_{-\infty}^{+\infty} G(j\omega)e^{j\omega t}d\omega
+              \end{cases}
+          \end{displaymath}
+          Queste sono trasformate di Fourier. La prima è ottenibile dalla definizione di trasformata di Laplace, sostituendo $j\omega$ ad $s$. La seconda si ricava dalla formula di antitrasformazione di Laplace, facendo un integrale di linea.
+    \item Ponendo $G(j\omega) = R(\omega) + jI\omega$ (parte reale ed immaginaria)
     \item Rappresentazioni grafiche della funzione di risposta armonica: diagrammi di Bode, diagrammi di Nyquist (polari), diagrammi di Nichols.
 \end{itemize}
 
@@ -755,12 +755,12 @@ Alcune considerazioni necessarie:
 Abbiamo quindi individuato tre guadagni relativi al sistema stesso:
 \begin{itemize}
     \item Funzione di trasferimento $G(s)$ (guadagno dinamico)
-    \item Ponendo $s:=j\omega$, otteniamo la funzione di risposta armonica $\rightarrow G(j\omega)$ o risposta in frequenza 
+    \item Ponendo $s:=j\omega$, otteniamo la funzione di risposta armonica $\rightarrow G(j\omega)$ o risposta in frequenza
     \item Ponendo $s:=0$ otteniamo il guadagno statico $G(0)$
 \end{itemize}
 \subsection{I diagrammi di Bode}
 I \textbf{diagrammi di Bode} sono diagrammi (cartesiani) logaritmici della risposta armonica. In particolare, riportiamo dalla rappresentazione polare di $G(j\omega)$ e applichiamo il logaritmo naturale. Spesso si indicano parte reale e immaginaria come $\alpha, beta$. Andremo quindi a mettere a grafico il \textbf{diagramma delle ampiezze}, che riporta il logaritmo del modulo della r.a. in funzione del logaritmo della pulsazione $\omega$, ed il \textbf{diagramma delle fasi} che riporta l'argomento della r.a. in funzione del logaritmo della pulsazione $\omega$.
-Usualmente, nelle ascisse, vengono riportati direttamente i valori delle pulsazioni ed i moduli in scala logaritmica. Può capitare che nel diagramma dei moduli, le ordinate (modulo della r.a.) siano espresse in decibel. La scala logaritmica ha diversi vantaggi: è possibile rappresentare grandezze variabili in campi molto estesi, è possibile sommare i diagrammi dei sistemi in cascata, ed è anche possibile costruire i diagrammi come somme di diagrammi elementari. 
+Usualmente, nelle ascisse, vengono riportati direttamente i valori delle pulsazioni ed i moduli in scala logaritmica. Può capitare che nel diagramma dei moduli, le ordinate (modulo della r.a.) siano espresse in decibel. La scala logaritmica ha diversi vantaggi: è possibile rappresentare grandezze variabili in campi molto estesi, è possibile sommare i diagrammi dei sistemi in cascata, ed è anche possibile costruire i diagrammi come somme di diagrammi elementari.
 \subsection{Rappresentazioni e parametri della f.d.t.}
 Una f.d.t. razionale $G(s)=\frac{b(s)}{a(s)}$ scrivibile nella \textbf{forma standard con polinomi monici}:
 \begin{displaymath}
@@ -773,7 +773,7 @@ Con $K_1$ costante di trasferimento. A partire dalla seconda forma possiamo fare
 \begin{displaymath}
     G(s)=K_1\frac{(s-z_1)...(s-z_m)}{s^h(s-p_{h+1})...(s-p_n)}
 \end{displaymath}
-Fatto ciò possiamo separare i poli/zeri fra reali e complessi coniugati. Otteniamo quindi 
+Fatto ciò possiamo separare i poli/zeri fra reali e complessi coniugati. Otteniamo quindi
 \begin{displaymath}
     G(s) = K_1\frac{\left(s+\frac{1}{\tau'_1}\right)\left(s+\frac{1}{\tau'_2}\right)\dots(s^2+2\delta'_1\omega'_{n1}s + \omega^{'2}_{n1})(s^2+2\delta'_2\omega'_{n2}s + \omega^{'2}_{n2})}{s^h\left(s+\frac{1}{\tau_1}\right)\left(s+\frac{1}{\tau_2}\right)\dots(s^2+2\delta'_1\omega'_{n1}s + \omega^{'2}_{n1})(s^2+2\delta'_2\omega'_{n2}s + \omega^{'2}_{n2})}
 \end{displaymath}
@@ -791,9 +791,9 @@ Con $K$ costante di guadagno, che in base ad $h$ è:
     \item $h=1$ $K$ è guadagno di velocità
     \item $h=2$ $K$ è guadagno di accelerazione
 \end{itemize}
-Sostituiamo ora $j\omega$ ad $s$ per trovare la risposta armonica con le costanti di tempo. 
+Sostituiamo ora $j\omega$ ad $s$ per trovare la risposta armonica con le costanti di tempo.
 \subsection{Diagrammi elementari}
-Vogliamo tracciare il diagramma di Bode partendo dai diagrammi elementari: $K, (j\omega)^{-h}, (1+\tau j \omega)^{\pm 1}$, $\left(1-\frac{\omega^2}{\omega^2_n}+2\delta \frac{j\omega}{\omega_n}\right)^{\pm1}$. Il $\pm1$ dipende da se si tratta di zeri complessi coniugati o poli complessi coniugati. 
+Vogliamo tracciare il diagramma di Bode partendo dai diagrammi elementari: $K, (j\omega)^{-h}, (1+\tau j \omega)^{\pm 1}$, $\left(1-\frac{\omega^2}{\omega^2_n}+2\delta \frac{j\omega}{\omega_n}\right)^{\pm1}$. Il $\pm1$ dipende da se si tratta di zeri complessi coniugati o poli complessi coniugati.
 Prima di ciò definiamo alcuni parametri caratteristici:
 \begin{itemize}
     \item Pulsazione di risonanza $\omega_R := arg max_{\omega \in \mathbb{R}_{\ge0}}|G(j\omega)|$
@@ -809,13 +809,13 @@ SLIDE C.
 Qui, $\frac{1}{\tau}$ è detta anche pulsazione d'angolo. Possiamo inoltre, nel diagramma delle fasi, tracciare la tangente del diagramma delle pulsazioni. Otteniamo così un segmento che si raccorda coi due tratti asintotici identificati da $\omega_a$ e $\omega_b$. Vogliamo quindi determinare i valori dei suddetti per poter tracciare il diagramma.
 Sappiamo che $\beta = -arctg \omega \tau$. Deriviamo ora $\beta$ rispetto al logaritmo naturale di $\omega$.
 \begin{displaymath}
-\frac{d\beta}{d(ln\omega)}|_{\omega=\omega_0} = -\frac{1}{2}
-\end{displaymath} 
-che è la pendenza della tangente. Otteniamo quindi che 
+    \frac{d\beta}{d(ln\omega)}|_{\omega=\omega_0} = -\frac{1}{2}
+\end{displaymath}
+che è la pendenza della tangente. Otteniamo quindi che
 \begin{displaymath}
     \frac{\pi/4}{ln\omega_0-ln\omega_a}=\frac{1}{2} \rightarrow ln\frac{\omega_0}{\omega_a} \rightarrow e^{\frac{\pi}{2}} \cong 4,81
 \end{displaymath}
-Sappiamo quindi che $\omega_a = \frac{\omega_0}{4,81}$ e $\omega_b = \omega_0 4,81$. I diagrammi di $G(j\omega) = q+j\omega\tau$ si ottengono per simmetria ribaltando i precedenti rispetto all'asse delle ascisse. 
+Sappiamo quindi che $\omega_a = \frac{\omega_0}{4,81}$ e $\omega_b = \omega_0 4,81$. I diagrammi di $G(j\omega) = q+j\omega\tau$ si ottengono per simmetria ribaltando i precedenti rispetto all'asse delle ascisse.
 SLIDE D.
 Per determinare il picco di risonanza $\omega_R$ sfruttiamo, solo quando $1-2\delta^2 >0$, $\omega_R = \omega_n\sqrt{1-2\delta^2}$. Quindi, inserendo il valore appena calcolato di $\omega_R$ in $M_R$:
 \begin{displaymath}
@@ -823,16 +823,16 @@ Per determinare il picco di risonanza $\omega_R$ sfruttiamo, solo quando $1-2\de
 \end{displaymath}
 \begin{displaymath}
     \begin{cases}
-        \delta \in \left(0,\frac{1}{\sqrt{2}}\right) \textrm{ c'è risonanza}\\
+        \delta \in \left(0,\frac{1}{\sqrt{2}}\right) \textrm{ c'è risonanza} \\
         \delta \in \left[\frac{1}{\sqrt{2}},1\right] \textrm{ non c'è risonanza}
     \end{cases}
 \end{displaymath}
 Possiamo anche fare un'altra osservazione:
 \begin{displaymath}
     \begin{cases}
-        \delta \in \left[0,\frac{1}{2}\right] \textrm{il d. }\alpha\textrm{ è tutto al di sopra del d. asintotico}\\
-        \delta \in \left(\frac{1}{2},\frac{1}{\sqrt{2}}\right) \textrm{il d. }\alpha\textrm{ intersexa l'asse delle pulsazioni a sinistra di }ln\omega_n(\omega_n)\\
-        \delta \in \left[\frac{1}{\sqrt{2}},1\right] \textrm{il d. }\alpha\textrm{ è tutto al di sotto del d. asintotico}\\
+        \delta \in \left[0,\frac{1}{2}\right] \textrm{il d. }\alpha\textrm{ è tutto al di sopra del d. asintotico}                                                 \\
+        \delta \in \left(\frac{1}{2},\frac{1}{\sqrt{2}}\right) \textrm{il d. }\alpha\textrm{ intersexa l'asse delle pulsazioni a sinistra di }ln\omega_n(\omega_n) \\
+        \delta \in \left[\frac{1}{\sqrt{2}},1\right] \textrm{il d. }\alpha\textrm{ è tutto al di sotto del d. asintotico}                                          \\
     \end{cases}
 \end{displaymath}
 Potremmo chiederci perché in $\delta=0$ il diagramma diverge. Questo succede perché esistono $c_1,c_2, \phi_1, \phi_2$ per cui otteniamo una risposta armonica con ampiezza divergente all'infinito $y(t)=c_1sen(\omega_nt+\phi_1)+c_2t(\omega_nt+\phi_2)$. Infine, calcoliamo la larghezza di banda:
@@ -844,29 +844,29 @@ Notiamo che i diagrammi di $G(j\omega) = 1-\frac{\omega^2}{\omega^2_n}+2\delta\f
 \subsection{I diagrammi di Nyquist}
 \subsubsection{Definizione}
 Vediamo ora un'altra rappresentazione grafica delle risposte armoniche.
-Definiamo subito un diagramma polare (di Nyquist) della risposta armonica $G(j\omega)$ o della f.d.t. $G(s)$ come la curva tracciata sul piano complesso dal vettore $G(j\omega)$ per $\omega$ che varia da $0$ a $+\infty$. 
+Definiamo subito un diagramma polare (di Nyquist) della risposta armonica $G(j\omega)$ o della f.d.t. $G(s)$ come la curva tracciata sul piano complesso dal vettore $G(j\omega)$ per $\omega$ che varia da $0$ a $+\infty$.
 Questi diagrammi sono utili per lo studio della stabilità, ad esempio tramite il criterio di Nyquist. Il tracciamento del diagramma può essere coadiuvato dal seguente procedimento grafico:
 \begin{displaymath}
     G(s)=K_1\frac{(s-z_1)}{(s-p_1)(s-p_2)(s-p_3)} \hspace{10px}G(j\omega) = K_1 \frac{(j\omega-z_1)}{(j\omega-p_1)(j\omega-p_2)(j\omega-p_3)}
 \end{displaymath}
 \begin{displaymath}
     |G(j\omega)| = |K_1|\frac{M_1}{M_2M_3M_4} \hspace{10px}argG(j\omega) = \begin{cases}
-    \varphi_1 - \varphi_2 - \varphi_3 - \varphi_4 \textrm{ se }K_1>0\\
-    \varphi_1 - \varphi_2 - \varphi_3 - \varphi_4 - \pi \textrm{ se }K_1<0
+        \varphi_1 - \varphi_2 - \varphi_3 - \varphi_4 \textrm{ se }K_1>0 \\
+        \varphi_1 - \varphi_2 - \varphi_3 - \varphi_4 - \pi \textrm{ se }K_1<0
     \end{cases}
 \end{displaymath}
 \subsubsection{Comportamenti importanti}
 Citiamo i comportamenti più importanti per il diagramma polare:
-\paragraph{Comportamento per $\omega\rightarrow+\infty$} Il diagramma polare di un sistema strettamente proprio termina (per $\omega\rightarrow+\infty$) sull'origine tangente ad uno degli assi coordinati. 
+\paragraph{Comportamento per $\omega\rightarrow+\infty$} Il diagramma polare di un sistema strettamente proprio termina (per $\omega\rightarrow+\infty$) sull'origine tangente ad uno degli assi coordinati.
 \paragraph{Comportamento per $\omega\rightarrow0+$, $\Sigma$ di tipo 0} Il diagramma polare di un sistema di tipo zero (non ha poli nell'origine) parte da $\omega=0$ dal punto dell'asse reale $G(j0)=K=K_1(b_0/a_0)$
-\paragraph{Comportamento per $\omega\rightarrow0+$, $\Sigma$ di tipo $\ge1$} 
-Si rappresenti $G(j\omega)$ con la forma standard con le costanti di tempo e sia $\tau_a := \sum_i \tau_i^{'} - \sum_i \tau_i + \sum_i 2\frac{\delta_i^{'}}{\omega_{ni}}$. Vale 
+\paragraph{Comportamento per $\omega\rightarrow0+$, $\Sigma$ di tipo $\ge1$}
+Si rappresenti $G(j\omega)$ con la forma standard con le costanti di tempo e sia $\tau_a := \sum_i \tau_i^{'} - \sum_i \tau_i + \sum_i 2\frac{\delta_i^{'}}{\omega_{ni}}$. Vale
 \begin{displaymath}
     lim_{g\rightarrow0+} G(j\omega) = K\frac{1+j\omega\tau_a}{(j\omega)^h}
 \end{displaymath}
 Otteniamo anche il seguente corollario:
 \paragraph{Comportamento asintotico del d.p. dei sistemi di tipo $h=1,2,3$}
-Dall'espressione precedente otteniamo che se $h=1$, 
+Dall'espressione precedente otteniamo che se $h=1$,
 \begin{displaymath}
     lim_{g\rightarrow0+} G(j\omega) = K\tau_a - j\frac{K}{\omega}
 \end{displaymath}
@@ -876,13 +876,13 @@ Se $h=2$, otteniamo:
     lim_{g\rightarrow0+} G(j\omega) = -\frac{K}{\omega^2} - j\frac{K\tau_a}{\omega}
 \end{displaymath}
 Osserviamo che la parte reale diverge ad infinito più velocemente della parte immaginaria. Questo risultato può essere interpretato come una curva parametrica, eliminando omega otteniamo che il d.p. parte adiacente ad un ramo della parabola di eq. $x=-\frac{1}{K\tau_a^2}y^2$.
-Infine, se $h=3$, vale 
+Infine, se $h=3$, vale
 \begin{displaymath}
     lim_{g\rightarrow0+} G(j\omega) = -\frac{K\tau_a}{\omega^2} + j\frac{K}{\omega^3}
 \end{displaymath}
 Notiamo che entrambe le componenti reali e immaginarie divergono ad infinito, con l'immaginaria che lo fa più velocemente, e individuiamo che il d.p. parte adiacente ad un ramo della curva cubica di eq. $y^2=-\frac{1}{K\tau_a^3}x^3$.
 \subsection{I sistemi a fase minima}
-Ci si accorge che per una significativa classe di sistemi, detti a fase minima, nella funzione di risposta armonica l'andamento del diagramma delle fasi è strettamente associato a quello delle ampiezze: se in una certa banda di frequenze l'ampiezza è costante, la fase tende ad essere nulla; una pendenza negativa del diagramma delle ampiezze è associata invece ad un ritardo di fase, una pendenza positiva ad un anticipo. 
+Ci si accorge che per una significativa classe di sistemi, detti a fase minima, nella funzione di risposta armonica l'andamento del diagramma delle fasi è strettamente associato a quello delle ampiezze: se in una certa banda di frequenze l'ampiezza è costante, la fase tende ad essere nulla; una pendenza negativa del diagramma delle ampiezze è associata invece ad un ritardo di fase, una pendenza positiva ad un anticipo.
 Questa constatazione è teorizzata nella \textbf{formula di Bode}. Prima di enunciarla, però, definiamo i sistemi a fase minima come:
 \begin{center}
     Consideriamo $\Sigma$ sistema lineare e stazionario con f.d.t. $G(s)$ e risposta armonica $G(j\omega)$. $\Sigma$ è detto a fase minima se il diagramma delle fasi $\beta=arg G(j\omega)$ è determinato univocamente, modulo $2\pi$, dal diagramma dei moduli $\alpha = ln|G(j\omega)|$ mediante la formula di Bode.
@@ -893,7 +893,7 @@ Ricordiamo che
 \begin{displaymath}
     \alpha := ln |G(j\omega)|, \beta := arg G(j\omega)
 \end{displaymath}
-Vogliamo trovare, una volta fissata una pulsazione $\omega_c$, il corrispondente argomento $\beta_c$. Introduciamo una variabile $u:=ln\frac{\omega}{\omega_c}=ln\omega-ln\omega_c$. Otteniamo infine 
+Vogliamo trovare, una volta fissata una pulsazione $\omega_c$, il corrispondente argomento $\beta_c$. Introduciamo una variabile $u:=ln\frac{\omega}{\omega_c}=ln\omega-ln\omega_c$. Otteniamo infine
 \begin{displaymath}
     \beta_c = \frac{1}{\pi} \sum_{-\infty}^{+\infty}\frac{d\alpha}{du}ln cotgh|\frac{u}{2}|du \textrm{ se }lim_{\rightarrow0}s^h G(s)>0
 \end{displaymath}
@@ -903,7 +903,7 @@ Vogliamo trovare, una volta fissata una pulsazione $\omega_c$, il corrispondente
 con $h$ tipo del sistema $\Sigma$, quindi $h=0$ se non vi sono poli né zeri nell'origine. $h>0$ se c'è un polo di molteplicità $h$ nell'origine, $h<0$ se c'è uno zero di molteplicità $|h|$ nell'origine.
 Approfondiamo il discorso della funzione peso che compare. Notiamo che su una pendenza pari a 1, l'integrale vale $\frac{\pi}{2}$, da cui la regola pratica: se $\frac{d\alpha}{du}$ è costante per due decadi di pulsazione centrate su $\omega_c$, allora $\beta_c \approx \left(\frac{d\alpha}{du}\right)\cdot \frac{\pi}{2}$.
 \subsection{Ritardi finiti}
-Un ritardo finito è una funzione trascendente che nei sistemi di controllo assume particolare importanza: vogliamo ora approssimarli. Il fatto che sia una funzione trascendente crea qualche difficoltà: per questo l'approssimazione risulta utile. Introduciamo l'approssimante di Padè di $e^{-t_0s}$ di ordine q come 
+Un ritardo finito è una funzione trascendente che nei sistemi di controllo assume particolare importanza: vogliamo ora approssimarli. Il fatto che sia una funzione trascendente crea qualche difficoltà: per questo l'approssimazione risulta utile. Introduciamo l'approssimante di Padè di $e^{-t_0s}$ di ordine q come
 \begin{displaymath}
     G_q(s;t_0) := \frac{\sum_{k=0}^q \frac{(sq-k)!q!}{(2q)!k!(q-k)!}(-1)^k t^k_0 s^k}{\sum_{k=0}^q \frac{(sq-k)!q!}{(2q)!k!(q-k)!} t^k_0 s^k}
 \end{displaymath}
@@ -911,12 +911,12 @@ Notiamo una proprietà: lo sviluppo in serie di McLaurin coincide con l'analogo 
 \begin{displaymath}
     e^{-t_0s} = 1- t_0s + \frac{t_0^2}{2!}s^2-\frac{t_0^3}{3!}s^3
 \end{displaymath}
-Calcolare l'approssimante del primo ordine è semplice: 
+Calcolare l'approssimante del primo ordine è semplice:
 \begin{displaymath}
     G_1(s;t_0) = \frac{1-\frac{t_0}{2}s}{1+\frac{t_0}{2}s}
 \end{displaymath}
 Notiamo una simmetria tra zeri e poli e una stabilità asintotica.
-L'approssimante di Padè del secondo ordine è invece 
+L'approssimante di Padè del secondo ordine è invece
 \begin{displaymath}
     G_2(s;t_0) = \frac{1-\frac{t_0}{2}s + \frac{t_0^2}{12}s^2}{1+\frac{t_0}{2}s + \frac{t_0^2}{12}s^2}
 \end{displaymath}
@@ -930,9 +930,9 @@ In generale è utile poter semplificare (ridurre) i blocchi tramite le cosiddett
     \item Riduzione di blocchi in parallelo $k=k_1+k_2$
     \item Scambio di giunzioni sommanti (proprietà commutativa)
     \item Spostamento di prelievo di segnale a monte di un blocco
-    \item Spostamento di prelievo di segnale a valle di un blocco 
-    \item Spostamento di giunzione sommante a monte di un blocco 
-    \item Spostamento di giunzione sommante a valle di un blocco 
+    \item Spostamento di prelievo di segnale a valle di un blocco
+    \item Spostamento di giunzione sommante a monte di un blocco
+    \item Spostamento di giunzione sommante a valle di un blocco
     \item Eliminazione di un anello
 \end{itemize}
 \subsection{Proprietà generale dei sistemi in retroazione}
@@ -944,23 +944,23 @@ Esiste una regola rapida per il calcolo della f.d.t. dei sistemi retroazionati (
 Consideriamo un sistema definito da $T(s)=\frac{G(s)}{1+G(s)H(s)}$. Studiamo vari casi:
 \begin{itemize}
     \item Variazione di un parametro nella catena diretta: $G(s)$ è in realtà $G(s;\alpha)$ con $\alpha=\alpha_0+\Delta\alpha$. Definiamo la sensibilità di T a variazioni di G come $\frac{\frac{\Delta T}{T(s;\alpha_0)}}{\frac{\Delta G}{G(s;\alpha_0)}}$. Otteniamo \begin{displaymath}
-        S_G^T=\frac{1}{1+G(s;\alpha_0)H(s)}
-    \end{displaymath} Quindi se il guadagno di anello è molto elevato, la var. relativa di T è molto più piccola della variazione relativa di G. Di conseguenza, un guadagno di anello elevato rende insensibile la f.d.t. del sistema retroazionato a variazioni della f.d.t. del sistema controllato. 
+              S_G^T=\frac{1}{1+G(s;\alpha_0)H(s)}
+          \end{displaymath} Quindi se il guadagno di anello è molto elevato, la var. relativa di T è molto più piccola della variazione relativa di G. Di conseguenza, un guadagno di anello elevato rende insensibile la f.d.t. del sistema retroazionato a variazioni della f.d.t. del sistema controllato.
     \item Variazione di un parametro nella catena di retroazione: $H(s)$ è in realtà $H(s;\beta)$ con $\beta = \beta_0+\Delta\beta$. Otteniamo $S_H^T = \frac{dT}{dH}|_{\beta=\beta_0}=G\frac{-G}{(1+GH)^2}\cdot\frac{H}{\frac{G}{1+GH}}$ e infine $S_H^T = -\frac{G(s)H(s;\beta_0)}{1+G(s)H(s;\beta_0)}$. Quindi se il guadagno di anello è elevato la variazione relativa di T è circa uguale (in modulo) alla variazione relativa di H. Di conseguenza, variazioni della f.d.t. nella catena di retroazione si riverberano senza attenuazione in variazioni della f.d.t. del sistema retroazionato.
 \end{itemize}
 \subsection{Attenuazione dei disturbi}
-Vediamo ora come può essere resa possibile un'attenuazione dei disturbi. Abbiamo per esempio un disturbo $D(s)$ su un sistema avente uscita normalmente uguale a $P(s)R(s)$. Vogliamo incrementare il rapporto segnale disturbo utlizzando un sistema retroazionato. A questo fine ipotizziamo che il disturbo sia indipendente da $R(s)$. Introduciamo un controllore $C(s)$. Per avere un confronto omogeneo si richiede $\frac{CP}{1+CPH} \approx P$, ossia che il sistema retroazionato non modifichi fortemente il comportamento. L'uscita determinata dal segnale utile è ora $P(s)R(s)$ mentre quella determinata dal disturbo è $\frac{P(s)}{1+C(s)P(s)H(s)}D(s)$, ottenendo un rapporto segnale disturbo pari a $\left(1+C(s)P(s)H(s)\right)\frac{R(s)}{D(s)}$. Quest'ultimo viene fortemente aumentato se nella banda di frequenze vale $|C(j\omega)P(j\omega)H(j\omega)|>>1$. In definitiva, se il guadagno di anello è elevato il rapporto segnale/disturbo si eleva all'incirca del medesimo fattore passando dallo schema in catena aperta a quello in catena chiusa. Quindi, a parità di segnale utile, il disturbo viene grandemente attenuato. 
+Vediamo ora come può essere resa possibile un'attenuazione dei disturbi. Abbiamo per esempio un disturbo $D(s)$ su un sistema avente uscita normalmente uguale a $P(s)R(s)$. Vogliamo incrementare il rapporto segnale disturbo utlizzando un sistema retroazionato. A questo fine ipotizziamo che il disturbo sia indipendente da $R(s)$. Introduciamo un controllore $C(s)$. Per avere un confronto omogeneo si richiede $\frac{CP}{1+CPH} \approx P$, ossia che il sistema retroazionato non modifichi fortemente il comportamento. L'uscita determinata dal segnale utile è ora $P(s)R(s)$ mentre quella determinata dal disturbo è $\frac{P(s)}{1+C(s)P(s)H(s)}D(s)$, ottenendo un rapporto segnale disturbo pari a $\left(1+C(s)P(s)H(s)\right)\frac{R(s)}{D(s)}$. Quest'ultimo viene fortemente aumentato se nella banda di frequenze vale $|C(j\omega)P(j\omega)H(j\omega)|>>1$. In definitiva, se il guadagno di anello è elevato il rapporto segnale/disturbo si eleva all'incirca del medesimo fattore passando dallo schema in catena aperta a quello in catena chiusa. Quindi, a parità di segnale utile, il disturbo viene grandemente attenuato.
 \subsection{Allargamento della banda passante}
 Ipotizziamo che $H(s) = h>0$. Significa quindi che la banda passante è infinita. Un guadagno di anello elevato implica un allargamento della banda passante. Sappiamo che \begin{displaymath}
     T(j\omega) = \frac{G(j\omega)}{1+hG(j\omega)}
 \end{displaymath}
-Quindi, se $h|G(j\omega) >> 1 \rightarrow T(j\omega) \approx 1/h$. 
+Quindi, se $h|G(j\omega) >> 1 \rightarrow T(j\omega) \approx 1/h$.
 Anche questo è un effetto benefico della retroazione. Possiamo esplicitare in termini quantitativi questo allargamento:
 \begin{displaymath}
     G(j\omega)=\frac{1}{1+\tau j \omega} \rightarrow \omega_T = \frac{1+h}{\tau}
 \end{displaymath}
 \subsection{Analisi a regime dei sistemi in retroazione}
-Vogliamo ora studiare l'errore di regolazione a regime in risposta a segnali tipici. Ipotizziamo un sistema asintoticamente stabile, e a retroazione unitaria (nessun blocco $H(s)$). I segnali tipici che consideriamo sono $r(t) \in \left\{r_0 1(t), r_0t1(t), r_0\frac{t^2}{2}1(t)\right\}$, quindi il gradino unitario, una rampa, una parabola (tutti caratterizzati da $r_0$). Sappiamo che $e(t) := r(t)-y(t)$ (errore a regime), ne calcoliamo la trasformata $E(s)=\frac{1}{1+G(s)}R(s)$ (catena diretta fratto guadagno di anello moltiplicato per la trasformata del segnale di ingresso). L'errore a regime è quindi $e_r := lim_{t\rightarrow\infty} e(t)$. Ricordiamo anche che $h$ è il tipo del sistema. 
+Vogliamo ora studiare l'errore di regolazione a regime in risposta a segnali tipici. Ipotizziamo un sistema asintoticamente stabile, e a retroazione unitaria (nessun blocco $H(s)$). I segnali tipici che consideriamo sono $r(t) \in \left\{r_0 1(t), r_0t1(t), r_0\frac{t^2}{2}1(t)\right\}$, quindi il gradino unitario, una rampa, una parabola (tutti caratterizzati da $r_0$). Sappiamo che $e(t) := r(t)-y(t)$ (errore a regime), ne calcoliamo la trasformata $E(s)=\frac{1}{1+G(s)}R(s)$ (catena diretta fratto guadagno di anello moltiplicato per la trasformata del segnale di ingresso). L'errore a regime è quindi $e_r := lim_{t\rightarrow\infty} e(t)$. Ricordiamo anche che $h$ è il tipo del sistema.
 \subsubsection{Gradino}
 Dopo un transitorio, l'uscita si stabilizza su un valore costante. Calcoliamo l'errore:
 \begin{displaymath}
@@ -968,7 +968,7 @@ Dopo un transitorio, l'uscita si stabilizza su un valore costante. Calcoliamo l'
 \end{displaymath}
 con $K_p := ilm_{s\rightarrow0}G(s)$ costante di posizione.
 \subsubsection{Rampa}
-Ora, abbiamo 
+Ora, abbiamo
 \begin{displaymath}
     r(t) = r_0 t1(t) \rightarrow R(s) = \frac{r_0}{s^2}
 \end{displaymath}
@@ -977,27 +977,27 @@ Ora, abbiamo
 \end{displaymath}
 con $K_v := lim_{s\rightarrow0}sG(s)$ costante di velocità.
 \subsubsection{Parabola}
-Abbiamo infine 
+Abbiamo infine
 \begin{displaymath}
     r(t) = r_0 \frac{t^2}{2}1(t) \rightarrow R(s)=\frac{r_0}{s^3}
 \end{displaymath}
 \begin{displaymath}
     e_r = \frac{r_0}{K_a}
 \end{displaymath}
-con $K_a := lim_{s\rightarrow0} s^2G(s)$ costante di accelerazione. 
+con $K_a := lim_{s\rightarrow0} s^2G(s)$ costante di accelerazione.
 \subsection{Errore a regime con retroazione non unitaria}
 Ipotizziamo ora che la retroazione non sia unitaria: la variabile controllata $y$ è in generale dimensionalmente diversa dal segnale di set-point $r$ e quindi occorre definire la condizione ideale di controllo:
 \begin{displaymath}
     y(t) \equiv K_c r(t)
 \end{displaymath}
-dove $K_c$ è detta costante di controllo o regolazione. Abbiamo quindi una variabile errore definita, ad esempio, come $e(t):=r(t) - \gamma y(t), \gamma=1/K_c$, e quindi $e(t) \equiv 0 \leftrightarrow y(t) \equiv K_cr(t)$. 
-Potremmo applicare il teorema del valore finale, ma ci conviene utilizzare i risultati ottenuti precedentemente trasformando il sistema in uno con retroazione unitaria, con guadagno dato da 
+dove $K_c$ è detta costante di controllo o regolazione. Abbiamo quindi una variabile errore definita, ad esempio, come $e(t):=r(t) - \gamma y(t), \gamma=1/K_c$, e quindi $e(t) \equiv 0 \leftrightarrow y(t) \equiv K_cr(t)$.
+Potremmo applicare il teorema del valore finale, ma ci conviene utilizzare i risultati ottenuti precedentemente trasformando il sistema in uno con retroazione unitaria, con guadagno dato da
 \begin{displaymath}
     G_E(s) = \frac{G(s)\gamma}{1+G(s)(H(s)-\gamma)}
 \end{displaymath}
 Se avessimo $H(s) = h$ e $K_c = 1/h \rightarrow G_E(s) = G(s)h$.
 \section{Sistemi retroazionati: criterio di Nyquist e margini di stabilità}
-Citiamo innanzitutto il requisito di \textbf{buona connessione}. Abbiamo un sistema retroazionato definito da $T_{ry}(s)\frac{G(s)}{1+L(s)}$ e guadagno di anello $L(s):=G(s)H(s)$. Il sistema retroazionato è ben connesso se 
+Citiamo innanzitutto il requisito di \textbf{buona connessione}. Abbiamo un sistema retroazionato definito da $T_{ry}(s)\frac{G(s)}{1+L(s)}$ e guadagno di anello $L(s):=G(s)H(s)$. Il sistema retroazionato è ben connesso se
 \begin{displaymath}
     lim_{|s|\rightarrow+\infty} 1+L(s) \neq 0
 \end{displaymath}
@@ -1005,11 +1005,11 @@ Questa caratteristica è necessaria per la realizzabilità fisica dell'anello di
 \subsection{Criterio di Nyquist}
 Il \textbf{criterio di Nyquist} è un criterio grafico per lo studio della stabilità asintotica. Introduciamo un sistema retroazionato definito come sempre da $T_{ry}(s)\frac{G(s)}{1+L(s)}$, con equazione caratteristica $1+L(s)$ (le cui radici sono poli del sistema). Allora,
 \begin{center}
-    Il sistema retroazionato è stabile asintoticamente se e solo se l'eq. caratteristica $1+L(s)=0$ ha tutte le radici a parte reale negativa. 
+    Il sistema retroazionato è stabile asintoticamente se e solo se l'eq. caratteristica $1+L(s)=0$ ha tutte le radici a parte reale negativa.
 \end{center}
 Il criterio richiede il tracciamento del diagramma polare (o di Nyquist) di $L(j\omega)$.
 \subsubsection{Teorema dell'indice logaritmico (principle of the argument)}
-Ora, per arrivare al criterio è necessario enunciare il \textbf{teorema dell'indice logaritmico}: sia $\Gamma$ una curva chiusa semplice nel piano complesso, e $\mathcal{D}$ la regione ad esso interna ($\Gamma = \partial \mathcal{D}$). Sia $F(s)$ una funzione analitica su $\Gamma$ e su $\mathcal{D}$ ad eccezione di un numero finito di poli appartenenti a $\mathcal{D}$. Inoltre $F(s)$ non abbia zeri su $\Gamma$. Vale quindi la relazione 
+Ora, per arrivare al criterio è necessario enunciare il \textbf{teorema dell'indice logaritmico}: sia $\Gamma$ una curva chiusa semplice nel piano complesso, e $\mathcal{D}$ la regione ad esso interna ($\Gamma = \partial \mathcal{D}$). Sia $F(s)$ una funzione analitica su $\Gamma$ e su $\mathcal{D}$ ad eccezione di un numero finito di poli appartenenti a $\mathcal{D}$. Inoltre $F(s)$ non abbia zeri su $\Gamma$. Vale quindi la relazione
 \begin{displaymath}
     \frac{1}{2\pi} \Delta arg F(s) = n_z - n_p
 \end{displaymath}
@@ -1050,14 +1050,14 @@ ed il corollario:
 \end{center}
 Nota che il corollario non è da associarsi ai sistemi stabili ad anello aperto. La dimostrazione del criterio è possibile verificandone la sufficienza e la necessità (vedi slide).
 \subsection{Margini di stabilità}
-La proprietà di stabilità (asintotica) di un sistema retroazionato è binaria: o c'è, o no. Tuttavia è opportuno e necessario inserire delle specifiche tecniche associate ad un sistema retroazionato una misura della distanza dell'instabilità. Ipotizziamo un guadagno ad anello $L(s)$ asintoticamente stabile. Definiamo il margine di stabilità come la distanza del diagramma polare dal punto $-1$, che significherebbe un'instabilità. Introduciamo quindi il concetto di misura della distanza dell'instabilità: in particolare ne introduciamo 2, il \textbf{margine di ampiezza $M_A$} ed il \textbf{margine di fase $M_F$}. In particolare, 
+La proprietà di stabilità (asintotica) di un sistema retroazionato è binaria: o c'è, o no. Tuttavia è opportuno e necessario inserire delle specifiche tecniche associate ad un sistema retroazionato una misura della distanza dell'instabilità. Ipotizziamo un guadagno ad anello $L(s)$ asintoticamente stabile. Definiamo il margine di stabilità come la distanza del diagramma polare dal punto $-1$, che significherebbe un'instabilità. Introduciamo quindi il concetto di misura della distanza dell'instabilità: in particolare ne introduciamo 2, il \textbf{margine di ampiezza $M_A$} ed il \textbf{margine di fase $M_F$}. In particolare,
 \begin{displaymath}
     M_A := \frac{1}{|L(j\omega_p)|} \textrm{ dove }\omega_p \ni argL(j\omega_p)=-\pi \textrm{ con }\omega_p\textrm{ pulsazione di fase pi greco}
 \end{displaymath}
 \begin{displaymath}
     M_F := \pi - |\varphi_c| \textrm{ dove }\varphi_c=argL(j\omega_c) \textrm{ e } \omega_c \ni |L(j\omega_c)|=1\textrm{ con }\omega_c\textrm{ pulsazione critica}
 \end{displaymath}
-$M_A$ è a volte espresso in decibel ($20logM_A$), $M_F$ è solitamente espresso in gradi sessagesimali. 
+$M_A$ è a volte espresso in decibel ($20logM_A$), $M_F$ è solitamente espresso in gradi sessagesimali.
 Questi concetti sono individuabili anche sui diagrammi di Bode: $M_{A(dB)} = -20log|L(j\omega_p)|$.
 Queste definizioni possono però creare dei problemi: spesso la definizione del margine di fase non è adatta, ed è necessaria una definizione più "robusta".
 \subsubsection{Definizioni generalizzate dei margini di stabilità}
@@ -1070,15 +1070,15 @@ Ipotizziamo un sistema retroazionato stabile asintoticamente, allora:
 \end{displaymath}
 I margini di stabilità sono "norme" che misurano la distanza del punto critico $-1+j0$ dal diagramma polare di $L(j\omega)$.
 Abbiamo alcune proprietà da citare:
-\paragraph{Proprietà 1} Sia $M>1$. Vale la disequazione $|1+\gamma L(j\omega)|>0, \forall \gamma \in \left[\frac{1}{M},M\right] \textrm{ e }\forall\omega\ge0$ se e solo se il segmento dell'asse reale compreso fra $-M$ e $-1/M$ non interseca il diagramma polare di $L(j\omega)$. 
+\paragraph{Proprietà 1} Sia $M>1$. Vale la disequazione $|1+\gamma L(j\omega)|>0, \forall \gamma \in \left[\frac{1}{M},M\right] \textrm{ e }\forall\omega\ge0$ se e solo se il segmento dell'asse reale compreso fra $-M$ e $-1/M$ non interseca il diagramma polare di $L(j\omega)$.
 \paragraph{Proprietà 2} Sia $\phi>0$. Vale la disequazione $\phi>0: |1+e^{-j\varphi}L(j\omega)|>0, \forall \varphi \in \left[-\phi,+\phi\right] \textrm{ e }\forall\omega\ge0$ se e solo se l'arco di circonferenza di equazione $e^{j(\pi+\varphi)}, \varphi \in \left[-\phi, +\phi\right]$ non interseca il diagramma polare di $L(j\omega)$.
 \subsubsection{Procedura generale per il calcolo dei margini di stabilità}
 Determiniamo ora una procedura generale: andiamo a trovare tutte le intersezioni più vicine a $-1$, e ne prendiamo il minimo. Per il margine di fase, il procedimento è lo stesso: cerchiamo le intersezioni del diagramma polare con la circonferenza unitaria, e prendiamo la più vicina:
 \begin{displaymath}
     M_A = min\left\{M_1,M_2\right\}\hspace{10px}M_F = min\left\{\phi_1,\phi_2\right\}
-\end{displaymath} 
+\end{displaymath}
 \section{Il luogo delle radici}
-Ci occupiamo ora del metodo del luogo delle radici, che permette di analizzare i sistemi retroazionati. 
+Ci occupiamo ora del metodo del luogo delle radici, che permette di analizzare i sistemi retroazionati.
 \subsection{Il luogo delle radici}
 Nel progetto di un sistema in retroazione è utile conoscere come i poli retroazionati si modificano al variare di più importanti parametri, come $K_1$ costante di trasferimento del guadagno di anello $L(s)$. Da quello che abbiamo visto, i poli retroazionati sono le radici dell'equazione $L(s)=K_1\frac{(s-z_1)...(s-z_m)}{(s-p_1)...(s-p_n)}$ ossia $G_1(s) := \frac{z(s)}{p(s)}$. Abbiamo quindi due definizioni:
 \begin{itemize}
@@ -1088,7 +1088,7 @@ Nel progetto di un sistema in retroazione è utile conoscere come i poli retroaz
 Se $K_1>0$, allora:
 \begin{displaymath}
     \{1+K_1G_1(s)=0\} \leftrightarrow \begin{cases}
-        argG_1(s)=\pi\hspace{5px}mod2\pi\\
+        argG_1(s)=\pi\hspace{5px}mod2\pi \\
         |G_1(s)| = \frac{1}{K_1}
     \end{cases}
 \end{displaymath}
@@ -1096,13 +1096,13 @@ La prima condizione impone che $G_1$ sia reale negativo, la seconda impone che i
 Se $K_1<0$, allora:
 \begin{displaymath}
     \{1+K_1G_1(s)=0\} \leftrightarrow \begin{cases}
-        argG_1(s)=0\hspace{5px}mod2\pi\\
+        argG_1(s)=0\hspace{5px}mod2\pi \\
         |G_1(s)| = -\frac{1}{K_1}
     \end{cases}
 \end{displaymath}
 \subsection{Proprietà del luogo delle radici}
-Il luogo ha tanti rami quanti sono i poli di $G_1(s)$. Ogni ramo parte da un polo di $G_1(s)$ e termina in uno zero di $G_1(s)$ o in un punto all'infinito. I rami si intersecano in corrispondenza delle radici multiple. 
-Una seconda proprietà è che il luogo delle radici è simmetrico rispetto all'asse reale. 
+Il luogo ha tanti rami quanti sono i poli di $G_1(s)$. Ogni ramo parte da un polo di $G_1(s)$ e termina in uno zero di $G_1(s)$ o in un punto all'infinito. I rami si intersecano in corrispondenza delle radici multiple.
+Una seconda proprietà è che il luogo delle radici è simmetrico rispetto all'asse reale.
 Sappiamo inoltre che nel luogo delle radici diretto ($K_1>0$) un punto dell'asse reale fa parte del luogo se si lascia alla sua destra un numero totale \textbf{dispari} di zeri e poli di $G_1(s)$. Nel luogo delle radici inverso ($K_1<0$) un punto dell'asse reale fa parte del luogo se si lascia alla sua destra un numero totale \textbf{pari} di zeri e poli di $G_1(s)$.
 Definiamo gli angoli di partenza e arrivo nel luogo. L'angolo di partenza è formato dalla direzione dell'asse reale positivo, e dalla tangente al luogo. Quello di arrivo è formato ancora dalla tangente al luogo, ma con $K_1$ da $0$ a $-\infty$.
 Nel luogo delle radici diretto ($K_1>0$), l'angolo di partenza è dato dalla relazione
@@ -1122,8 +1122,8 @@ Se lo zero $z_i$ è multiplo con molteplicità $h>1$, gli $h$ angoli di arrivo $
 \begin{displaymath}
     h\Psi_i = \pi + \sum_{j=1}^{n} arg(z_i-p_j) - \sum_{j\neq i} arg(z_i-z_j) \hspace{5px}mod2\pi
 \end{displaymath}
-Si potrebbe dimostrare che indipendentemente dalla molteplicità otteniamo sempre $h$ soluzioni distinte. 
-Sappiamo anche che una radice del luogo di molteplicità $h$ corrisponde a un punto comune ad $h$ rami in cui oltre all'eq. $1+K_1G_1(s)=0$ sono soddisfatte le relazioni $D^i G_1(s) = 0,i=1,\dots,h-1$ cioè la derivata i-esima si annulla. Abbiamo un corollario di questa proprietà, che afferma che una radice doppia del luogo soddisfa l'equazione $\sum_{i=1}^n \frac{1}{s-p_i} -\sum_{i=1}^m \frac{1}{s-z_i} = 0$. L'ultima proprietà afferma che in corrispondenza di una radice di molteplicità $h$ il luogo presenta $h$ rami entranti ed $h$ rami uscenti, alternati fra loro, le cui tangenti suddividono lo spazio circostante in settori uguali di $\pi/h$ radianti. 
+Si potrebbe dimostrare che indipendentemente dalla molteplicità otteniamo sempre $h$ soluzioni distinte.
+Sappiamo anche che una radice del luogo di molteplicità $h$ corrisponde a un punto comune ad $h$ rami in cui oltre all'eq. $1+K_1G_1(s)=0$ sono soddisfatte le relazioni $D^i G_1(s) = 0,i=1,\dots,h-1$ cioè la derivata i-esima si annulla. Abbiamo un corollario di questa proprietà, che afferma che una radice doppia del luogo soddisfa l'equazione $\sum_{i=1}^n \frac{1}{s-p_i} -\sum_{i=1}^m \frac{1}{s-z_i} = 0$. L'ultima proprietà afferma che in corrispondenza di una radice di molteplicità $h$ il luogo presenta $h$ rami entranti ed $h$ rami uscenti, alternati fra loro, le cui tangenti suddividono lo spazio circostante in settori uguali di $\pi/h$ radianti.
 L'ultima proprietà che vediamo definisce il comportamento asintotico del luogo delle radici. Gli asintoti del luogo delle radici formano una cosiddetta "stella di asintoti" (di raggi) con centro nel punto dell'asse reale di ascissa
 \begin{displaymath}
     \sigma_a = \left(\sum_{i=1}^n p_i - \sum_{i=1}^m z_i\right) / (n-m)
@@ -1136,14 +1136,14 @@ Se il luogo è invece diretto, avremo
 \begin{displaymath}
     \upvartheta_{a,\nu} = 2\nu\pi/ (n-m), \nu=0,1,\dots,n-m-1
 \end{displaymath}
-In pratica, questi asintoti si disporranno diversamente in base a $\rho:=n-m$ grado relativo di $G_1(s)$. 
+In pratica, questi asintoti si disporranno diversamente in base a $\rho:=n-m$ grado relativo di $G_1(s)$.
 SLIDE 13.16
 Quando abbiamo luoghi diretti del secondo ordine, possiamo trovare il raggio calcolando le distanze dei poli dallo zero $R=\sqrt{d_1d_2}$.
 \subsection{Contorno delle radici}
-La tecnica del contorno delle radici permette di generalizzare il metodo del luogo delle radici. Il contorno delle radici è infatti un luogo delle radici (dell'eq. caratteristica) per variazioni di un parametro diverso (può variare, ci sono regole per decidere se il parametro è applicabile) dalla costante di trasferimento del guadagno di anello. Questa tecnica è infatti applicabile quando l'eq. caratteristica $1+L(s;p)=0$ con p parametro variante è riconducibile all'eq. caratteristica standard $1+K_1G_1(s)=0$ con $K_1=K_1(p)$ funzione biunivoca di p. 
-Per esempio, se avessimo un contorno delle radici per variazioni di un polo, potremmo sfruttare $\tau$ per trovare un luogo delle radici. In $\tau=0$ abbiamo $1+\frac{K}{s} =0 $, ma con $\tau>0$ avremo $1+\tau\frac{s^2}{s+\overline{K}}$. È convenzione fissare $\overline{K}$, e variare il parametro $\tau$. Quest'equazione ha una scritura standard in cui al posto di $K_1$ ritroviamo $\tau$, notiamo però che il grado del numeratore è maggiore del denominatore. Questo è abbastanza tipico (a differenza dei luoghi visti precedentemente), significa che i rami partono dai poli e uno dall'infinito. I raggi si incontrano nella radice multipla, e convergono verso lo 0. 
+La tecnica del contorno delle radici permette di generalizzare il metodo del luogo delle radici. Il contorno delle radici è infatti un luogo delle radici (dell'eq. caratteristica) per variazioni di un parametro diverso (può variare, ci sono regole per decidere se il parametro è applicabile) dalla costante di trasferimento del guadagno di anello. Questa tecnica è infatti applicabile quando l'eq. caratteristica $1+L(s;p)=0$ con p parametro variante è riconducibile all'eq. caratteristica standard $1+K_1G_1(s)=0$ con $K_1=K_1(p)$ funzione biunivoca di p.
+Per esempio, se avessimo un contorno delle radici per variazioni di un polo, potremmo sfruttare $\tau$ per trovare un luogo delle radici. In $\tau=0$ abbiamo $1+\frac{K}{s} =0 $, ma con $\tau>0$ avremo $1+\tau\frac{s^2}{s+\overline{K}}$. È convenzione fissare $\overline{K}$, e variare il parametro $\tau$. Quest'equazione ha una scritura standard in cui al posto di $K_1$ ritroviamo $\tau$, notiamo però che il grado del numeratore è maggiore del denominatore. Questo è abbastanza tipico (a differenza dei luoghi visti precedentemente), significa che i rami partono dai poli e uno dall'infinito. I raggi si incontrano nella radice multipla, e convergono verso lo 0.
 SLIDE 13.21
-L'eq. caratteristica $1+L(s;p)=0$ è riconducibile alla forma standard quando, trasformata in equazione polinoimale, i suoi coefficienti sono funzioni affini del parametro $p$. 
+L'eq. caratteristica $1+L(s;p)=0$ è riconducibile alla forma standard quando, trasformata in equazione polinoimale, i suoi coefficienti sono funzioni affini del parametro $p$.
 \subsection{Complementi}
 Vediamo ora alcuni complementi. Riscriviamo l'equazione del luogo, considerando i poli come parametri fissati e gli zeri variabili. L'eq. caratteristica dipenderà quindi dagli zeri e da $K_1$.
 \begin{displaymath}
@@ -1159,35 +1159,35 @@ Introduciamo ora il grado di stabilità di un sistema. Consideriamo un sistema $
 \begin{displaymath}
     G_s := max\left\{Rep_1, Re p_2, ..., Re p_n\right\}
 \end{displaymath}
-Nell'ipotesi che fra i poli di $\Sigma$ esista una coppia dominante, vale l'ipotesi che il tempo di assestamento $T_a$ valga approssimativamente $T_a \approx \frac{3}{G_s}$. Ricordiamo che il tempo di assestamento è il tempo minimo per il quale la risposta al gradino del sistema entra in una fascia di $\pm 5\%$ del valore finale del sistema considerato. 
+Nell'ipotesi che fra i poli di $\Sigma$ esista una coppia dominante, vale l'ipotesi che il tempo di assestamento $T_a$ valga approssimativamente $T_a \approx \frac{3}{G_s}$. Ricordiamo che il tempo di assestamento è il tempo minimo per il quale la risposta al gradino del sistema entra in una fascia di $\pm 5\%$ del valore finale del sistema considerato.
 \section{Progetto di un sistema di controllo in retroazione}
 Iniziamo ora la sezione dedicata al progetto di un sistema di controllo.
 \subsection{Il progetto di un sistema di controllo in retroazione}
-Consideriamo un sistema scalare, con un singolo anello di retroazione. La struttura composta di un possibile sistema di controllo è la seguente, con P impianto controllato, Q disturbo di P (eventualmente modificato da parte dinamica di filtraggio), ingresso $u$ determinato dall'uscita di un attuatore (A) e da un disturbo. Poi, nella linea di retroazinoe troviamo H funzione di trasferimento del possibile trasduttore, con disturbo $n$, un anello comparatore che sottrae la parte dedicata alla retroazione. Infine, il controllore C, elemento cruciale per la buona riuscita del sistema e protagonista del nostro progetto, e F prefiltraggio. A volte il progetto non riguarda solo $C_s$, ma anche una funzione di prefiltraggio $F$. Quando questo accade, avremo un sistema di feedforward-feedback. A volte $F$ è semplicemente un guadagno algebrico. Usualmente si parte modellando l'impianto, prevedendo la scelta dei trasduttori ($H_s$) e dell'attuatore. 
-È chiaro che il progetto di un sistema completo sia ben più complesso. 
+Consideriamo un sistema scalare, con un singolo anello di retroazione. La struttura composta di un possibile sistema di controllo è la seguente, con P impianto controllato, Q disturbo di P (eventualmente modificato da parte dinamica di filtraggio), ingresso $u$ determinato dall'uscita di un attuatore (A) e da un disturbo. Poi, nella linea di retroazinoe troviamo H funzione di trasferimento del possibile trasduttore, con disturbo $n$, un anello comparatore che sottrae la parte dedicata alla retroazione. Infine, il controllore C, elemento cruciale per la buona riuscita del sistema e protagonista del nostro progetto, e F prefiltraggio. A volte il progetto non riguarda solo $C_s$, ma anche una funzione di prefiltraggio $F$. Quando questo accade, avremo un sistema di feedforward-feedback. A volte $F$ è semplicemente un guadagno algebrico. Usualmente si parte modellando l'impianto, prevedendo la scelta dei trasduttori ($H_s$) e dell'attuatore.
+È chiaro che il progetto di un sistema completo sia ben più complesso.
 \subsection{Specifiche di controllo}
 I requisiti per il sistema di controllo riguardano:
 \begin{enumerate}
     \item Buona connessione: ci deve essere buona connessione nella retroazione
     \item Stabilità asintotica interna
-    \item Prestazioni statiche e/o asintotiche 
+    \item Prestazioni statiche e/o asintotiche
     \item Prestazioni dinamiche
     \item Robustezza: alcuni di questi requisiti devono essere soddisfatti non solamente per il sistema nominale, ma per una classe di impianti
 \end{enumerate}
 \subsubsection{Buona connessione}
-Per avere un sistema retroazionato \textbf{ben connesso} deve valere $P(s)$ strettamente propria e $\mathcal{C}(s)$ propria. $\mathcal{C}(s)$ strettamente propria significa che il suo polinomio al numeratore dev'essere sempre $\le$ del polinomio al denominatore, per realizzabilità fisica: se così non fosse, la risposta armonica divergerebbe per $\omega\rightarrow\infty$. 
+Per avere un sistema retroazionato \textbf{ben connesso} deve valere $P(s)$ strettamente propria e $\mathcal{C}(s)$ propria. $\mathcal{C}(s)$ strettamente propria significa che il suo polinomio al numeratore dev'essere sempre $\le$ del polinomio al denominatore, per realizzabilità fisica: se così non fosse, la risposta armonica divergerebbe per $\omega\rightarrow\infty$.
 \subsubsection{Stabilità asintotica interna}
-Il sistema retroazionato è asintoticamente ed internamente stabile quando tutte le f.d.t. fra gli ingressi $\left\{r,d_1,d_2\right\}$ e le uscite $\left\{e,m,y\right\}$ sono asintoticamente stabili. Questo è del tutto ragionevole: se così non fosse, ci ritroveremmo una situazione in cui una variabile sull'uscita, o interna, divergerebbe all'infinito. 
+Il sistema retroazionato è asintoticamente ed internamente stabile quando tutte le f.d.t. fra gli ingressi $\left\{r,d_1,d_2\right\}$ e le uscite $\left\{e,m,y\right\}$ sono asintoticamente stabili. Questo è del tutto ragionevole: se così non fosse, ci ritroveremmo una situazione in cui una variabile sull'uscita, o interna, divergerebbe all'infinito.
 Fino ad ora, parlavamo di sistema asintoticamente stabile quando l'uscita la era: ciò non è sufficiente per la stabilità asintotica interna. Abbiamo una condizione necessaria e sufficiente per verificare la stabilità asintotica interna. Devono valere due condizioni:
 \begin{enumerate}
-    \item Le radici dell'equazione $1+L(s)=0$ sono tutte a parte reale negativa 
+    \item Le radici dell'equazione $1+L(s)=0$ sono tutte a parte reale negativa
     \item Le eventuali cancellazioni polo-zero fra $C(s)$ e $P(s)$ avvengono in $\mathbb{C}_-$.
 \end{enumerate}
 \subsection{Terminologie}
-Definiamo la \textbf{funzione di sensitività} $T_{re}(s)$ pari a $\frac{1}{1+L(s)}$, spesso indicata con $S$, e la funzione di sensitività complementare $T=1-S$. Otteniamo quindi $T(s)=\frac{L(s)}{1+L(s)}$. Si noti che $T_{ry}(s)=T(s)$. 
-Osserviamo anche che nei progetti con prevalenti specifiche in frequenza, vengono imposti vincoli su S e T in modo disgiunto: possono capitare problemi di compatibilità, in quanto deve valere $S(j\omega)+T(j\omega) = 1, \forall \omega$. 
+Definiamo la \textbf{funzione di sensitività} $T_{re}(s)$ pari a $\frac{1}{1+L(s)}$, spesso indicata con $S$, e la funzione di sensitività complementare $T=1-S$. Otteniamo quindi $T(s)=\frac{L(s)}{1+L(s)}$. Si noti che $T_{ry}(s)=T(s)$.
+Osserviamo anche che nei progetti con prevalenti specifiche in frequenza, vengono imposti vincoli su S e T in modo disgiunto: possono capitare problemi di compatibilità, in quanto deve valere $S(j\omega)+T(j\omega) = 1, \forall \omega$.
 \subsection{La sintesi con controllori di struttura prefissata}
-Nella letteratura controllistica tecnica c'è in realtà una moltitudine di approcci per la sintesi di controllori. Sfrutteremo l'approccio con i controllori di struttura prefissata o di ordine prefissato. 
+Nella letteratura controllistica tecnica c'è in realtà una moltitudine di approcci per la sintesi di controllori. Sfrutteremo l'approccio con i controllori di struttura prefissata o di ordine prefissato.
 Anzitutto, spieghiamo cosa sono i controllori di ordine prefissato.
 \subsubsection{Controllori di ordine prefissato}
 I \textbf{controllori di ordine prefissato} sono dei sistemi dinamici aventi un ordine fisso. Nell'ambito di questo parametro, ci manteniamo nella massima libertà progettuale. Li introduciamo come insiemi, in cui $\mathcal{R}_p$ è l'insieme delle funzioni razionali proprie. Per esempio, il controllore di ordine zero sarà: $\mathcal{C}_0 :=\left\{C\in\mathcal{R}_p: C(s) K, K\in\mathbb{R}\right\}$.
@@ -1204,11 +1204,11 @@ I \textbf{controllori di struttura prefissata} sono definiti mediante particolar
     \item $\mathcal{C}_B := \left\{C\in\mathcal{R}_p:C(s)=\gamma \frac{s+\beta}{s+\alpha}, \alpha, \beta \in \mathbb{R}_+,\gamma \in \mathbb{R} \right\}$. Si osservi che $\mathcal{C}_B \neq \mathcal{C}_A$ e $\mathcal{C}_B \subset \mathcal{C}_A$
     \item $\mathcal{C}_C := \left\{C\in\mathcal{R}_p:C(s)=\gamma \frac{s+\beta}{s+\alpha}, \alpha \in [10,100] \beta \in (0,10],\gamma \in \mathbb{R} \right\}$. Si osservi che $\mathcal{C}_C \subset \mathcal{C}_B$.
 \end{itemize}
-Notiamo quindi che questi insiemi vanno via via restringendosi. 
+Notiamo quindi che questi insiemi vanno via via restringendosi.
 \subsection{Classi tradizionali di controllori a struttura fissa}
-Fra i controllori a struttura fissa, si individuano due classi tradizionali: reti correttrici, e regolatori standard. Le \textbf{reti correttrici} sono i più semplici controllori utilizzati nel progetto dei sistemi di controllo. Nell'approccio tradizionale vengono progettati per correggere il comportamento dinamico dell'anello di retroazione. In realtà le implementazioni non vengono più fatte con reti elettriche. I \textbf{regolatori standard} sono caratterizzati dalla combinazione di azioni proporzionale, derivativa e integrale. Vengono implementati su dispositivi standard adattabili a classi estese di applicazioni e per i quali è possibile il tuning diretto dei parametri di progetto anche in condizioni operative. 
+Fra i controllori a struttura fissa, si individuano due classi tradizionali: reti correttrici, e regolatori standard. Le \textbf{reti correttrici} sono i più semplici controllori utilizzati nel progetto dei sistemi di controllo. Nell'approccio tradizionale vengono progettati per correggere il comportamento dinamico dell'anello di retroazione. In realtà le implementazioni non vengono più fatte con reti elettriche. I \textbf{regolatori standard} sono caratterizzati dalla combinazione di azioni proporzionale, derivativa e integrale. Vengono implementati su dispositivi standard adattabili a classi estese di applicazioni e per i quali è possibile il tuning diretto dei parametri di progetto anche in condizioni operative.
 \subsubsection{Principali reti correttrici}
-Citiamo, tra le principali reti correttrici, 
+Citiamo, tra le principali reti correttrici,
 \begin{itemize}
     \item Rete integratrice
     \item Rete derivatrice
@@ -1218,7 +1218,7 @@ Citiamo, tra le principali reti correttrici,
     \item Rete a T ponticellato: rapporto di due polinomi dipendenti da $\omega_n, \delta, \delta'$. Generalmente $\delta'\in (0,1)$, e $\delta>1 mentre \delta'$ non per forza
 \end{itemize}
 \subsection{Struttura del controllore con rete correttrice}
-Dovremo quindi progettare il parametro $K_c$ ed i parametri della rete correttrice $C_r(s)$, quindi un numero limitato di parametri per completare questo controllore. 
+Dovremo quindi progettare il parametro $K_c$ ed i parametri della rete correttrice $C_r(s)$, quindi un numero limitato di parametri per completare questo controllore.
 \subsection{I regolatori standard}
 I regolatori standard si basano sulla combinazione di effetti di controllo che si riconducono ad effetto \textbf{proporzionale}($R(s)=K_p$) quindi non avente poli/zeri in quanto non dinamico, \textbf{integrale}($R(s)=\frac{K_p}{T_is}$) con l'integrale dell'ingresso pari all'uscita ed un polo nell'origine, \textbf{proporzionale-integrale} ($R(s)=K_p\left(1+\frac{1}{T_is}\right)$), che avrà un polo nell'origine e uno zero. Citamo poi il regolatore \textbf{proporzionale-derivativo} ($R(s)=K_p(1+T_ds)$) dove in realtà abbiamo $R(s)=K_p\left(1+\frac{T_ds}{1+\tau s}\right)$ con $\tau<<T_d$, ossia sostanzialmente una rete anticipatrice con uno zero e un polo. Se li sommiamo tutti otteniamo il cosiddetto regolatore PID, o \textbf{proporzionale-integrale-derivativo} dove $R(s)=\left(1+T_ds+\frac{1}{T_is}\right)$. Sviluppiamo la f.d.t. e otteniamo \begin{displaymath}
     R(s)\approx K_p \frac{T_dT_is^2+T_is+1}{T_is(1+\tau s)}
@@ -1226,10 +1226,10 @@ I regolatori standard si basano sulla combinazione di effetti di controllo che s
 \subsection{Rete ritardatrice}
 Introdotto $C_r(s) = \frac{1+\alpha\tau s}{1+\tau s}$ procediamo ad ottenere i diagrammi di Bode e Nyquist. Otteniamo infine $\varphi_m = -arcsin\frac{1-\alpha}{1+\alpha}=argC_r(j\omega_m)$ dove $\omega_m := \frac{1}{\sqrt{\alpha}\cdot \tau}$.
 \subsubsection{Azione compensatrice della rete ritardatrice}
-Sia $P(s)$ asintoticamente stabile e a fase minima. Per prima cosa, scegliamo un controllore proporzionale $C(s)=K_c>0$. Progettiamo $K_c>0$ al fine di assicurare una specifica di precisione. Tanto più grande $K_c$, tanto più piccolo sarà l'errore in risposta al gradino. Questo introduce la possibilità di ottenere un sistema instabile. Allora, qual è l'idea dell'azione compensatrice della rete ritardatrice? È proprio quello di attenuare in alta frequenza il guadagno di anello, modificando il diagramma polare per ottenere la stabilità. Questo in virtù del fatto che la rete ritardatrice è un filtro passa-basso. Progettiamo quindi $\alpha$ e $\tau$ per assicurare la stabilità asintotica con un buon margine di ampiezza e/o fase. Abbiamo vari metodi per il progetto, come i grafici (obsoleti), per tentativi/ad hoc, o con le formule di inversione. L'utilizzo della rete ritardatrice ha come vantaggio che il guadagno di anello si mantiene elevato alle basse frequenze (buone prestazioni statiche), ma riduce la banda passante del g.d.a. ottenendo una riduzione della banda passante di $T_{ry}(j\omega)$ e quindi scarse prestazioni dinamiche. 
+Sia $P(s)$ asintoticamente stabile e a fase minima. Per prima cosa, scegliamo un controllore proporzionale $C(s)=K_c>0$. Progettiamo $K_c>0$ al fine di assicurare una specifica di precisione. Tanto più grande $K_c$, tanto più piccolo sarà l'errore in risposta al gradino. Questo introduce la possibilità di ottenere un sistema instabile. Allora, qual è l'idea dell'azione compensatrice della rete ritardatrice? È proprio quello di attenuare in alta frequenza il guadagno di anello, modificando il diagramma polare per ottenere la stabilità. Questo in virtù del fatto che la rete ritardatrice è un filtro passa-basso. Progettiamo quindi $\alpha$ e $\tau$ per assicurare la stabilità asintotica con un buon margine di ampiezza e/o fase. Abbiamo vari metodi per il progetto, come i grafici (obsoleti), per tentativi/ad hoc, o con le formule di inversione. L'utilizzo della rete ritardatrice ha come vantaggio che il guadagno di anello si mantiene elevato alle basse frequenze (buone prestazioni statiche), ma riduce la banda passante del g.d.a. ottenendo una riduzione della banda passante di $T_{ry}(j\omega)$ e quindi scarse prestazioni dinamiche.
 \subsection{Rete anticipatrice}
-Ottenuto $C_r(s)=\frac{1+\tau s}{1+\alpha \tau s}$. Notiamo che la rete anticipatrice è l'esatto reciproco della precedente, caratteristica che possiamo sfruttare per l'analisi. Sarà quindi un filtro passa-alto. Otteniamo anche $\varphi_m = arcsin\frac{1-\alpha}{1+\alpha}=argC_r(j\omega_m)$ dove $\omega_m := \frac{1}{\sqrt{\alpha}\cdot \tau}$. 
-Interpretiamo ora il principio di funzionamento. Per esempio, se avessimo lo spostamento di un carrello su rotaia in cui il segnale di controllo fosse la forza applicata al carrello, potremmo applicare una forza proporzionale all'errore di posizione $e=y_R -y : f=K_ce$. Otteniamo come esito che, in assenza di attriti, il carello oscilla indefinitamente. Questo perché quando arriva al punto giusto, sarà già in moto e andrà oltre al punto, nonostante l'inversione della forza. Quando l'errore diventa sufficientemente grande, il carrello tornerà indietro, ma non si fermerà, di nuovo, al punto giusto. 
+Ottenuto $C_r(s)=\frac{1+\tau s}{1+\alpha \tau s}$. Notiamo che la rete anticipatrice è l'esatto reciproco della precedente, caratteristica che possiamo sfruttare per l'analisi. Sarà quindi un filtro passa-alto. Otteniamo anche $\varphi_m = arcsin\frac{1-\alpha}{1+\alpha}=argC_r(j\omega_m)$ dove $\omega_m := \frac{1}{\sqrt{\alpha}\cdot \tau}$.
+Interpretiamo ora il principio di funzionamento. Per esempio, se avessimo lo spostamento di un carrello su rotaia in cui il segnale di controllo fosse la forza applicata al carrello, potremmo applicare una forza proporzionale all'errore di posizione $e=y_R -y : f=K_ce$. Otteniamo come esito che, in assenza di attriti, il carello oscilla indefinitamente. Questo perché quando arriva al punto giusto, sarà già in moto e andrà oltre al punto, nonostante l'inversione della forza. Quando l'errore diventa sufficientemente grande, il carrello tornerà indietro, ma non si fermerà, di nuovo, al punto giusto.
 Applichiamo al sistema il luogo delle radici. Determiniamo $P(s)=\frac{1}{Ms^2}$. L'equazione caratteristica sarà quindi $1+K_c \frac{1}{Ms^2}=0$. Ma quindi, come dovremmo stabilizzare questo carrello? Il problema è che la forza non cambia segno in prossimità del punto $y_R$, ma solo dopo. Vogliamo quindi ottenere il cambio di segno prima dell'arrivo al punto. Per questo, sommiamo al termine proporzionale di forza, un termine che dipende dalla derivata: se l'errore si sta riducendo, la derivata è negativa!
 \begin{displaymath}
     f=K_ce+K_c^{'}\frac{de}{dt}
@@ -1239,21 +1239,21 @@ Sarà poi una pseudoderivata per i soliti motivi, ma il concetto funziona. Quind
     C_r(s)=\frac{1+\tau s}{1+\alpha\tau s}
 \end{displaymath}
 \subsubsection{Vantaggi/Svantaggi della rete anticipatrice}
-La rete anticipatrice ha diversi vantaggi, come il mantenimento delle prestazioni statiche e la stabilizzazion con allargamento della banda passante del guadagno dianello e quindi allargamento della banda passante per $T_{ry}(j\omega)$: aumento del grado di stabilità $G_s$, diminuzione del tempo di assestamento $T_a$, migliori capacità di inseguimento di segnale. C'è però uno svantaggio: la possibile introduzione di rumore. Infatti, il parametro $\alpha$ non può essere troppo piccolo. Anche qui, saltiamo i metodi grafici e citiamo i metodi per tentativi, i metodi con formule di inversione, ed infine anche la cancellazione polo-zero (non presente nelle ritardatrici). 
+La rete anticipatrice ha diversi vantaggi, come il mantenimento delle prestazioni statiche e la stabilizzazion con allargamento della banda passante del guadagno dianello e quindi allargamento della banda passante per $T_{ry}(j\omega)$: aumento del grado di stabilità $G_s$, diminuzione del tempo di assestamento $T_a$, migliori capacità di inseguimento di segnale. C'è però uno svantaggio: la possibile introduzione di rumore. Infatti, il parametro $\alpha$ non può essere troppo piccolo. Anche qui, saltiamo i metodi grafici e citiamo i metodi per tentativi, i metodi con formule di inversione, ed infine anche la cancellazione polo-zero (non presente nelle ritardatrici).
 \subsubsection{Cancellazione polo-zero}
 Possiamo sintetizzare la rete anticipatrice mediante cancellazione polo-zero. La cancellazione deve avvenire sempre nella regione negativa (parte reale negativa) del diagramma. Scegliamo quale zero della rete il polo reale negativo di $P(s)$ più vicino all'asse immaginario determinando così nella funzione di trasferimento di catena diretta una cancellazione polo-zero ammissibile. Cancelliamo quindi il polo più vicino all'asse immaginario. Comparirà quindi un polo determinato dalla rete in $-\frac{1}{\alpha\tau}$. Abbiamo infatti imposto $\tau=-\frac{1}{p_1}$.
 \subsection{Sintesi in frequenza con le formule di inversione}
-La sintesi in frequenza delle reti ritardatrici/anticipatrici con imposizione dei margini di stabilità prestabiliti può essere svolta utilizzando le funzioni inverse delle stesse reti. Interpretiamo anzitutto la risposta armonica della rete anticipatrice $\frac{1+j\tau\omega}{1+j\alpha\tau\omega}$, studiandola come una funzione matematica $f:\mathcal{D}\rightarrow \mathbb{R}^2, (\alpha,\tau\omega)\rightarrow(M,\varphi)$ dove $\mathcal{D}:=(0,1)x(0,+\infty)$ e $M=\frac{\sqrt{1+(\tau\omega)^2}}{\sqrt{1+(\alpha\tau\omega)^2}}, \varphi = arctan(\tau\omega)-arctan(\alpha\tau\omega)$. Ci porremo il problema di invertire questa funzione. Vogliamo quindi anzitutto provare che la stessa sia invertibile (biiettiva) e determinare $f^{-1}$ e $f(\mathcal{D})$ codominio. Per arrivare all'inversa introduciamo un lemma algebrico. Quindi la funzione $f:\mathcal{D}\rightarrow f(\mathcal{D})$ è biiettiva e la sua funzione inversa $f^{-1}:f(\mathcal{D})\rightarrow\mathcal{D}, (M,\varphi) \rightarrow (\alpha, \tau\omega)$ è definita da 
+La sintesi in frequenza delle reti ritardatrici/anticipatrici con imposizione dei margini di stabilità prestabiliti può essere svolta utilizzando le funzioni inverse delle stesse reti. Interpretiamo anzitutto la risposta armonica della rete anticipatrice $\frac{1+j\tau\omega}{1+j\alpha\tau\omega}$, studiandola come una funzione matematica $f:\mathcal{D}\rightarrow \mathbb{R}^2, (\alpha,\tau\omega)\rightarrow(M,\varphi)$ dove $\mathcal{D}:=(0,1)x(0,+\infty)$ e $M=\frac{\sqrt{1+(\tau\omega)^2}}{\sqrt{1+(\alpha\tau\omega)^2}}, \varphi = arctan(\tau\omega)-arctan(\alpha\tau\omega)$. Ci porremo il problema di invertire questa funzione. Vogliamo quindi anzitutto provare che la stessa sia invertibile (biiettiva) e determinare $f^{-1}$ e $f(\mathcal{D})$ codominio. Per arrivare all'inversa introduciamo un lemma algebrico. Quindi la funzione $f:\mathcal{D}\rightarrow f(\mathcal{D})$ è biiettiva e la sua funzione inversa $f^{-1}:f(\mathcal{D})\rightarrow\mathcal{D}, (M,\varphi) \rightarrow (\alpha, \tau\omega)$ è definita da
 \begin{displaymath}
     \alpha=\frac{Mcos\varphi - 1}{M(M-cos\varphi)}, \tau\omega=\frac{M-cos\varphi}{sin\varphi}
 \end{displaymath}
-Poniamo infine una proposizione. Se noi assegniamo $M, \varphi$, l'$\alpha$ deve essere positivo e che quindi il suo numeratore sia maggiore di 0. 
+Poniamo infine una proposizione. Se noi assegniamo $M, \varphi$, l'$\alpha$ deve essere positivo e che quindi il suo numeratore sia maggiore di 0.
 \begin{displaymath}
     f(\mathcal{D}) = \left\{(M,\varphi) \in (1,+\infty)x\left(0,\frac{\pi}{2}\right):\varphi < arccos\frac{1}{M}\right\}
 \end{displaymath}
 \subsubsection{Sintesi della rete anticipatrice con imposizione del margine di fase $M_F$}
-Avremo un g.d.a. non compensato pari a $L(s)$, compensato pari a $\frac{1+\tau s}{1+\alpha\tau s} L(s)$. 
-Vogliamo che in virtù della presenza della rete anticipatrice, in corrispondenza di $\omega_0$ la rete debba amplificare la fase per portare il punto di intersezione con il cerchio unitario alla destra di -1. Questa amplificazione sarà pari al rapporto tra la dimensione del vettore (1) diviso il modulo di $L(j\omega_0)$. Quindi, dovremo 
+Avremo un g.d.a. non compensato pari a $L(s)$, compensato pari a $\frac{1+\tau s}{1+\alpha\tau s} L(s)$.
+Vogliamo che in virtù della presenza della rete anticipatrice, in corrispondenza di $\omega_0$ la rete debba amplificare la fase per portare il punto di intersezione con il cerchio unitario alla destra di -1. Questa amplificazione sarà pari al rapporto tra la dimensione del vettore (1) diviso il modulo di $L(j\omega_0)$. Quindi, dovremo
 \begin{enumerate}
     \item Scegliere $\omega_0$ affinché con $\varphi_0 := M_F - argL(j\omega_0)-\pi$ valga $\left(\frac{1}{|L(j\omega_0)}, \varphi_0\right) \in f(\mathcal{D})$ quindi $cos\varphi_0 > |L(j\omega_0)|$
     \item Definiti $M:=\frac{1}{|L(j\omega_0)|}$ e $\varphi := \varphi_0$ segue $\tau = \frac{M-cos\varphi}{\omega_0 sin\varphi} $ e $\alpha=\frac{Mcos\varphi-1}{M(M-cos\varphi)}$
@@ -1263,24 +1263,320 @@ Per massimizzare il margine di fase nella sintesi della rete anticipatrice, sapp
     M_F(\omega_0) = \pi + argL(j\omega_0)+arccos|L(j\omega_0)|
 \end{displaymath}
 \subsubsection{Sintesi della rete ritardatrice con imposizione del margine di fase $M_F$}
-Teniamo presente che questa è il reciproco della precedente. Cercheremo quindi un valore di $\omega_0$ che non stia dentro il cerchio unitario, ma fuori: otterremo così il desiderato passaggio a destra di -1. 
+Teniamo presente che questa è il reciproco della precedente. Cercheremo quindi un valore di $\omega_0$ che non stia dentro il cerchio unitario, ma fuori: otterremo così il desiderato passaggio a destra di -1.
 \begin{enumerate}
     \item Scegliere $\omega_0$ affinché con $\varphi_0 := argL(j\omega_0)+\pi - M_F$ valga $\left(|L(j\omega_0), \varphi_0\right) \in f(\mathcal{D})$ quindi $cos\varphi_0 > \frac{1}{|L(j\omega_0)|}$
     \item Definiti $M:=|L(j\omega_0)|$ e $\varphi := \varphi_0$ segue $\tau = \frac{M-cos\varphi}{\omega_0 sin\varphi} $ e $\alpha=\frac{Mcos\varphi-1}{M(M-cos\varphi)}$
 \end{enumerate}
-Abbiamo visto questi progetti, e possiamo espletare una considerazione: l'uso delle formule di inversione permette in generale di spostare nel piano complesso, per una data frequenza, un punto del diagramma di Nyquist in uno limitrofo del diagramma di Nyquist compensato. Lo scopo, al di là dell'imposizione di margini di stabilità, è quello di migliorare la risposta armonica del guadagno di anello in accordo a specifiche di progetto. 
+Abbiamo visto questi progetti, e possiamo espletare una considerazione: l'uso delle formule di inversione permette in generale di spostare nel piano complesso, per una data frequenza, un punto del diagramma di Nyquist in uno limitrofo del diagramma di Nyquist compensato. Lo scopo, al di là dell'imposizione di margini di stabilità, è quello di migliorare la risposta armonica del guadagno di anello in accordo a specifiche di progetto.
 \subsubsection{Sintesi della rete anticipatrice con imposizione del margine di ampiezza $M_A$}
-In questo caso, anzitutto tracciamo un cerchio di raggio $\frac{1}{M_A}$, trovando il vettore. Dovremo quindi, in corrispondenza di $\omega_0$, amplificare di $\frac{1}{M_A(mod L(j\omega_0))}$ per spostare il punto sulla circonferenza. 
+In questo caso, anzitutto tracciamo un cerchio di raggio $\frac{1}{M_A}$, trovando il vettore. Dovremo quindi, in corrispondenza di $\omega_0$, amplificare di $\frac{1}{M_A(mod L(j\omega_0))}$ per spostare il punto sulla circonferenza.
 \begin{enumerate}
     \item Scegliere $\omega_0$ affinché con $\varphi_0 := - argL(j\omega_0)-\pi$ valga $\left(\frac{1}{M_A|L(j\omega_0)}, \varphi_0\right) \in f(\mathcal{D})$ quindi $cos\varphi_0 > M_A|L(j\omega_0)|$
     \item Definiti $M:=\frac{1}{M_A|L(j\omega_0)|}$ e $\varphi := \varphi_0$ segue $\tau = \frac{M-cos\varphi}{\omega_0 sin\varphi} $ e $\alpha=\frac{Mcos\varphi-1}{M(M-cos\varphi)}$
 \end{enumerate}
 \subsubsection{Sintesi della rete ritardatrice con imposizione del margine di ampiezza $M_A$}
-Tracciamo ancora il cerchio con raggio $\frac{1}{M_A}$, ma vogliamo ora posizionarci fuori dal cerchio. Otterremo quindi un'attenuazione di $M_A modL(j\omega_0)$, e vorremo un ritardo di fase dato da $\varphi_0$, ottenibile $\pi$ meno il modulo dell'argomento di $L(j\omega_0)$. 
+Tracciamo ancora il cerchio con raggio $\frac{1}{M_A}$, ma vogliamo ora posizionarci fuori dal cerchio. Otterremo quindi un'attenuazione di $M_A modL(j\omega_0)$, e vorremo un ritardo di fase dato da $\varphi_0$, ottenibile $\pi$ meno il modulo dell'argomento di $L(j\omega_0)$.
 \begin{enumerate}
     \item Scegliere $\omega_0$ affinché con $\varphi_0 := argL(j\omega_0)+\pi$ valga $\left(M_A|L(j\omega_0), \varphi_0\right) \in f(\mathcal{D})$ quindi $cos\varphi_0 > \frac{1}{M_A|L(j\omega_0)|}$
     \item Definiti $M:=M_A|L(j\omega_0)|$ e $\varphi := \varphi_0$ segue $\tau = \frac{M-cos\varphi}{\omega_0 sin\varphi} $ e $\alpha=\frac{Mcos\varphi-1}{M(M-cos\varphi)}$
 \end{enumerate}
+\subsection{La rete a ritardo e anticipo e la rete a T}
+Qui, abbiamo un controllore a struttura prefissata con f.d.t. $C_r(s)=\frac{1+2\delta'\frac{s}{\omega_n}+\frac{s^2}{\omega_n^2}}{1+2\delta\frac{s}{\omega_n}+\frac{s^2}{\omega_n^2}}$. È sostanzialmente un progetto frequenziale definito dai parametri $\omega_n, \delta, \delta'$ con, nella rete a ritardo e anticipo $\omega_n>0, \delta>\delta'\ge1$, e in quella a T $\omega_n>0,\delta>1,\delta>\delta'>0$. Vedremo che potrà emergere naturalmente una rete a T o ritardo/anticipo in base ai parametri. In effetti, se esaminiamo la risposta armonica, in corrispondenza di $\omega=\omega_n$, la funzione assume il valore puramente reale (non c'è ritardo o anticipo) pari a $C_r(j\omega_n)=\frac{\delta'}{\delta}<1$ (attenuazione di centro banda). Osservando i diagrammi di Bode e Nyquist, notiamo la presenza di un ritardo di fase e successivamente un anticipo, posti in modo simmetrico rispetto all'asse delle pulsazioni, in virtù di una intrinseca simmetria osservabile nel diagramma polare(circonferenza perfetta). È evidente che in corrispondenza di $\omega_n$ siamo nel punto di anticipo/ritardo 0, ed il punto di massimo anticipo sarà opposto a questo.
+\subsubsection{Progetto delle reti con imposizione del margine di fase $M_F$}
+Nel progetto, cerchiamo l'attenuazione adatta a spostare il punto $\omega_0$ sulla circonferenza. L'attenuazione sarà pari al rapporto tra il segmento che intercetta la circonferenza, ed il modulo di $j\omega_0$. In sintesi:
+\begin{enumerate}
+    \item Determiniamo $\omega_0$ soluzione dell'equazione $argL(j\omega_0)=-\pi +M_F$
+    \item Imponiamo $\omega_n=\omega_0, \frac{\delta'}{\delta} = \frac{1}{|L(j\omega_0)|}$
+\end{enumerate}
+Abbiamo sostanzialmente fissato due equazioni, ma con tre parametri ci rimane un grado di libertà.
+\subsubsection{Progetto delle reti con imposizione del margine di ampiezza $M_A$}
+Partiamo qui dal diagramma non compensato, che interseca l'asse reale negativo in $\omega_p$ (determiniamo questa pulsazione), poi andiamo a determinare un punto sull'asse che disti dall'origine $\frac{1}{M_A}$. Vogliamo sostanzialmente fissare una rete a ritardo/anticipo/T ponticellato, che determini una pulsazione tale da spostare il punto $\omega_p$. L'attenuazione sarà quindi pari a $\frac{1}{M_A|L(j\omega_p)|}$.
+Quindi,
+\begin{enumerate}
+    \item Determinare $\omega_p$ come $argL(j\omega_p)=-\pi$
+    \item Imporre $\omega_n=\omega_p, \frac{\delta'}{\delta}=\frac{1}{|L(j\omega_p)| M_A}$
+\end{enumerate}
+Ora, mostriamo una parametrizzazione alternativa (equivalente) per la rete a ritardo anticipo:
+\begin{displaymath}
+    C_r(s)=\frac{(1+\tau_1 s)(1+\tau_2s)}{(1+\tau_1 s)(1+\tau_2s)+\tau_{12}s}
+\end{displaymath}
+Potremmo quindi dedurre che
+\begin{displaymath}
+    \omega_n=\frac{1}{\sqrt{\tau_1\tau_2}}\hspace{5px}\delta'=\frac{\tau_1+\tau_2}{2\sqrt{\tau_1\tau_2}}\ge1\hspace{5px}\delta=\frac{\tau_1+\tau_2+\tau_{12}}{2\sqrt{\tau_1\tau_2}}>\delta'
+\end{displaymath}
+L'attenuazione di centro banda è esprimibile come $C_r(j\omega_n)=\frac{\tau_1+\tau_2}{\tau_1+\tau_2+\tau_{12}}$. Usualmente, nel progetto della rete a ritardo e anticipo si impone il rapporto $\frac{\tau_1}{\tau_2}$.
+\subsection{La sintesi con l'equazione diofantea}
+Abbandoniamo il controllore di struttura prefissata per occuparci di una problematica più generale: in particolare, questo metodo permette l'allocazione arbitraria dei poli retroazionati. In particolare, utilizza una soluzione dell'equazione di Diòfanto, riconducibile alla risoluzione di un sistema di equazioni algebriche lineari. Questo metodo può anche essere utilizzato ed adattato per il conseguimento di prestazioni asintotiche. Prendiamo uno schema di sistema di controllo retroazionato, e ipotizziamo che la f.d.t. $P(s)$ sia strettamente propria,
+\begin{displaymath}
+    P(s):=\frac{b(s)}{a(s)} :=\frac{b_{n-1}s^{n-1}+...+b_1s+b_0}{s^n+a_{n-1}s^{n-1}+...+a_1s+a_0}
+\end{displaymath}
+Il problema è ora \textbf{progettare un controllore proprio $C(s)$ affinché i poli retroazionati del sistema di controllo siano assegnabili arbitrariamente.}
+A questo fine introduciamo un controllore di ordine $l$, pari a $C(s)=\frac{y(s)}{x(s)}$. Vogliamo quindi che le radici dell'eq. caratteristica $1+C(s)P(s)=0$ coincidano con quelle prefissate $\Lambda = \left\{\lambda_1, \lambda_2,...,\lambda_{n+1} \right\}$. Otteniamo quindi il polinomio caratteristico associato al controllore introdotto: $a(s)x(s)+b(s)y(s)$, e introduciamo il polinomio caratteristico desiderato per il sistema retroazionato:
+\begin{displaymath}
+    d(s) := \prod_{i=1}^{n+1} (s-\lambda_i)
+\end{displaymath}
+Otteniamo quindi il polinomio associato ai poli, e quello al controllore. A questo punto dobbiamo quindi equagliarli, ottenendo l'\textbf{equazione diofantea}:
+\begin{displaymath}
+    a(s)x(s)+b(s)y(s)=d(s)
+\end{displaymath}
+L'equazione diofantea ammette soluzione \textbf{se e solo se} il massimo comun divisore di $a(s)$ e $b(s)$ è divisore di $d(s)$. Enunciamo ora alcune osservazioni.
+\paragraph{Proprietà della parametrizzazione esaustiva delle soluzioni dell'eq. diofantea} Sia $m(s)$ il m.c.d. di $a(s)$ e $b(s)$ per il quale valgono le fattorizzazioni $a(s)=m(s)a_1(s)$ e $b(s)=m(s)b_1(s)$. Se l'equazione diofantea ammette una soluzione $\left\{x_0(s), y_0(s)\right\}$ allora l'insieme di tutte le soluzioni è dato da
+\begin{displaymath}
+    \begin{cases}
+        x(s) = x_0(s)+b_1(s)p(s) \\
+        y(s) = y_0(s)-a_1(s)p(s)
+    \end{cases}
+\end{displaymath}
+dove $p(s)$ è un polinomio arbitrario.
+\paragraph{Proprietà} Assumiamo $a(s)$ e $b(s)$ coprimi fra loro. Allora indicato con $\left\{x(s), y(s)\right\}$ una soluzione dell'eq. diofantea, valgono le seguenti equivalenze: se $a(s)$ e $d(s)$ sono coprimi, $a(s)$ e $y(s)$ li saranno; se $b(s)$ e $d(s)$ sono coprimi s.se $b(s)$ e $x(s)$ li sono. Non possono quindi esserci cancellazioni polo-zero tra i poli dell'impianto e gli zeri del controllore. Analogamente, non possono esserci cancellazioni polo-zero tra i poli del controllore e gli zeri dell'impianto.
+\subsubsection{Soluzione}
+Entriamo ora nel merito della soluzione. Considerati $a(s)$ e $b(s)$ coprimi fra di loro, per ogni scelta di $d(s)$ esistono soluzioni dell'eq. diofantea, ma non tutte sono accettabili in quanto è necessario garantire $deg y(s) \le feg x(s)$. Andiamo quindi a parametrizzare un controllore di ordine $l$ che soddisfi l'equazione:
+\begin{displaymath}
+    \frac{y(s)}{x(s)} := \frac{y_ls^l+y_{l-1}s^{l-1}+\dots+y_1s+y_0}{x_ls^l+x_{l-1}s^{l-1}+\dots+x_1s+x_0}, y_i \in \mathbb{R} i =0,1,\dots,l; x_i\in\mathbb{R} i=0,1,\dots,l-1
+\end{displaymath}
+È una scelta corrispondente ad un controllore proprio di ordine $l$. A questo punto, se definiamo il controllore così, dovremo scegliere un controllore $d$ con grado pari a $n+l$. In particolare, introduciamo questo polinomio desiderato:
+\begin{displaymath}
+    d(s)=s^{n+l}+d_{n+l-1}s^{n+l-1}+\dots+d_1s+d_0, d_i \in \mathbb{R} i=0,1,\dots,n+l-1
+\end{displaymath}
+A questo punto, interpretiamo l'eq. diofantea con il principio di identità dei polinomi:
+\begin{displaymath}
+    (s^n+a_{n-1}s^{n-1}+\dots)(s^l+x_{l-1}s^{l-1}+\dots)+(b_{n-1}s^{n-1}+b_{n-2}s^{n-2}+\dots)(y_ls^l+y_{l-1}s^{l-1}+\dots)=s^{n+l}+d_{n+l-1}s^{n+l-1}+\dots
+\end{displaymath}
+Ottenendo quindi $n+l$ equazioni lineari nelle $2l+1$ incognite reali (le $x_i$ ed $y_i$).
+È ragionevole imporre che il numero di equazioni lineari sia uguale al numero di incognite, ovvero
+\begin{displaymath}
+    nl=2l+1 \rightarrow l=n-1
+\end{displaymath}
+Sviluppando i calcoli della produttoria, otteniamo
+\begin{displaymath}
+    s^{2n-1}+d_{2n-2}s^{2n-2}+\dots+d1s+d_0
+\end{displaymath}
+ed infine
+\begin{displaymath}
+    \begin{cases}
+        x_{n-2}+b_{n-1}y_{n-1} = d_{2n-2}-a_{n-1}                                                             \\
+        a_{n-1}x_{n-2}+x_{n-3}+b_{n-2}y_{n-1} + b_{n-1}y_{n-2} = d_{2n-3}-a_{n-2}                             \\
+        a_{n-2}x_{n-2}+a_{n-1}x_{n-3}+x_{n-4}+b_{n-3}y_{n-1}+b_{n-2}y_{n-2}+b_{n-1}y_{n-3} = d_{2n-4}-a_{n-3} \\
+        \dots                                                                                                 \\
+        a_0x_1+a_1x_0+b_0y_1+b_1y_0=d_1                                                                       \\
+        a_0x_0+b_0y_0+d_0
+    \end{cases}
+\end{displaymath}
+Queste equazioni sembrano complesse, ma ricordando la convenzione che il coefficiente di un certo monomio ha il pedice uguale alla potenza del monomio stesso, è semplice da ricordare. Osserviamo infatti che i pedici hanno somma costante per ogni equazione (pari al pedice del coefficiente $d$ sul membro di destra).
+Trascrivendo in forma matriciale le equazioni, otteniamo questo:
+SCREENSHOT TODO
+Per capirne la struttura, è conveniente vederla come due sottomatrici affiancate: una prima composta dalle prime $n-1$ colonne, e quella con le successive $n$. Nella prima, avremo solo i coefficienti dei polinomi $a$, nella seconda solo i $b$. Notiamo che nelle diagonali gli elementi sono sempre uguali. Queste matrici sono dette matrici di Teplez: sono caratterizzate dal fatto di essere caratterizzate dalla prima riga e dalla prima colonna. Infatti, sapendo che le diagonali sono costanti, possiamo ottenere l'intera matrice.
+Il problema di assegnabilità arbitraria è risolvibile con un controllore proprio $C(s)$ di ordine $n-1$ se e solo se la matrice dei coefficienti del sistema di equazioni è non singolare. Per verificare questa condizione, costruiamo la matrice di Sylvester $S(a,b)$ di ordine $(m+n)x(m+n)$ in accordo alla definizione seguente: nelle prime $m$ righe compaiono solo i coefficienti $a$, nelle seguenti $n$ righe i coefficienti $b$. Le prime $m$ righe costituiscono ancora una matrice Tepleziana. Quella seguente non è Teplezian ma è simile: la costanza non è più nelle diagonali, ma nelle \textbf{antidiagonali}. Queste matrici sono dette matrici di Ankel. Otteniamo, per definizione, il risultante di $a(s)$ e $b(s)$.
+\begin{displaymath}
+    R(a,b):=det S(a,b)
+\end{displaymath}
+C'è un risultato teorico che afferma che se il risultante è diverso da 0, i polinomi $a(s)$ e $b(s)$ \textbf{sono coprimi}. A questo punto, facciamo la trasposta della matrice di Sylester: se la prima è non singolare, anche la trasposta la è. Notiamo che la matrice $S^T$ coincide a meno di una permutazione di colonne con la matrice dei coefficienti del sistema di equazioni delle incognite: se $S^T$ è non singolare, la sarà anche la matrice dei coefficienti. Siamo giunti al teorema desiderato:
+\begin{center}
+    Assunti $a(s)$ e $b(s)$ coprimi fra loro, i poli del sistema in retroazione unitaria sono assegnabili arbitrariamente con un controllore proprio di ordine $n-1$.
+\end{center}
+Questo è un risultato importante:
+\begin{itemize}
+    \item Il metodo di sintesi con l'eq. diofantea può essere adattato per incorporare specifiche di regolazione asintotica (principio del modello interno, ossia quando desideriamo che la risposta al gradino di un sistema retroazionato sia nulla, dobbiamo garantire che il sistema sia di tipo 1, cioè deve esserci un polo nell'origine, che sta a significare una sorta di modello interno di una costante) (scusate)
+    \item Questo metodo può essere interpretato come una delle tecniche del progetto con il polinomio caratteristico (principio di identità dei polinomi). Il fatto è partito dal prendere un polinomio associato alla struttura del controllore, eguagliato al polinomio desiderato.
+    \item Questo risultato non è una panacea per la sintesi dei controllori: non tutte le specifiche sono riconducibili ad imposizioni sui poli retroazionati o a prestazioni asintotiche
+    \item L'assegnabilità dei poli retroazionati va utilizzata con cautela per evitare un uso eccessivo dell'azione di controllo ($max_{t\in\mathbb{R}}|u(t)|$ limitato dalle caratteristihe dell'attuatore o dell'impianto). Se io scelgo i poli retroazionati molto a sinistra, rendo il sistema apparentemente velocissimo, ma questo si scontra con il fatto fisico: provando a usare questi poli retroazionati troveremmo dei segnali inutilizzabili.
+\end{itemize}
+\section{Sistemi di controllo per la regolazione}
+Il problema di regolazione asintotica può essere così posto: sia dato un impianto con f.d.t. $P(s)$ strettamente propria, vogliamo determinare un controllore $C(s)$ per il quale si abbia nel sistema retroazionato la stabilità asintotica interna e un errore a regime nullo in risposta ad un gradino del segnale di riferimento.
+Assumiamo $P(s)=\frac{b(s)}{a(s)}$ con $a(s)$ e $b(s)$ coprimi. Sappiamo allora che
+\begin{center}
+    Il problema di regolazione asintotica ha soluzione se e solo se $P(0)\neq0$ ovvero il guadagno statico dell'impianto è diverso da zero.
+\end{center}
+L'impianto non deve quindi avere zeri sull'origine. Possiamo quindi progettare un controllore $C(s)$ di ordine $n-1$ affinché i poli del sistema retroazionati siano assegnati arbitrariamente e in particolare siano tutti a parte reale negativa nonché diversi dalle radici di $a(s)$ e $b(s)$. Ne consegue che il sistema retroazionato è internamente asintoticamente stabile e di tipo maggiore o uguale ad $1$. L'errore a regime in risposta ad un gradino del riferimento è dunque nullo. Il problema di regolazione è risolto. Analizziamo un altro caso: l'origine del piano complesso non è polo dell'impianto ($a_0\neq 0$) e $P(0)\neq 0$ significa $b_0\neq0$. Il sistema retroazionato sia di tipo 1 con controllore di ordine $l$:
+\begin{displaymath}
+    C(s)=\frac{z(s)}{x(s)}=\frac{z_ls^l+z_{l-1}s^{l-1}+\dots+z_1s+z_0}{s^l+x_{l-1}s^{l-1}+\dots+x_1s}
+\end{displaymath}
+\begin{displaymath}
+    1+\frac{z(s)}{x(s)}\cdot \frac{b(s)}{a(s)}=0,\hspace{5px}x(s)a(s)+z(s)b(s)=0
+\end{displaymath}
+Vogliamo quindi un polo nell'origine.
+Avremo $p_c(s) := x(s)a(s)+z(s)b(s)$ polinomio caratteristico associato al controllore, e $p_d(s):=s^{n+l}+d_{n+l-1}s^{n+l-1}+\dots+d_0$ polinomio caratteristico desiderato. Imponiamo allora $p_c(s)=p_d(s)$, da cui otteniamo $n+l$ equazioni con $2l$ incognite.
+Da qui, deduciamo che il grado del controllore $n$ deve essere uguale a $l$.
+A questo punto possiamo effettuare la produttoria in $p_c(s)$ e la sviluppiamo. Otterremo un sistema, da riportare poi in una matrice,che sarà non singolare: esiste sempre una soluzione, e sarà una sola. Il problema può quindi essere risolta con assegnazione arbitraria dei poli del sistema retroazionato: la scelta è solitamente fatta con metodi numerici di ottimizzazione secondo possibili vincoli o indici da minimizzare/massimizzare.
+\section{I regolatori PID}
+Ricordiamo la f.d.t. dei regolatori PID: $R(s)=K_p\left(1+T_ds+\frac{1}{T_is}\right)$, nell'ipotesi che l'azione derivativa sia pura. Ricordiamo che nelle implementazioni, $T_d s$ è sempre sostituito con un filtraggio, $\frac{T_ds}{1+\tau s}$. Ricordiamo anche $K_p$ costante proporzionale, $T_d$ costante di tempo dell'azione derivativa, $T_i$ costante di tempo dell'azione integrale, $\frac{1}{K_p}$ banda proporzionale. Citiamo anche i casi particolari: regolatore P, regolatore I, regolatore PI, regolatore PD.
+Esaminiamo dal punto di vista frequenziale il progetto di un regolatore PID. Facciamo riferimento anzitutto al diagramma asintotico di Bode. $P(s)$ è asintoticamente stabile e a fase minima. Se al posto del regolatore avessimo un controllore di guadagno unitario, il guadagno di anello coincide con $P(s)$. Osserviamo che l'intersezione del diagramma dei moduli di $P(s)$ avviene all'incirca in pendenza $-3$. Ricordiamo che nei sistemi a fase minima, il diagramma dei moduli determina univocamente quello delle fasi.
+% TODO: aggiungi diagrama 16.10
+Osserviamo che la pulsazione di rottura di $|R(j\omega)|$ è quasi corrispondente al punto in cui la pendenza di $|P(j\omega)|$ passa da -1 a -2. È possibile in realtà fare un progetto frequenziale utilizzando relazioni abbastanza semplici. Riscrivamo $R(s)$ per ottenere $\omega_n$ e $\delta$:
+\begin{displaymath}
+    R(s)=K_p\left(1+T_ds+\frac{1}{T_is}\right)=\frac{K_p}{T_i}\cdot\frac{T_dT_is^2+T_is+1}{s}=\frac{K_p}{T_i}\cdot\frac{1+2\delta\frac{s}{\omega_n}+\frac{s^2}{\omega_n^2}}{s}
+\end{displaymath}
+\begin{displaymath}
+    \omega_n = \frac{1}{\sqrt{T_dT_i}}, \hspace{5px}\delta=\frac{1}{2}\cdot\sqrt{\frac{T_i}{T_d}}
+\end{displaymath}
+\begin{displaymath}
+    R(j\omega) = \frac{K_p}{T_i}\cdot\frac{2\delta}{\omega_n}=K_p
+\end{displaymath}
+\begin{displaymath}
+    R(j\omega_n)=\frac{K_p}{T_i}\cdot\frac{2\delta}{\omega_n}=K_p
+\end{displaymath}
+Il guadagno algebrico è senza ritardi e senza anticipi. Determiniamo $\omega_0$ soluzione di $argP(j\omega_0)=-\pi+M_f$, e imponiamo $\omega_n = \omega_0$ e $R(j\omega_n)=\frac{1}{|P(j\omega_0)|}$ da cui $K_p=\frac{1}{|P(j\omega_0)|}$. Scelto il rapporto $k :=\frac{T_i}{T_d}$ segue $\delta =\frac{1}{2}\cdot\sqrt{k}$ e $T_i=\frac{2\delta}{\omega_n}=\frac{\sqrt{k}}{\omega_0}$. Infine, da $T_dT_i = \frac{1}{\omega_n^2}$ segue $T_d = \frac{1}{T_i\omega_0^2} = \frac{1}{\sqrt{k}\omega_0}$.
+\subsection{Implementazione dei regolatori PID}
+\subsubsection{Limitazione dell'azione derivativa $\frac{T_ds}{1+\tau s}$}
+La modifica che facciamo per limitare la sovraelongazione è spostare l'azione derivativa: miglioreremo perché se noi la tenessimo nella posizione normale, l'introduzione di un gradino eccita significativamente questa azione pseudoderivativa. Spostandola in questa linea, filtriamo questa azione grazie alla presenza dell'impianto.
+\subsubsection{Desaturazinoe dell'azione integrale}
+Il problema risiede nella carica integrale quando l'attuatore è saturante. L'attuatore saturante viene modellato attraverso una caratteristica non lineare $m(t)$. Ipotizziamo un valore di gradino piuttosto elevato e vicino al valore di saturazione dell'attuatore. L; integratore integra il segnale errore, che raggiunge un valore elevato e satura $u_M$. Possiamo sfruttare quindi un regolatore PID con desaturazione (anti wind-up). L'idea è semplice: si tratta di replicare all'interno del regolatore, la saturazione dell'attuatore.
+\subsection{Metodi di taratura dei regolatori PID}
+Questi metodi sono progetti veloci, non particolarmente accurati, ma utili per la loro semplicità. Citiamo il metodo di Ziegler-Nichols ad anello aperto: identificazione del processo da regolare mediante applicazione di un gradino all'ingresso $u(t) = u_c1(t)$. Questi metodi sono utili quando abbiamo, per esempio, un numero molto alto di regolatori da progettare. Dato $t_0$ tempo di ritardo, $T$ costante di tempo, $R:=\frac{t_0}{T}$ rapporto di ritardo, $K:=\frac{y_c}{u_c}$ guadagno statico, $N:=\frac{y_c}{T}$ velocita di risposta.
+\begin{displaymath}
+    P(s)=\frac{Ke^{-t_0s}}{1+Ts}
+\end{displaymath}
+In altre parole, individuo il punto di flesso, e trovo la tangente. Le regole sono state poi riviste da Cohen e Coon, che hanno proposto queste regole:\begin{itemize}
+    \item Regolatore P: $K_p = \frac{u_c}{Nt_0}\left(1+\frac{R}{3}\right)$
+    \item Regolatore I: $\frac{K_p}{T_i}=\frac{4u_c}{Nt_0^2}\frac{R^2}{1+5R}$
+    \item Regolatore PI: $K_p = \frac{u_c}{Nt_0}\left(\frac{9}{10}+\frac{R}{12}\right), T_i = t_0\frac{30+3R}{9+20R}$
+    \item Regolatore PD: $K_p=\frac{u_c}{Nt_0}\left(\frac{5}{4}+\frac{R}{6}\right), T_d=t_0\frac{6-2R}{22+3R}$
+    \item Regolatore PID: $K_p = \frac{u_c}{Nt_0} \left(\frac{4}{3}+\frac{R}{4}\right), T_i = t_0\frac{32+6R}{13+8R}, T_d=t_0\frac{4}{11+2R}$
+\end{itemize}
+C'è anche da segnalare un metodo ad anello chiuso: con un regolatore proporzionale si porta il sistema retrozionato nella condizione di stabilità limite (innesco di autooscillazioni sull'uscita dell'impianto). Avremo $K_0$ guadagno critico (del regolatore P nella condizione di stabilità limite) e $T_0$ periodo dell'oscillazione.
+\begin{itemize}
+    \item Regolatore P: $K_p = 0.5K_0$
+    \item Regolatore PI: $K_p = 0.45K_0, T_i=0.85T_0$
+    \item Regolatore PD: $K_p = 0.5K_0, T_d = 0.2T_0$
+    \item Regolatore PID: $K_p = 0.6K_0, T_i = 0.5T_0, T_d = 0.12T_0$
+\end{itemize}
+Esistono inoltre tante regole di taratura pubblicate, ed algoritmi di auto-sintonia.
+\section{Controllo dei sistemi con ritardo}
+\subsection{Schema a predittore di Smith}
+Lo schema visto fino ad ora impone una forte limitazione delle prestazioni in sistemi affetti da ritardo di tempo. Lo \textbf{schema a predittore di Smith} supera questa limitazione. L'idea centrale è quella di affiancare al controllore $C$ una parte che contien una replica del sistema controllato (possibilmente esatta), ovvero del ritardo finito $C_P(s)=(1-e^{-t_0s})G(s)$. Otteniamo quindi
+\begin{displaymath}
+    T_{ry}(s)=\frac{C(s)G(s)}{1+C(s)G(s)}e^{-t_0s}
+\end{displaymath}
+Il ritardo non crea così problemi: progetto il controllore $C$ come se non esistesse questo ritardo, poi semplicemente ritardo i segnali. Lo schema può essere implementato anche con uno schema equivalente.
+% TODO 16.17-16.18
+\section{Controllo feedforward/feedback (schemi di controllo a due gradi di libertà)}
+Vediamo ora qualche schema avanzato di feedforward/feedback. Il primo che analizziamo è il \textbf{prefiltraggio del segnale di riferimento}
+%TODO: 16.19
+Applichiamo quindi il segnale di riferimento a monte di $C_1$ blocco di prefiltraggio. Esistono tre metodi: filtraggio statico ($C_1(s)=T_{r_1y}(0)^{-1}$), filtraggio passa-basso, filtraggio passa-alto. Un altro schema è la \textbf{compensazione del segnale di riferimento}, dove $C_1$ non è più prefiltraggio su $r$ macome contributo di segnale che sommiamo direttamente al segnale del controllore feedback che introduciamo. Osserviamo che la f.d.t. di $r$ e $y$ è determinata da due contributi, uno su $C_1$ e uno su $C_2$. In particolare sarà la somma. A questo punto, se $C_1(s)$ è il reciproco di $P(s)$, otteniamo che la f.d.t. risulta essere uguale ad 1. Questo può essere considerato un buon risultato. In realtà, inserire il sistema inverso può essere impraticabile: non posso implementare un sistema improprio (se $C_1$ è proprio l'inverso non lo è). Inoltre, se l'impianto ha degli zeri con parte reale non negativa, il sistema inverso sarà instabile. Certamente, non possiamo sfruttare un sistema instabile per aumentare la stabilità.
+Potremmo però costruire un sistema inverso approssimato per risolvere la prima condizione, mentre la seconda è possibile attraverso l'inversione dinamica stabile.
+Quest'ultima permette di ottenere un segnale inverso limitato, determinando anche per impianti a fase non minima dei segnali inversi $u_d$ limitati. Il metodo dell'inversione dinamica stabile può essere anche utilizzato per generalizzare lo scema di controllo col prefiltraggio del segnale di riferimento: l'inversione non sarà più sull'impianto ma sul sistema chiuso in retroazione determinato da $C_2(s)$ e $P(s)$. Questa tecnica può ragionevolmente avere successo.
+\section{Conclusioni sul progetto dei controllori in retroazione}
+Elenchiamo alcune tecniche utili per la sintesi di un controllore in retroazione a struttura prefissata $C(s;p)$ dove $p=[p_1p_2\dots p_k]^T$ indica il vettore dei parametri di progetto ($p \in \mathcal{P} \subseteq \mathbb{R}$ e usualmente $\mathcal{P}=[p_1^{-}p_1^+]x\dots x[p_k^-p_k^+]$)
+\begin{itemize}
+    \item Criterio di Routh o metodi con uso della tabella di Routh (imposizione di un prefissato grado di stabilità $G_S$, imposizione del margine di ampiezza $M_A$, ecc\dots)
+    \item Diagrammi di Nyquist e formule di inversione (progetti in frequenza con imposizione di margini di stabilità, ecc\dots)
+    \item Diagrammi di Bode (progetti in frequenza per sistemi a fase minima, progetti con specifiche frequenziali su $T_{ry}(j\omega)$ o $T_{dy}(j\omega)$, ecc\dots)
+    \item Metodo di cancellazione polo-zero (anche utili per ridurre il numero $k$ dei parametri di progetto)
+    \item Metodo del polinomio caratteristico con uso del principio di identità dei polinomi (equazione diofantea, imposizione dei poli dominanti, ecc\dots)
+    \item Metodo del luogo delle radici (sintesi con grado di stabilità massimo, specifiche sui poli dominanti, ecc\dots) Quale metodo qualitativo è utile nell'individuare la struttura appropriata per il controllore.
+\end{itemize}
+Nel progetto dei controllori e più in generale dei sistemi di controllo è una buona pratica l'uso di ottimizzazioni (dei parametri di progetto) e di simulazioni al calcolatore per la verifica delle evoluzioni nelle varie situazioni operative.
+\section{Introduzione al controllo digitale}
+I \textbf{sistemi di controllo digitale} comprendono un elaboratore digitale nel sistema di controllo.
+% TODO: immagine controllore digitale
+La sezione analogica si interfaccerà quindi con una parte digitale, in cui i segnali sono a tempo discreto. I segnali $m$ e $c$ sono continui quindi analogici, mentre i segnali $~$ saranno digitali. Il controllore $C_d$ sarà gestito da un programma che si occuperà dell'elaborazione, fornendo molte più possibilità, come per esempio una supervisione/diagnosi del controllo. Apre quindi ad aspetti di automazione avanzata.
+\subsection{Convertitore A/D}
+Questo convertitore effettua quindi il campionamento del segnale con periodo $T$:
+\begin{displaymath}
+    x(t)\rightarrow \widetilde{x}(k)\rightarrow x(kT), k\in \mathbb{Z}
+\end{displaymath}
+C'è un aspetto importante al riguardo: la rappresentazione del campione. Abbiamo la necessità di rappresentare i numeri in modo finito: distinguiamo tra livelli di quantizzazione. Detto ciò, in questo corso trascureremo la quantizzazione: la campionatura sarà idealmente esatta, basterà tenere conto di un errore.
+La conversione inversa, però, non ammette un'unica soluzione! Questo problema venne affrontato da Shannon nel dopoguerra, portando al \textbf{teorema del campionamento}:
+\begin{center}
+    Un segnale $f(t)$ con spettro limitato da $0$ a $\omega_s$, cioè con trasformata di Fourier $F(j\omega)$ nulla per $\omega\ge\omega_s$, si può ricostruire dalla sequenza di campioni $\widetilde{f}(k)=f(kT)$ se e solo se la pulsazione di campionamento $\Omega = 2\pi /T$ è non inferiore a $2\omega_s$
+\end{center}
+Questo risultato sottolinea quanto importante sia la frequnza di campionatura.
+Se il segnale viene sottocampionato, accade l'\textbf{aliasing}, attenuabile attraverso filtri anti-aliasign (passa-basso) di Butterworth o Bessel.
+\subsection{Convertitore D/A}
+Il più comune è il dispositivo di tenuta di ordine zero (zero-order hold). Semplicemente tiene in memoria l'ultimo campione ricevuto all'ingresso, e l'uscita corrispondente a tempo continuo su quel valore: l'uscita sarà una funzione a gradini.
+%TODO: immagine
+È ovvio che una frequenza bassa può portare a problemi.
+\subsection{La trasformata zeta}
+È opportuno definire uno strumento matematico per questi sistemi. La \textbf{trasformata Zeta} porta a una funzione complessa di variabile complessa, come la trasformata di Laplace.
+\begin{center}
+    Sia $x:\mathbb{Z}\rightarrow\mathbb{R}$ (o $\mathbb{C}$) un segnale a tempo discreto (anche sequenza o successione). La trasformata zeta di $x(k)$ è $\mathcal{Z}[x] = \mathcal{Z}[x(k)]:=\sum_{k=0}^{+\infty} x(k)z^{-k}$ con $z$ variabile complessa.
+\end{center}
+Se esistono $\rho>0$ e $M>0$ per i quali vale $x(k)\le M\rho^k, k\ge0$ allora $X(z)$ è analitica su $\mathbb{C}B_\rho$, ovvero per i valori $|z|>\rho$.
+Esempi:
+\begin{displaymath}
+    x(k)=a^k,\mathcal{Z}[a^k]=\sum_{k=0}^+\infty a^kz^{-k}=\sum_{k=0}^+\infty \left(\frac{a}{z}\right)^k = \frac{1}{1-\frac{a}{z}} = \frac{z}{z-a}
+\end{displaymath}
+convergente per $|z|>|a|$. Analogamente a come fatto in passato, possiamo procedere per continuazione analitica: $X(z)=\frac{z}{z-a}$ è ben definita per ogni $z\neq a$. Se $a=1$, otteniamo $\mathcal{Z}[1^k]=\mathcal{Z}[1(k)]=\frac{z}{z-1}$. La trasformata considera solo i valori di $k$ non negativi. Introduciamo ora la delta di Dirac discreta o impulso discreto (totalmente diversa da quella vista in passato):
+\begin{displaymath}
+    \delta(k)=\begin{cases}
+        1 \textrm{ se }k=0 \\
+        0 \textrm{ altrimenti}
+    \end{cases}
+\end{displaymath}
+È quindi molto semplice: $\mathcal{Z}[\delta(k)]=\sum_{k=0}^{+\infty}\delta(k)z^{-k}=1$. Un'altra proprietà interessante è la sua linearità: dati due segnali $x(k), y(k)$ e due costanti $a,b$ anche complesse,\begin{displaymath}
+    \mathcal{Z}[ax(k)+by(k)]=a\mathcal{Z}[x(k)]+b\mathcal{Z}[y(k)]
+\end{displaymath}
+Possiamo ora introdurre la regione di convergenza (ROC). Semplicemente è definita come
+\begin{center}
+    Data la sequenza $x(k)$, la regione di convergenza (ROC) di $X(z)=\mathcal{Z}[x(k)]$ è definita da:
+\end{center}
+\begin{displaymath}
+    \left\{z\in\mathbb{C}:|\sum_{k=0}^\infty x(k)z^{-k}|<\infty\right\}
+\end{displaymath}
+Ha alcune proprietà:
+\begin{itemize}
+    \item $X(z)$ è analitica su ROC
+    \item Se ROC non è l'insieme vuoto, $ROC=\left\{z\in\mathbb{C}:|z|>\rho_c\right\}$, con $\rho_c$ è raggio di assoluta convergenza $\rho_c =lim sup_{k\rightarrow+\infty} |x(k)|^{1/k}:=lim_{k\rightarrow+\infty}sup_{m\ge k} \left\{|x(m)|^{1/m}\right\}$
+    \item Se $\rho>\rho_c$, la serie $\sum_{k=0}^{\infty} x(k)z^{-k}$ è convergente uniformemente su $\left\{z\in\mathbb{C}:|z|\ge\rho\right\}$.
+\end{itemize}
+\section{Proprietà della trasformata zeta}
+Vediamo ora alcune proprietà della trasformata zeta.
+\subsection{Trasformata zeta di un segnale ritardato di n passi}
+Questa può essere espressa prendendo la trasformata zeta di $x(k)$, la si moltiplica per $z^{-n}$ poi si aggiungono dei monomi con potenze negativa di z, che riportano i valori del segnale (condizioni iniziali). Nel caso di segnali non causali, vanno considerati per valutare correttamente la trasformata.
+\begin{displaymath}
+    \mathcal{Z}[x(k-n)] = z^{-n} \mathcal{Z}[x(k)] + \sum_{k=0}^{n-1}x(k-n)z^{-k} = z^{-n}\mathcal{Z}[x(k)]+x(-n)+x(-n+1)z^{-1}+\dots+x(-1)z^{-n+1}
+\end{displaymath}
+Questa proprietà vale per la definizione di $\mathcal{Z}$.
+\subsection{Trasformata zeta di un segnale anticipato di n passi}
+Questa è una proprietà \textit{duale} della precedente:
+\begin{displaymath}
+    \mathcal{Z}[x(k+n)] = z^{n} \mathcal{Z}[x(k)] - \sum_{i=0}^{n-1}x(i)z^{n-i} = z^{n}\mathcal{Z}[x(k)]-x(0)z^n-x(1)z^{n-1}-\dots-x(n-1)z
+\end{displaymath}
+Un esempio valido è $\mathcal{Z}[2^{k+2}]=\frac{4z}{z-2}$.
+\subsection{Teorema del valore iniziale}
+Questo teorema afferma che il campione iniziale del segnale $x(0)$ si ottiene dal limite
+\begin{displaymath}
+    x(0)=lim_{z\rightarrow+\infty}\mathcal{Z}[x(k)]
+\end{displaymath}
+\subsection{Teorema del valore finale}
+Dato il segnale $x(k)$ per il quale il limite $lim_{k\rightarrow+\infty}x(k)$ esiste ed è finito, vale
+\begin{displaymath}
+    lim_{k\rightarrow+\infty} x(k) = lim_{z\rightarrow1}(z-1)\trz[x(k)]
+\end{displaymath}
+Qusto teorema può essere posto in una formulazione più utile, estesa: dato il segnale $x(k)$ sia $X(z) := \trz[x(k)]$
+\begin{enumerate}
+    \item Se $X(z)$ non ha poli nella regione $|z|\ge1$ allora $lim_{k\rightarrow+\infty} x(k)=0$. Vuol dire che quando i poli sono concentrati nel cerchio unitario aperto vale il limite.
+    \item Se $X(z)$ non ha poli nella regione $|z|\ge1$ ad eccezione di un polo semplice in $z=1$ allora $x(k)$ converge per $k\rightarrow+\infty$ e vale $lim_{k\rightarrow+\infty} x(k) = Res\left\{X(z),1\right\} = lim_{z\rightarrow1}(z-1)X(z)$.
+    \item Se $X(z)$ ha un polo multiplo in $z=1$, allora $x(k)$ non converge per $k\rightarrow+\infty$. È sufficiente quindi l'esistenza di un polo multiplo nel punto per la non convergenza.
+    \item Se $X(z)$ ha un polo nella regione $|z|\ge1, z\neq 1$ allora $x(k)$ non converge per $k\rightarrow+\infty$.
+\end{enumerate}
+\subsection{Trasformata zeta di $a^kx(k)$}
+In questo caso, la trasformata si ottiene dalla trasformata X valutandola in $z/a$:
+\begin{displaymath}
+    \trz[a^k x(k)] = X\left(\frac{z}{a}\right)
+\end{displaymath}
+\subsection{Convoluzione a tempo discreto}
+La convoluzione dei segnali discreti $x(k)$ e $y(k)$ è definita come:
+\begin{displaymath}
+    (x*y)(k)=x(k)*y(k) := \sum_{i=-\infty}^{+\infty} x(k-1)y(i)
+\end{displaymath}
+La convoluzione è quindi ottenuta sommando infinite copie di $x(k)$, ciascuna delle quali è traslata in avanti di $i$ passi e moltiplicata per $y(i)$. 
+\subsubsection{Commutatività della convoluzione}
+\begin{displaymath}
+    x(k)*y(k)=y(k)*x(k)
+\end{displaymath}
+\subsubsection{Trasformata zeta della convoluzione}
+Se $x(k)$ e $y(k)$ sono segnali discreti tali che $x(k)=0, y(k)=0$ per $k<0$ (segnali causali) allora 
+\begin{displaymath}
+    \trz [x*y]=X(z)Y(z)
+\end{displaymath}
+\subsection{Derivata della trasformata zeta}
+Sia $x(k)$ un segnale discreto e $X(z)$ la corrispondente trasformata zeta. Nella regione in cui $X(z)$ è analitica, vale
+\begin{displaymath}
+    -z\frac{dX(z)}{dz} = \trz [k\cdot x(k)]
+\end{displaymath}
+
 \end{document}
 
 
