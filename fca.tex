@@ -1561,13 +1561,13 @@ La convoluzione dei segnali discreti $x(k)$ e $y(k)$ è definita come:
 \begin{displaymath}
     (x*y)(k)=x(k)*y(k) := \sum_{i=-\infty}^{+\infty} x(k-1)y(i)
 \end{displaymath}
-La convoluzione è quindi ottenuta sommando infinite copie di $x(k)$, ciascuna delle quali è traslata in avanti di $i$ passi e moltiplicata per $y(i)$. 
+La convoluzione è quindi ottenuta sommando infinite copie di $x(k)$, ciascuna delle quali è traslata in avanti di $i$ passi e moltiplicata per $y(i)$.
 \subsubsection{Commutatività della convoluzione}
 \begin{displaymath}
     x(k)*y(k)=y(k)*x(k)
 \end{displaymath}
 \subsubsection{Trasformata zeta della convoluzione}
-Se $x(k)$ e $y(k)$ sono segnali discreti tali che $x(k)=0, y(k)=0$ per $k<0$ (segnali causali) allora 
+Se $x(k)$ e $y(k)$ sono segnali discreti tali che $x(k)=0, y(k)=0$ per $k<0$ (segnali causali) allora
 \begin{displaymath}
     \trz [x*y]=X(z)Y(z)
 \end{displaymath}
@@ -1576,7 +1576,90 @@ Sia $x(k)$ un segnale discreto e $X(z)$ la corrispondente trasformata zeta. Nell
 \begin{displaymath}
     -z\frac{dX(z)}{dz} = \trz [k\cdot x(k)]
 \end{displaymath}
-
+\section{Antitrasformazione zeta}
+Vediamo ora le tecniche di antitrasformazione zeta. È necesssario un richiamo di analisi complessa: il teorema dei residui.
+\begin{center}
+    Sia $\Gamma$ una curva chiusa semplice, e $f(z)$ una funzione analitica su $\Gamma$ e nella sua regione interna ad eccezione dei punti singolari $p_1,p_2,\dots,p_n$ in essa contenuti. Allora
+\end{center}
+\begin{displaymath}
+    \oint f(z)dz=2\pi j \sum_{i=1}^n Res\left\{f,p_i\right\}
+\end{displaymath}
+Esiste ora un lemma che dà sostanzialmente ragione del calcolo di questo integrale chiuso: sia $l\in \mathbb{Z}$, allora
+\begin{displaymath}
+    \oint_\Gamma z^l dz = \begin{cases}
+        2\pi j \textrm{ se }l=-1 \\
+        0\textrm{ altrimenti}
+    \end{cases}
+\end{displaymath}
+dove $\Gamma$ è una curva chiusa (semplice) che circonda l'origine del piano complesso ($\mathbb{C}$) percorsa in senso antiorario. Questo lemma è dimostrabile utilizzando il teorema dei residui. Quando quindi consideriamo i valori di $l$ negativi, abbiamo la necessità di valutare il residuo in corrispondenza di $z=0$. Questo lemma lo applichiamo al teorema di antitrasformazione, in cui indichiamo $X(z)$ come la trasformata di una sequenza $x(k)$, allora
+\begin{displaymath}
+    x(k)=\frac{1}{2\pi j}\oint_\gamma X(z)^{k-1}dz
+\end{displaymath}
+dove $\gamma$ è una curva chiusa semplice, percorsa in senso antiorario, che circonda la regione di non convergenza di $Z[x(k)]$. La regione di non convergenza è
+\begin{displaymath}
+    \mathbb{C}/ROC = \left\{z \in \mathbb{C} : |z|\le \rho_c\right\} \subset \left\{\textrm{regione interna di }\gamma\right\}
+\end{displaymath}
+Formalmente, $x(k)=\trz^-1[X(z)]$.
+\subsection{Antitrasformazione con il metodo dei residui}
+Applicando il teorema dei residui nel calcolo dell'integrale, segue
+\begin{displaymath}
+    x(k)=\frac{1}{2\pi j}\cdot 2\pi j \sum_i Res \left\{X(z)\cdot z^{k-1}, p_i\right\}
+\end{displaymath}
+I valori $p_i$ sono le singolarità distinte di $X(z) \cdot z^{k-1}$.
+Quindi
+\begin{displaymath}
+    x(k)=\sum_i Res \left\{X(z)\cdot z^{k-1}, p_i\right\}
+\end{displaymath}
+\subsubsection{Proprietà (sommatoria dei residui di una funzione razionale strettamente propria)}
+Se avessimo una funzione razionale $F(z)=\frac{b_mz^m+b_{m-1}z^{m-1}+...+b_0}{a_nz^n+a_{n-1}z^{n-1}+\dots+a_0}$ strettamente propria, con $a_n\neq0, b_m\neq0$ e $p_1,p_2,\dots,p_h$ i suoi poli distinti. Segue allora
+\begin{displaymath}
+    \sum_{i=1}^h Res\left\{F,p_i\right\} = \begin{cases}
+        0 \textrm{ se }n-m>1 \\
+        \frac{b_m}{a_n} \textrm{ se }n-m=1
+    \end{cases}
+\end{displaymath}
+Alcuni casi particolari:
+\begin{displaymath}
+    \trz^{-1}\left[\frac{1}{z-a}\right] = a^k-1 \cdot 1(k-1)
+\end{displaymath}
+\begin{displaymath}
+    \trz^{-1}\left[\frac{1}{(z-a)^2}\right] = (k-1)a^{k-2}\cdot 1(k-1)
+\end{displaymath}
+\begin{displaymath}
+    \trz^{-1}\left[\frac{1}{(z-a)^3}\right] = \frac{(k-1)(k-2)}{2}a^{k-3}\cdot 1(k-1)
+\end{displaymath}
+\begin{displaymath}
+    \trz^{-1}\left[\frac{z}{z-a}\right] = a^k \cdot 1(k)
+\end{displaymath}
+\begin{displaymath}
+    \trz^{-1}\left[\frac{z}{(z-a)^2}\right] = ka^{k-1}\cdot 1(k)
+\end{displaymath}
+\begin{displaymath}
+    \trz^{-1}\left[\frac{z}{(z-a)^3}\right] = \frac{k(k-1)}{2}a^{k-2}\cdot 1(k)
+\end{displaymath}
+\subsubsection{Antitrasformata zeta di fratti complessi}
+\begin{displaymath}
+    \trz^{-1}\left[\frac{c}{z-p}+\frac{\overline{c}}{z-\overline{p}}\right] = 2|c||p|^{k-1} cos\left[arg(p)(k-1)+arg(c)\right]\cdot 1(k-1)
+\end{displaymath}
+\begin{displaymath}
+    \trz^{-1}\left[c\frac{c}{z-p}+\overline{c}\frac{\overline{c}}{z-\overline{p}}\right] = 2|c||p|^{k} cos\left[arg(p)(k)+arg(c)\right]\cdot 1(k)
+\end{displaymath}
+oppure, equivalentemente
+\begin{displaymath}
+    \trz^{-1}\left[\frac{a+jb}{z-p}+\frac{a-jb}{z-\overline{p}}\right] = 2|p|^{k-1}\left\{a cos[arg(p)(k-1)]- b sin [arg(p)(k-1)]\right\} \cdot 1(k-1)
+\end{displaymath}
+\begin{displaymath}
+    \trz^{-1}\left[(a+jb)\frac{z}{z-p}+(a-jb)\frac{z}{z-\overline{p}}\right] = 2|p|^{k}\left\{a cos[arg(p)(k)]- b sin [arg(p)(k)]\right\} \cdot 1(k)
+\end{displaymath}
+\subsection{Antitrasformazione zeta con il metodo dello sviluppo in fratti semplici}
+Di norma nelle trasformate di Laplace, la funzione da antitrasformare è strettamente propria (altrimenti avremmo delle delta di Dirac nella soluzione). Nel caso delle antitrasformazioni zeta, però, le consideriamo proprie.
+Ricordiamo infine le due trasformate notevoli da cui tutto si può ricavare:
+\begin{displaymath}
+    \trz\left[{k}\choose{n-1}a^{k-(n-1)}\right] = \frac{z}{(z-a)^n}
+\end{displaymath}
+\begin{displaymath}
+    \mathcal{L}\left[\frac{1}{(n-1)!}t^{n-1}e^{\alpha t}\right] = \frac{1}{(s-a)^n}
+\end{displaymath}
 \end{document}
 
 
