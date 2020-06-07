@@ -129,7 +129,7 @@ Se $f \in \overline{C_p^{k,\infty}}$ allora $k$ è il grado massimo di continuit
 Il metodo generale proposto per "integrare" l'equazione differenziale di $\Sigma$ si basa sulla \textbf{trasformata di Laplace}, che permette di trasformare un'equazione differenziale in un'equazione algebrica.
 \section{Cenni di analisi complessa}
 \subsection{Limite di una funzione complessa}
-Consideriamo una funzione complessa di variabile complessa $f: \mathbb{C} \rightarrow \mathbb{C} s \rightarrow f(s)$. Se $s = \sigma + j \omega$, allora $f(s) = u(\sigma, \omega)+ jv(\sigma, \omega)$. Definiamo il limite $lim_{s\rightarrow s_0} f(s) = \lambda$ con la classica definizione da Analisi 1:
+Consideriamo una funzione complessa di variabile complessa $f: \mathbb{C} \rightarrow \mathbb{C}, s \rightarrow f(s)$. Se $s = \sigma + j \omega$, allora $f(s) = u(\sigma, \omega)+ jv(\sigma, \omega)$. Definiamo il limite $lim_{s\rightarrow s_0} f(s) = \lambda$ con la classica definizione da Analisi 1:
 \begin{center}
     $\forall \epsilon >0, \exists \rho >0$ tale che se $s$ soddisfa $0<|s-s_0|<\rho \rightarrow |f(s) - \lambda| < \epsilon$
 \end{center}
@@ -366,8 +366,8 @@ Introduciamo $f(t<\tau) \in C_p^{0,\infty}$:
 \begin{displaymath}
     f(t:\tau) :=
     \begin{cases}
-        0 \textrm{ per } t<0                         \\
-        \frac{1}{\tau} t \textrm{ per }0\le \le \tau \\
+        0 \textrm{ per } t<0                           \\
+        \frac{1}{\tau} t \textrm{ per }0\le t \le \tau \\
         1 \textrm{ per }t>\tau
     \end{cases}
 \end{displaymath}
@@ -516,7 +516,7 @@ Definiamo ora la funzione di trasferimento di un sistema la funzione di variabil
     \mathcal{L}[y(t)] = G(s)\mathcal{L}[u(t)]
 \end{displaymath}
 $\forall (u(t), y(t)) \in \mathcal{B}$ con $u(t)=0, y(t)=0$ per $t<0$.
-Abbiamo quindi ottenuto un modello matematico alternativo all'eq. differenzialie:
+Abbiamo quindi ottenuto un modello matematico alternativo all'eq. differenziale:
 \begin{displaymath}
     G(s)=\frac{\sum_{i=0}^m b_i s^i}{\sum_{i=0}^n a_i s^i}=\frac{b(s)}{a(s)}
 \end{displaymath}
@@ -623,13 +623,13 @@ I tempi di asservimento e salita, invece:
 \end{displaymath}
 Com'è evidente, la seconda è approssimata, frutto di interpolazione.
 \subsection{Poli dominanti di un sistema generico}
-Un sistema $\Sigma$ generico con funzione di trasferimento $G(s)=\frac{b(s)}{a(s)}$, con n poli e $m$ zeri, tutti i poli hanno parte reale negativa (i modi convergono a zero per $t\rightarrow+\infty$). Definiamo i \textbf{poli dominanti} come i poli (normalmente una coppia) non soggetti a quasi cancellazione polo-zero, più vicini all'asse immaginario. La risposta al gradino unitario dipende approssimativamente dai soli poli dominanti: se i poli dominanti sono complessi coniugati, i parametri della risposta $S, T_a, T_s$ sono determinabili approssimativamente dalle relazioni per i sistemi di ordine due. Bisogna però fare attenzione: spesso può essere un'approssimazione abbondante, e non sempre è possibile individuare un insieme significativo di poli dominanti.
+Consideriamo un sistema $\Sigma$ generico con funzione di trasferimento $G(s)=\frac{b(s)}{a(s)}$, con n poli e $m$ zeri, tutti i poli hanno parte reale negativa (i modi convergono a zero per $t\rightarrow+\infty$). Definiamo i \textbf{poli dominanti} come i poli (normalmente una coppia) non soggetti a quasi cancellazione polo-zero, più vicini all'asse immaginario. La risposta al gradino unitario dipende approssimativamente dai soli poli dominanti: se i poli dominanti sono complessi coniugati, i parametri della risposta $S, T_a, T_s$ sono determinabili approssimativamente dalle relazioni per i sistemi di ordine due. Bisogna però fare attenzione: spesso può essere un'approssimazione abbondante, e non sempre è possibile individuare un insieme significativo di poli dominanti.
 \subsection{Specifiche sulla risposta al gradino per un sistema di controllo}
 Siamo ora in grado di poter definire delle specifiche sulla risposta al gradino grazie ai parametri definiti: imponiamo infatti le specifiche $S \le S_{max}$ e $T_a \le T_{a-max}$, ottenendo che i poli $-\delta\omega_n \pm j\omega_n \sqrt{1-\delta^2}$ devono appartenere ad un cono troncato.
 
 \section{La stabilità dei sistemi dinamici}
 \subsection{Stabilità alle perturbazioni}
-Consideriamo un sistema dinamico $\Sigma$ nella solita forma $\sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u$ e andiamo ad analizzarne i punti di equilibrio, ossia quei valori costanti di ingresso/uscita che si mantengono inalterati nel tempo. Andiamo quindi ad analizzare una coppia di valori $u_c, y_c$ devono rispettare la relazione $y_c = G(0)u_c$. Possiamo quindi mettere i punti a grafico, che evidentemente staranno su una retta con pendenza data dal guadagno statico $\frac{b_0}{a_0}$.
+Consideriamo un sistema dinamico $\Sigma$ nella solita forma $\sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u$ e andiamo ad analizzarne i punti di equilibrio, ossia quei valori costanti di ingresso/uscita che si mantengono inalterati nel tempo. Andiamo quindi ad analizzare una coppia di valori $u_c, y_c$ che devono rispettare la relazione $y_c = G(0)u_c$. Possiamo quindi mettere i punti a grafico, che evidentemente staranno su una retta con pendenza data dal guadagno statico $\frac{b_0}{a_0}$.
 Introduciamo il concetto di stabilità. Per semplicità ci concentreremo solo sul punto di equilibrio che sta nell'origine. Ipotizziamo anche che $a(s)$ e $b(s)$ siano coprimi (non hanno radici in comune). Esaminiamo una perturbazione alla condizione di equilibrio, ad esempio introducendo un segnale di ingresso o modificando l'uscita nell'intervallo $[t_0,0)$.
 Distinguiamo tra tre tipologie di risposta a questa condizione: instabilità, stabilità semplice, stabilità asintotica. Formalizziamo la perturbazione come
 \begin{displaymath}
@@ -675,7 +675,7 @@ Un altro teorema utile è il seguente. Assumiamo $a(s)$ e $b(s)$ coprimi. Vale l
 \end{center}
 I due concetti vengono spesso utilizzati equivalentemente.
 \subsection{Criterio di Routh}
-Partiamo da una premessa: abbiamo fino ad ora associato la stabilità ai poli del sistema dinamico. Questi ultimi sono le radici dell'equazione caratteristica: potremo dire che con routine numeriche possiamo risolvere i quesiti sulla stabilità. Questo è spesso opportuno, ma è anche utile saperlo fare senza calcolo di radici. Consideriamo il solito sistema lineare $\Sigma$ decritto da $\sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u$ con f.d.t. $G(s)= \frac{b(s)}{a(s)}$, con $a(s)$ polinomio caratteristico e relativa equazione caratteristica $a_s=0$:
+Partiamo da una premessa: abbiamo fino ad ora associato la stabilità ai poli del sistema dinamico. Questi ultimi sono le radici dell'equazione caratteristica: potremo dire che con routine numeriche possiamo risolvere i quesiti sulla stabilità. Questo è spesso opportuno, ma è anche utile saperlo fare senza calcolo di radici. Consideriamo il solito sistema lineare $\Sigma$ descritto da $\sum_{i=0}^n a_i D^i y = \sum_{i=0}^m b_i D^i u$ con f.d.t. $G(s)= \frac{b(s)}{a(s)}$, con $a(s)$ polinomio caratteristico e relativa equazione caratteristica $a_s=0$:
 \begin{displaymath}
     a_ns^n+a_{n-1}s^{n-1}+...+a_1s+a_0=0
 \end{displaymath}
@@ -709,7 +709,7 @@ Esistono metodi ad hoc per risolvere queste singolarità.
     \item Metodo di Benidir-Picinbono: algoritmicamente semplice e sempre risolutivo
 \end{enumerate}
 Vediamo il secondo: ogni riga non nulla che inizia con $p$ zeri viene sommata con la riga ottenuta moltiplicandola per $-1^p$ e traslandola verso sinistra di $p$ posizioni.
-0\paragraph{Prosecuzione della tabella nel caso 2} Questo accade sempre in una riga dispari: il polinomio non ha radici nell'origine ($a_0 \neq 0$). Introduciamo un polinomio ausiliario $\beta$ ottenuto riportando le potenze pari di $s$:
+\paragraph{Prosecuzione della tabella nel caso 2} Questo accade sempre in una riga dispari: il polinomio non ha radici nell'origine ($a_0 \neq 0$). Introduciamo un polinomio ausiliario $\beta$ ottenuto riportando le potenze pari di $s$:
 \begin{displaymath}
     \beta(s) := \gamma_{n-2i,1}s^{2i}+\gamma_{n-2i,2}s^{2i-2}+\gamma_{n-2i,3}s^{2i-4}+\dots+\gamma_{n-2i,i}s^{2}+\gamma_{n-2i,i+1}
 \end{displaymath}
@@ -759,7 +759,7 @@ Abbiamo quindi individuato tre guadagni relativi al sistema stesso:
     \item Ponendo $s:=0$ otteniamo il guadagno statico $G(0)$
 \end{itemize}
 \subsection{I diagrammi di Bode}
-I \textbf{diagrammi di Bode} sono diagrammi (cartesiani) logaritmici della risposta armonica. In particolare, riportiamo dalla rappresentazione polare di $G(j\omega)$ e applichiamo il logaritmo naturale. Spesso si indicano parte reale e immaginaria come $\alpha, beta$. Andremo quindi a mettere a grafico il \textbf{diagramma delle ampiezze}, che riporta il logaritmo del modulo della r.a. in funzione del logaritmo della pulsazione $\omega$, ed il \textbf{diagramma delle fasi} che riporta l'argomento della r.a. in funzione del logaritmo della pulsazione $\omega$.
+I \textbf{diagrammi di Bode} sono diagrammi (cartesiani) logaritmici della risposta armonica. In particolare, ripartiamo dalla rappresentazione polare di $G(j\omega)$ e applichiamo il logaritmo naturale. Spesso si indicano parte reale e immaginaria come $\alpha, \beta$. Andremo quindi a mettere a grafico il \textbf{diagramma delle ampiezze}, che riporta il logaritmo del modulo della r.a. in funzione del logaritmo della pulsazione $\omega$, ed il \textbf{diagramma delle fasi} che riporta l'argomento della r.a. in funzione del logaritmo della pulsazione $\omega$.
 Usualmente, nelle ascisse, vengono riportati direttamente i valori delle pulsazioni ed i moduli in scala logaritmica. Può capitare che nel diagramma dei moduli, le ordinate (modulo della r.a.) siano espresse in decibel. La scala logaritmica ha diversi vantaggi: è possibile rappresentare grandezze variabili in campi molto estesi, è possibile sommare i diagrammi dei sistemi in cascata, ed è anche possibile costruire i diagrammi come somme di diagrammi elementari.
 \subsection{Rappresentazioni e parametri della f.d.t.}
 Una f.d.t. razionale $G(s)=\frac{b(s)}{a(s)}$ scrivibile nella \textbf{forma standard con polinomi monici}:
@@ -831,7 +831,7 @@ Possiamo anche fare un'altra osservazione:
 \begin{displaymath}
     \begin{cases}
         \delta \in \left[0,\frac{1}{2}\right] \textrm{il d. }\alpha\textrm{ è tutto al di sopra del d. asintotico}                                                 \\
-        \delta \in \left(\frac{1}{2},\frac{1}{\sqrt{2}}\right) \textrm{il d. }\alpha\textrm{ intersexa l'asse delle pulsazioni a sinistra di }ln\omega_n(\omega_n) \\
+        \delta \in \left(\frac{1}{2},\frac{1}{\sqrt{2}}\right) \textrm{il d. }\alpha\textrm{ interseca l'asse delle pulsazioni a sinistra di }ln\omega_n(\omega_n) \\
         \delta \in \left[\frac{1}{\sqrt{2}},1\right] \textrm{il d. }\alpha\textrm{ è tutto al di sotto del d. asintotico}                                          \\
     \end{cases}
 \end{displaymath}
@@ -949,12 +949,12 @@ Consideriamo un sistema definito da $T(s)=\frac{G(s)}{1+G(s)H(s)}$. Studiamo var
     \item Variazione di un parametro nella catena di retroazione: $H(s)$ è in realtà $H(s;\beta)$ con $\beta = \beta_0+\Delta\beta$. Otteniamo $S_H^T = \frac{dT}{dH}|_{\beta=\beta_0}=G\frac{-G}{(1+GH)^2}\cdot\frac{H}{\frac{G}{1+GH}}$ e infine $S_H^T = -\frac{G(s)H(s;\beta_0)}{1+G(s)H(s;\beta_0)}$. Quindi se il guadagno di anello è elevato la variazione relativa di T è circa uguale (in modulo) alla variazione relativa di H. Di conseguenza, variazioni della f.d.t. nella catena di retroazione si riverberano senza attenuazione in variazioni della f.d.t. del sistema retroazionato.
 \end{itemize}
 \subsection{Attenuazione dei disturbi}
-Vediamo ora come può essere resa possibile un'attenuazione dei disturbi. Abbiamo per esempio un disturbo $D(s)$ su un sistema avente uscita normalmente uguale a $P(s)R(s)$. Vogliamo incrementare il rapporto segnale disturbo utlizzando un sistema retroazionato. A questo fine ipotizziamo che il disturbo sia indipendente da $R(s)$. Introduciamo un controllore $C(s)$. Per avere un confronto omogeneo si richiede $\frac{CP}{1+CPH} \approx P$, ossia che il sistema retroazionato non modifichi fortemente il comportamento. L'uscita determinata dal segnale utile è ora $P(s)R(s)$ mentre quella determinata dal disturbo è $\frac{P(s)}{1+C(s)P(s)H(s)}D(s)$, ottenendo un rapporto segnale disturbo pari a $\left(1+C(s)P(s)H(s)\right)\frac{R(s)}{D(s)}$. Quest'ultimo viene fortemente aumentato se nella banda di frequenze vale $|C(j\omega)P(j\omega)H(j\omega)|>>1$. In definitiva, se il guadagno di anello è elevato il rapporto segnale/disturbo si eleva all'incirca del medesimo fattore passando dallo schema in catena aperta a quello in catena chiusa. Quindi, a parità di segnale utile, il disturbo viene grandemente attenuato.
+Vediamo ora come può essere resa possibile un'attenuazione dei disturbi. Abbiamo per esempio un disturbo $D(s)$ su un sistema avente uscita normalmente uguale a $P(s)R(s)$. Vogliamo incrementare il rapporto segnale disturbo utilizzando un sistema retroazionato. A questo fine ipotizziamo che il disturbo sia indipendente da $R(s)$. Introduciamo un controllore $C(s)$. Per avere un confronto omogeneo si richiede $\frac{CP}{1+CPH} \approx P$, ossia che il sistema retroazionato non modifichi fortemente il comportamento. L'uscita determinata dal segnale utile è ora $P(s)R(s)$ mentre quella determinata dal disturbo è $\frac{P(s)}{1+C(s)P(s)H(s)}D(s)$, ottenendo un rapporto segnale disturbo pari a $\left(1+C(s)P(s)H(s)\right)\frac{R(s)}{D(s)}$. Quest'ultimo viene fortemente aumentato se nella banda di frequenze vale $|C(j\omega)P(j\omega)H(j\omega)|>>1$. In definitiva, se il guadagno di anello è elevato il rapporto segnale/disturbo si eleva all'incirca del medesimo fattore passando dallo schema in catena aperta a quello in catena chiusa. Quindi, a parità di segnale utile, il disturbo viene grandemente attenuato.
 \subsection{Allargamento della banda passante}
 Ipotizziamo che $H(s) = h>0$. Significa quindi che la banda passante è infinita. Un guadagno di anello elevato implica un allargamento della banda passante. Sappiamo che \begin{displaymath}
     T(j\omega) = \frac{G(j\omega)}{1+hG(j\omega)}
 \end{displaymath}
-Quindi, se $h|G(j\omega) >> 1 \rightarrow T(j\omega) \approx 1/h$.
+Quindi, se $hG(j\omega) >> 1 \rightarrow T(j\omega) \approx 1/h$.
 Anche questo è un effetto benefico della retroazione. Possiamo esplicitare in termini quantitativi questo allargamento:
 \begin{displaymath}
     G(j\omega)=\frac{1}{1+\tau j \omega} \rightarrow \omega_T = \frac{1+h}{\tau}
@@ -1163,7 +1163,7 @@ Nell'ipotesi che fra i poli di $\Sigma$ esista una coppia dominante, vale l'ipot
 \section{Progetto di un sistema di controllo in retroazione}
 Iniziamo ora la sezione dedicata al progetto di un sistema di controllo.
 \subsection{Il progetto di un sistema di controllo in retroazione}
-Consideriamo un sistema scalare, con un singolo anello di retroazione. La struttura composta di un possibile sistema di controllo è la seguente, con P impianto controllato, Q disturbo di P (eventualmente modificato da parte dinamica di filtraggio), ingresso $u$ determinato dall'uscita di un attuatore (A) e da un disturbo. Poi, nella linea di retroazinoe troviamo H funzione di trasferimento del possibile trasduttore, con disturbo $n$, un anello comparatore che sottrae la parte dedicata alla retroazione. Infine, il controllore C, elemento cruciale per la buona riuscita del sistema e protagonista del nostro progetto, e F prefiltraggio. A volte il progetto non riguarda solo $C_s$, ma anche una funzione di prefiltraggio $F$. Quando questo accade, avremo un sistema di feedforward-feedback. A volte $F$ è semplicemente un guadagno algebrico. Usualmente si parte modellando l'impianto, prevedendo la scelta dei trasduttori ($H_s$) e dell'attuatore.
+Consideriamo un sistema scalare, con un singolo anello di retroazione. La struttura composta di un possibile sistema di controllo è la seguente, con P impianto controllato, Q disturbo di P (eventualmente modificato da parte dinamica di filtraggio), ingresso $u$ determinato dall'uscita di un attuatore (A) e da un disturbo. Poi, nella linea di retroazione troviamo H funzione di trasferimento del possibile trasduttore, con disturbo $n$, un anello comparatore che sottrae la parte dedicata alla retroazione. Infine, il controllore C, elemento cruciale per la buona riuscita del sistema e protagonista del nostro progetto, e F prefiltraggio. A volte il progetto non riguarda solo $C_s$, ma anche una funzione di prefiltraggio $F$. Quando questo accade, avremo un sistema di feedforward-feedback. A volte $F$ è semplicemente un guadagno algebrico. Usualmente si parte modellando l'impianto, prevedendo la scelta dei trasduttori ($H_s$) e dell'attuatore.
 È chiaro che il progetto di un sistema completo sia ben più complesso.
 \subsection{Specifiche di controllo}
 I requisiti per il sistema di controllo riguardano:
@@ -1239,7 +1239,7 @@ Sarà poi una pseudoderivata per i soliti motivi, ma il concetto funziona. Quind
     C_r(s)=\frac{1+\tau s}{1+\alpha\tau s}
 \end{displaymath}
 \subsubsection{Vantaggi/Svantaggi della rete anticipatrice}
-La rete anticipatrice ha diversi vantaggi, come il mantenimento delle prestazioni statiche e la stabilizzazion con allargamento della banda passante del guadagno dianello e quindi allargamento della banda passante per $T_{ry}(j\omega)$: aumento del grado di stabilità $G_s$, diminuzione del tempo di assestamento $T_a$, migliori capacità di inseguimento di segnale. C'è però uno svantaggio: la possibile introduzione di rumore. Infatti, il parametro $\alpha$ non può essere troppo piccolo. Anche qui, saltiamo i metodi grafici e citiamo i metodi per tentativi, i metodi con formule di inversione, ed infine anche la cancellazione polo-zero (non presente nelle ritardatrici).
+La rete anticipatrice ha diversi vantaggi, come il mantenimento delle prestazioni statiche e la stabilizzazione con allargamento della banda passante del guadagno di anello e quindi allargamento della banda passante per $T_{ry}(j\omega)$: aumento del grado di stabilità $G_s$, diminuzione del tempo di assestamento $T_a$, migliori capacità di inseguimento di segnale. C'è però uno svantaggio: la possibile introduzione di rumore. Infatti, il parametro $\alpha$ non può essere troppo piccolo. Anche qui, saltiamo i metodi grafici e citiamo i metodi per tentativi, i metodi con formule di inversione, ed infine anche la cancellazione polo-zero (non presente nelle ritardatrici).
 \subsubsection{Cancellazione polo-zero}
 Possiamo sintetizzare la rete anticipatrice mediante cancellazione polo-zero. La cancellazione deve avvenire sempre nella regione negativa (parte reale negativa) del diagramma. Scegliamo quale zero della rete il polo reale negativo di $P(s)$ più vicino all'asse immaginario determinando così nella funzione di trasferimento di catena diretta una cancellazione polo-zero ammissibile. Cancelliamo quindi il polo più vicino all'asse immaginario. Comparirà quindi un polo determinato dalla rete in $-\frac{1}{\alpha\tau}$. Abbiamo infatti imposto $\tau=-\frac{1}{p_1}$.
 \subsection{Sintesi in frequenza con le formule di inversione}
@@ -1331,7 +1331,7 @@ L'equazione diofantea ammette soluzione \textbf{se e solo se} il massimo comun d
 dove $p(s)$ è un polinomio arbitrario.
 \paragraph{Proprietà} Assumiamo $a(s)$ e $b(s)$ coprimi fra loro. Allora indicato con $\left\{x(s), y(s)\right\}$ una soluzione dell'eq. diofantea, valgono le seguenti equivalenze: se $a(s)$ e $d(s)$ sono coprimi, $a(s)$ e $y(s)$ li saranno; se $b(s)$ e $d(s)$ sono coprimi s.se $b(s)$ e $x(s)$ li sono. Non possono quindi esserci cancellazioni polo-zero tra i poli dell'impianto e gli zeri del controllore. Analogamente, non possono esserci cancellazioni polo-zero tra i poli del controllore e gli zeri dell'impianto.
 \subsubsection{Soluzione}
-Entriamo ora nel merito della soluzione. Considerati $a(s)$ e $b(s)$ coprimi fra di loro, per ogni scelta di $d(s)$ esistono soluzioni dell'eq. diofantea, ma non tutte sono accettabili in quanto è necessario garantire $deg y(s) \le feg x(s)$. Andiamo quindi a parametrizzare un controllore di ordine $l$ che soddisfi l'equazione:
+Entriamo ora nel merito della soluzione. Considerati $a(s)$ e $b(s)$ coprimi fra di loro, per ogni scelta di $d(s)$ esistono soluzioni dell'eq. diofantea, ma non tutte sono accettabili in quanto è necessario garantire $deg y(s) \le deg x(s)$. Andiamo quindi a parametrizzare un controllore di ordine $l$ che soddisfi l'equazione:
 \begin{displaymath}
     \frac{y(s)}{x(s)} := \frac{y_ls^l+y_{l-1}s^{l-1}+\dots+y_1s+y_0}{x_ls^l+x_{l-1}s^{l-1}+\dots+x_1s+x_0}, y_i \in \mathbb{R} i =0,1,\dots,l; x_i\in\mathbb{R} i=0,1,\dots,l-1
 \end{displaymath}
@@ -1371,7 +1371,7 @@ Il problema di assegnabilità arbitraria è risolvibile con un controllore propr
 \begin{displaymath}
     R(a,b):=det S(a,b)
 \end{displaymath}
-C'è un risultato teorico che afferma che se il risultante è diverso da 0, i polinomi $a(s)$ e $b(s)$ \textbf{sono coprimi}. A questo punto, facciamo la trasposta della matrice di Sylester: se la prima è non singolare, anche la trasposta la è. Notiamo che la matrice $S^T$ coincide a meno di una permutazione di colonne con la matrice dei coefficienti del sistema di equazioni delle incognite: se $S^T$ è non singolare, la sarà anche la matrice dei coefficienti. Siamo giunti al teorema desiderato:
+C'è un risultato teorico che afferma che se il risultante è diverso da 0, i polinomi $a(s)$ e $b(s)$ \textbf{sono coprimi}. A questo punto, facciamo la trasposta della matrice di Sylvester: se la prima è non singolare, anche la trasposta la è. Notiamo che la matrice $S^T$ coincide a meno di una permutazione di colonne con la matrice dei coefficienti del sistema di equazioni delle incognite: se $S^T$ è non singolare, la sarà anche la matrice dei coefficienti. Siamo giunti al teorema desiderato:
 \begin{center}
     Assunti $a(s)$ e $b(s)$ coprimi fra loro, i poli del sistema in retroazione unitaria sono assegnabili arbitrariamente con un controllore proprio di ordine $n-1$.
 \end{center}
@@ -1444,7 +1444,7 @@ C'è anche da segnalare un metodo ad anello chiuso: con un regolatore proporzion
 Esistono inoltre tante regole di taratura pubblicate, ed algoritmi di auto-sintonia.
 \section{Controllo dei sistemi con ritardo}
 \subsection{Schema a predittore di Smith}
-Lo schema visto fino ad ora impone una forte limitazione delle prestazioni in sistemi affetti da ritardo di tempo. Lo \textbf{schema a predittore di Smith} supera questa limitazione. L'idea centrale è quella di affiancare al controllore $C$ una parte che contien una replica del sistema controllato (possibilmente esatta), ovvero del ritardo finito $C_P(s)=(1-e^{-t_0s})G(s)$. Otteniamo quindi
+Lo schema visto fino ad ora impone una forte limitazione delle prestazioni in sistemi affetti da ritardo di tempo. Lo \textbf{schema a predittore di Smith} supera questa limitazione. L'idea centrale è quella di affiancare al controllore $C$ una parte che contiene una replica del sistema controllato (possibilmente esatta), ovvero del ritardo finito $C_P(s)=(1-e^{-t_0s})G(s)$. Otteniamo quindi
 \begin{displaymath}
     T_{ry}(s)=\frac{C(s)G(s)}{1+C(s)G(s)}e^{-t_0s}
 \end{displaymath}
@@ -1453,7 +1453,7 @@ Il ritardo non crea così problemi: progetto il controllore $C$ come se non esis
 \section{Controllo feedforward/feedback (schemi di controllo a due gradi di libertà)}
 Vediamo ora qualche schema avanzato di feedforward/feedback. Il primo che analizziamo è il \textbf{prefiltraggio del segnale di riferimento}
 %TODO: 16.19
-Applichiamo quindi il segnale di riferimento a monte di $C_1$ blocco di prefiltraggio. Esistono tre metodi: filtraggio statico ($C_1(s)=T_{r_1y}(0)^{-1}$), filtraggio passa-basso, filtraggio passa-alto. Un altro schema è la \textbf{compensazione del segnale di riferimento}, dove $C_1$ non è più prefiltraggio su $r$ macome contributo di segnale che sommiamo direttamente al segnale del controllore feedback che introduciamo. Osserviamo che la f.d.t. di $r$ e $y$ è determinata da due contributi, uno su $C_1$ e uno su $C_2$. In particolare sarà la somma. A questo punto, se $C_1(s)$ è il reciproco di $P(s)$, otteniamo che la f.d.t. risulta essere uguale ad 1. Questo può essere considerato un buon risultato. In realtà, inserire il sistema inverso può essere impraticabile: non posso implementare un sistema improprio (se $C_1$ è proprio l'inverso non lo è). Inoltre, se l'impianto ha degli zeri con parte reale non negativa, il sistema inverso sarà instabile. Certamente, non possiamo sfruttare un sistema instabile per aumentare la stabilità.
+Applichiamo quindi il segnale di riferimento a monte di $C_1$ blocco di prefiltraggio. Esistono tre metodi: filtraggio statico ($C_1(s)=T_{r_1y}(0)^{-1}$), filtraggio passa-basso, filtraggio passa-alto. Un altro schema è la \textbf{compensazione del segnale di riferimento}, dove $C_1$ non è più prefiltraggio su $r$ ma come contributo di segnale che sommiamo direttamente al segnale del controllore feedback che introduciamo. Osserviamo che la f.d.t. di $r$ e $y$ è determinata da due contributi, uno su $C_1$ e uno su $C_2$. In particolare sarà la somma. A questo punto, se $C_1(s)$ è il reciproco di $P(s)$, otteniamo che la f.d.t. risulta essere uguale ad 1. Questo può essere considerato un buon risultato. In realtà, inserire il sistema inverso può essere impraticabile: non posso implementare un sistema improprio (se $C_1$ è proprio l'inverso non lo è). Inoltre, se l'impianto ha degli zeri con parte reale non negativa, il sistema inverso sarà instabile. Certamente, non possiamo sfruttare un sistema instabile per aumentare la stabilità.
 Potremmo però costruire un sistema inverso approssimato per risolvere la prima condizione, mentre la seconda è possibile attraverso l'inversione dinamica stabile.
 Quest'ultima permette di ottenere un segnale inverso limitato, determinando anche per impianti a fase non minima dei segnali inversi $u_d$ limitati. Il metodo dell'inversione dinamica stabile può essere anche utilizzato per generalizzare lo scema di controllo col prefiltraggio del segnale di riferimento: l'inversione non sarà più sull'impianto ma sul sistema chiuso in retroazione determinato da $C_2(s)$ e $P(s)$. Questa tecnica può ragionevolmente avere successo.
 \section{Conclusioni sul progetto dei controllori in retroazione}
@@ -1659,6 +1659,92 @@ Ricordiamo infine le due trasformate notevoli da cui tutto si può ricavare:
 \end{displaymath}
 \begin{displaymath}
     \mathcal{L}\left[\frac{1}{(n-1)!}t^{n-1}e^{\alpha t}\right] = \frac{1}{(s-a)^n}
+\end{displaymath}
+\section{Sistemi a tempo discreto}
+\subsection{Generalità sui sistemi a tempo discreto}
+Consideriamo un generico sistema a tempo discreto, interpretabile come un processo con ingresso a tempo discreto $u(k)$ determinate un segnale di uscita a tempo discreto $y(k)$.
+I concetti tradizionali dei sistemi a tempo continuo possono essere introdotti anche qui:
+\paragraph{Behavior}
+Il behavior è l'insieme di tutte le coppie $u,y$ con ingresso $u$ e uscita $y$ compatibili.
+\paragraph{Linearità}
+Il sistema si dice lineare quando soddisfa la proprietà di sovrapposizione degli effetti, ossia l'insieme $\mathcal{B}_d$ è uno spazio vettoriale.
+\paragraph{Stazionarietà}
+Un sistema si dice stazionario (invariante nel tempo) se per ogni $n\in \mathbb{Z}$
+\begin{displaymath}
+    (u(k),y(k)) \in \mathcal{B}_d \rightarrow (u(k-n), y(k-n)) \in \mathcal{B}_d
+\end{displaymath}
+Il modello matematico che descrive il sistema sarà un'equazione alle differenze così strutturata:
+\begin{displaymath}
+    f(y(k), y(k-1)...y(k-n)) = g(u(k-n+m),\dots,u(k-n))
+\end{displaymath}
+Se $f$ e $g$ sono funzioni lineari degli argomenti si ottiene
+\begin{displaymath}
+    a_ny(k)+a_{n-1}y(k-1)+...+a_0y(k-n) = b_mu(k-n+m)+b_{m-1}u(k-n+m-1)+\dots+b_0u(k-n)
+\end{displaymath}
+La suddetta è l'equazione standard dei sistemi a tempo discreto.
+Affinche l'equazione sia ben posta, assumiamo
+\begin{displaymath}
+    a_n \neq 0, b_m \neq 0, a_0\neq 0 \bigvee b_0 \neq 0, m \le n
+\end{displaymath}
+E inoltre, assumiamo $n$ ordine di $\Sigma_d$, $n-m$ grado relativo di $\Sigma_d$
+\subsection{Risposta di un sistema lineare a tempo discreto e la funzione di trasferimento}
+Definita l'equazione alle differenze, vogliamo risolverla in modo analitico. Definito il segnale $u(k)$ e le condizioni iniziali($y(-1), y(-2)..., u(-1), u(-2),...$), definire l'uscita è semplice. Notiamo che le condizioni iniziali esatte arrivano fino all'indice $n_0$ e $m_0$, ossia il minimo tra i vari $a_i$ e $b_i$ rispettivamente.
+L'equazione può essere riscritta come
+\begin{displaymath}
+    a_ny(k)+a_{n-1}+\dots+a_0y(k-n) = b_nu(k)+b_{n-1}u(k-1)+\dots+b_0u(k-n)
+\end{displaymath}
+con $m$ massimo tra i $b_i$. Possiamo allora:
+\begin{displaymath}
+    \sum_{i=0}^n a_i y(k-n+i) = \sum_{i=0}^n b_i u(k-n+i)
+\end{displaymath}
+E trasformare:
+\begin{displaymath}
+    \sum_{i=0}^{n} a_i \mathcal{Z}[y(k-n+i)]=\sum_{i=0}^{n} \mathcal{Z}[u(k-n+i)]
+\end{displaymath}
+Osserviamo che in $i=n$ non è un segnale ritardato, allora lo valutiamo a parte:
+\begin{displaymath}
+    \sum_{i=0}^{n-1} a_i \mathcal{Z}[y(k-n+i)] + a_n Y(z)=\sum_{i=0}^{n-1} \mathcal{Z}[u(k-n+i)] +b_n U(z)
+\end{displaymath}
+A questo punto, valutiamo la trasformata zeta dei segnali ritardati (con ritardo $n-i$), ottenendo infine:
+\begin{displaymath}
+    \sum_{i=0}^n a_i z^i Y(z) + \sum_{i=0}^{n-1}\sum_{k=0}^{n-i-1} a_i y (k-n+i) z^{n-k} = \sum_{i=0}^n b_i z^i U(z) + \sum_{i=0}^{n-1}\sum_{k=0}^{n-i-1} b_i u (k-n+i) z^{n-k}
+\end{displaymath}
+Otteniamo a questo punto i polinomi $a(z):=\sum_{i=0}^n a_iz^i, b(z):=\sum_{i=0}^n b_iz^i$ e $c(z)$ composto dalle sommatorie doppie $\sum_{i=0}^{n-1}\sum_{k=0}^{n-i-1} b_i u (k-n+i) z^{n-k} - \sum_{i=0}^{n-1}\sum_{k=0}^{n-i-1} a_i y (k-n+i) z^{n-k}$, abbiamo
+\begin{displaymath}
+    Y(z)=\frac{b(z)}{a(z)}U(z)+\frac{c(z)}{a(z)}
+\end{displaymath}
+e di conseguenza $Y(z) = Y_{for}(z)+Y_{lib}(z)$
+\begin{displaymath}
+    Y_{for}(z)=\frac{b(z)}{a(z)}U(z) \hspace{5px} Y_{lib} (z) = \frac{c(z)}{a(z)}
+\end{displaymath}
+la prima infatti non dipende dalle condizioni iniziali, mentre la seconda contiene solamente le suddette.
+Allora,
+\begin{displaymath}
+    y(k) = y_{for}(k)+y_{lib}(k) = \trz^{-1}\left[\frac{b(z)}{a(z)}U(z)\right] + \trz^{-1}\left[\frac{c(z)}{a(z)}\right]
+\end{displaymath}
+Questo è del tutto analogo a quanto visto nei sistemi a tempo continuo.
+\subsection{Funzione di trasferimento}
+Definiamo quindi al funzione di trasferimento discreto $\Sigma_d$ la funzione $H(z)$ per la quale
+\begin{displaymath}
+    \trz[y(k)] = H(z)\trz[u(k)]
+\end{displaymath}
+per ogni $(u,y) \in \mathcal{B}_d$ tale che $u(k)=0, y(k)=0, k<0$.
+Quindi la f.d.t. di $\Sigma_d$ è
+\begin{displaymath}
+    H(z) = \frac{b(z)}{a(z)} = \frac{\sum_{i=0}^m b_iz^i}{\sum_{i=0}^n a_iz^i} = \frac{b_mz^m+...+b_0}{a_nz_n+...+a_0}
+\end{displaymath}
+La risposta all'impulso è $h(k)=\trz^{-1}[H(z)]$, si considera $h(k)=0, k<0$. Viceversa, nota la risposta all'impulso $H(z)=\trz[h(k)]$, dal teorema di convoluzione segue $y_{for.}(k)=\sum_{i=0}^k h(k-i)u(i)$.
+\subsubsection{Analisi della risposta libera}
+L'analisi della risposta libera è cruciale per stabilire la stabilità del sistema. Individuiamo la struttura: avremo la necessità, essendo noto $a(z)$, di calcolare il polinomio $c(z)$, calcolabile tramite funzioni matriciali (vedi slide 20.11), definite da matrici triangolari Tepleziane. Queste si ottengono dalle doppie sommatorie viste prima, dove possiamo scambiare gli indici $i$ con $k$, mantenendo l'identità della doppia sommatoria stessa.
+\subsection{Conversione continuo/discreto di un sistema con il mantenitore di ordine zero}
+Vogliamo ora calcolare la funzione di trasferimento includente anche i due convertitori D/A A/D. Il tempo di campionamento sia $T(\tilde{y}(k) = y(kT))$ e il convertitore D/A sia un mantenitore di ordine zero. Introduciamo, per questo,  la trasformata zeta di un segnale a tempo continuo campionati. Sia $f(t)$ un segnale a tempo continuo e $F(s)$ la corrispondente trasformata di Laplace.
+\begin{displaymath}
+    \trz[f(t), T] \triangleq \trz[f(kT)] \hspace{10px} \trz[F(s), T]\triangleq \trz[\mathcal{L}^{-1}[F(s)]_{t=kT}]
+\end{displaymath}
+Determiniamo quindi $P_d(z)$ come trasformata zeta della risposta all'impulso applicato all'ingresso del mantenitore di ordine zero $\tilde{u}(k) = \delta(k)$.
+Ci rendiamo conto che il segnale $u(t)$ è definito dalla differenza tra il gradino ed il gradino ritardato. Quindi, $p_s(t) = \mathcal{L}^{-1} \left[\frac{P(s)}{s}\right]$, calcoliamo allora $P_d(z)$ e otteniamo
+\begin{displaymath}
+    P_d(z)=\frac{z-1}{z} \trz \left[\frac{P(s)}{s}, T\right]
 \end{displaymath}
 \end{document}
 
