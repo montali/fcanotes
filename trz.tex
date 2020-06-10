@@ -1,0 +1,90 @@
+\documentclass[11pt]{article}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{upgreek}
+\usepackage{amssymb}
+\usepackage[normalem]{ulem}
+\newcommand{\numpy}{{\tt numpy}}    % tt font for numpy
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+\newcommand{\trz}{\mathcal{Z}}
+\begin{document}
+
+% ========== Edit your name here
+\author{Simone Montali - monta.li}
+\title{Trasformate zeta fondamentali}
+
+\maketitle
+
+\medskip
+\section{Trasformate zeta fondamentali}
+\subsection{Trasformata di un segnale ritardato di n passi}
+\begin{displaymath}
+    \begin{aligned}
+        \mathcal{Z}[x(k-n)]= & z^{-n} \mathcal{Z}[x(k)]+\sum_{k=0}^{n-1} x(k-n) z^{-k}              \\
+                             & =z^{-n} \mathcal{Z}[x(k)]+x(-n)+x(-n+1) z^{-1}+\cdots+x(-1) z^{-n+1}
+    \end{aligned}
+\end{displaymath}
+Se le condizioni iniziali sono nulle, ovviamente:
+\begin{displaymath}
+    \mathcal{Z}[x(k-n) 1(k-n)]=z^{-n} \mathcal{Z}[x(k)]
+\end{displaymath}
+\subsection{Trasformata di un segnale anticipato di n passi}
+\begin{displaymath}
+    \begin{aligned}
+        \mathcal{Z}[x(k+n)] & =z^{n} \mathcal{Z}[x(k)]-\sum_{i=0}^{n-1} x(i) z^{n-i}           \\
+                            & =z^{n} \mathcal{Z}[x(k)]-x(0) z^{n}-x(1) z^{n-1}-\cdots-x(n-1) z
+    \end{aligned}
+\end{displaymath}
+\subsection{Teorema del valore iniziale}
+\begin{displaymath}
+    x(0)=\lim _{z \rightarrow+\infty} \mathcal{Z}[x(k)]
+\end{displaymath}
+\subsection{Teorema del valore finale}
+\begin{displaymath}
+    \lim _{k \rightarrow+\infty} x(k)=\lim _{z \rightarrow 1}(z-1) \mathcal{Z}[x(k)]
+\end{displaymath}
+\subsection{Trasformata zeta di $a^kx(k)$}
+\begin{displaymath}
+    \mathcal{Z}\left[a^{k} x(k)\right]=X\left(\frac{z}{a}\right)
+\end{displaymath}
+\subsection{Convoluzione}
+\begin{displaymath}
+    x * y=\sum_{i=-\infty}^{+\infty} x(k-i) y(i)
+\end{displaymath}
+\subsection{Gradino, rampa, parabola}
+\begin{displaymath}
+    \mathcal{Z}[1(k)]=\frac{z}{z-1}, \mathcal{Z}[k 1(k)]=\frac{z}{(z-1)^{2}}, \mathcal{Z}\left[k^{2} 1(k)\right]=\frac{z(z+1)}{(z-1)^{3}}
+\end{displaymath}
+\section{Antitrasformate zeta}
+\subsection{Metodo dei fratti semplici}
+\begin{displaymath}
+    \mathcal{Z}^{-1}\left[\frac{1}{(z-a)^{n}}\right]=\frac{(k-1)(k-2) \cdots(k-n+1)}{(n-1) !} a^{k-n} 1(k-1)=\left(\begin{array}{c}
+            k-1 \\
+            n-1
+        \end{array}\right) a^{k-n} 1(k-1)
+\end{displaymath}
+\subsection{Casi particolari}
+\begin{displaymath}
+    \begin{array}{ll}
+        \mathcal{Z}^{-1}\left[\frac{1}{z-a}\right]=a^{k-1} \cdot 1(k-1)                            & \mathcal{Z}^{-1}\left[\frac{z}{z-a}\right]=a^{k} \cdot 1(k)                          \\
+        \mathcal{Z}^{-1}\left[\frac{1}{(z-a)^{2}}\right]=(k-1) a^{k-2} \cdot 1(k-1)                & \mathcal{Z}^{-1}\left[\frac{z}{(z-a)^{2}}\right]=k a^{k-1} \cdot 1(k)                \\
+        \mathcal{Z}^{-1}\left[\frac{1}{(z-a)^{3}}\right]=\frac{(k-1)(k-2)}{2} a^{k-3} \cdot 1(k-1) & \mathcal{Z}^{-1}\left[\frac{z}{(z-a)^{3}}\right]=\frac{k(k-1)}{2} a^{k-2} \cdot 1(k)
+    \end{array}
+\end{displaymath}
+\subsection{Complessi coniugati}
+\begin{displaymath}
+    \mathcal{Z}^{-1}\left[c \frac{z}{z-p}+\bar{c} \frac{z}{z-\bar{p}}\right]=2|c||p|^{k} \cos [\arg (p) k+\arg (c)] \cdot 1(k)
+\end{displaymath}
+\begin{displaymath}
+    \mathcal{Z}^{-1}\left[(a+j b) \frac{z}{z-p}+(a-j b) \frac{z}{z-\bar{p}}\right]=2|p|^{k}\{a \cos [\arg (p) \cdot k]-b \sin [\arg (p) \cdot k]\} \cdot 1(k)
+\end{displaymath}
+\end{document}
